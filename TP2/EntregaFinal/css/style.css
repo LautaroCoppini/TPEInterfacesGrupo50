@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.flechaizquierda{
+    background-color: transparent;
+    border: 0px;
+}
+
+nav {
+    display: flex;
+    background-color: #2F3237 ;
+}
