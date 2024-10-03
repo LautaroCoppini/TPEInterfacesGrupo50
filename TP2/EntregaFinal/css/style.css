@@ -10,6 +10,18 @@
 }
 
 nav {
+    height: 68px;
     display: flex;
     background-color: #2F3237 ;
 }
+nav button{
+    background-color: transparent;
+}
+nav button:nth-child(1){
+    margin: 0px 15px;
+}
+nav button:nth-child(1) img{
+    width: 35px;
+    height: 29.143px;
+}
+nav img
