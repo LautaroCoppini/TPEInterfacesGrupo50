@@ -354,15 +354,50 @@ footer a img{
 
     .img_card_principal{
         display: unset;
+        min-width: 500px;
     }
 
     header article figure{
-        width: 50%;
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
     }
 
-    
+    header article figure figcaption{
+        display: flex;
+        flex-direction: column;
+    }
+
+    header article figure figcaption div{
+        margin-top: auto;
+    }
+
+    section article figure{
+        min-width: 289.377px;
+        height: 260px;
+    }
+
+    .img_card{
+        width: 289.377px;
+        height: 176.271px;
+    }
+
+    section article figure figcaption h2{
+        height: 50px;
+    }
+
+    footer{
+        flex-wrap: nowrap;
+    }
+
+    footer > img{
+        display: unset;
+        width: 213.657px;
+        height: 226px;
+    }
+
+    .redes{
+        display: block;
+    }
 
 }
