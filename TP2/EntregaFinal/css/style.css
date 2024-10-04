@@ -352,4 +352,17 @@ footer a img{
         width: 500px;
     }
 
+    .img_card_principal{
+        display: unset;
+    }
+
+    header article figure{
+        width: 50%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    
+
 }
