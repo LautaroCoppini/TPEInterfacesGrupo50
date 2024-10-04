@@ -291,6 +291,30 @@ section ::-webkit-scrollbar-thumb {
     box-shadow: -4px -4px 4px 0px #8F6B02 inset, 4px 4px 4px 0px #FFD14A inset;
 }
 
+.banner{
+    position:relative
+}
+
+.banner>img{
+    padding-bottom: 5%;
+
+}
+
+.banner .jugar{
+    width: 10%;
+    height: 15%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.banner .jugar img{
+  height: 65%;
+}
+
 /* Footer */
 
 footer{
@@ -350,7 +374,7 @@ footer a img{
 
     nav form input:focus{
         width: 500px;
-    }
+    }   
 
     .img_card_principal{
         display: unset;
@@ -370,6 +394,11 @@ footer a img{
 
     header article figure figcaption div{
         margin-top: auto;
+    }
+
+    .carruseles_categorias{
+        margin: 0px auto;
+        max-width: 1630px;
     }
 
     section article figure{
