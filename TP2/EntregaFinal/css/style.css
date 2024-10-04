@@ -41,6 +41,10 @@ nav div button{
     margin: 0px 5px;
 }
 
+nav div button img{
+    height: auto;
+}
+
 nav button{
     background-color: transparent;
     height: 30px;
@@ -56,7 +60,7 @@ nav form{
     border-radius: 30px;
     display: flex;
     height: 40px;
-    width: auto;
+    width: 100%;
     margin-right: auto;
 }
 
@@ -80,7 +84,7 @@ nav form input::placeholder{
 nav form input:focus{
     outline: none;
     color: black;
-    width: 250px;
+    width: 100%;
 }
 
 nav form label{
@@ -101,6 +105,11 @@ nav div{
 }
 
  /* Carrusel principal */
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 header h1{
     text-align: center;
@@ -108,6 +117,8 @@ header h1{
 }
 
 header article{
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -314,4 +325,10 @@ footer a img{
     flex-direction: row;
     justify-content: flex-start;
     align-content: flex-start;
+}
+
+@media only screen and (min-width:1024px){
+    body{
+        background-color: #004D4D;
+    }
 }
