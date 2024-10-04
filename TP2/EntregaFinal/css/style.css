@@ -89,7 +89,7 @@ nav form input:focus{
 
 nav form label{
     z-index: 2;
-    margin-left: -40px;
+    margin-left: -45px;
 }
 
 nav form label img{
@@ -328,7 +328,26 @@ footer a img{
 }
 
 @media only screen and (min-width:1024px){
-    body{
-        background-color: #004D4D;
+    nav{
+        justify-content: center;
+        height: 68px;
     }
+
+    nav form label img{
+        height: 50px;
+    }
+
+    nav form{
+        justify-content: center;
+        height: 50px;
+    }
+
+    nav form input{
+        width: 500px;
+    }
+
+    nav form input:focus{
+        width: 500px;
+    }
+
 }
