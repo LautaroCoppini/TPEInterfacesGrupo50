@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     <title></title>
 </head>
 
@@ -34,9 +37,9 @@
         <header>
             <h1>Juegos Recomendados del dia</h1>
             <article>
-                <button class="oculto"><img src="img/Iconos/iconoflechaizquierda.png" alt="Flecha para ir a la card anterior"></button>
+                <button><img src="img/Iconos/iconoflechaizquierda.png" alt="Flecha para ir a la card anterior"></button>
                 <figure>
-                    <img src="img/Cards/imagenprincipal.jpg" alt="Miniatura del juego Hora de Aventura 4 en linea">
+                    <img class="img_card_principal" src="img/Cards/imagenprincipal.jpg" alt="Miniatura del juego Hora de Aventura 4 en linea">
                     <figcaption>
                         <h2>Hora de Aventura 4 en Linea</h2>
                         <h3>Puzzles</h3>
@@ -48,7 +51,7 @@
                         </aside>
                         <div>
                             <p class="gratis">Gratis</p>
-                            <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                            <button class="jugarPrincipal"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
                         </div>
                     </figcaption>
                     <!--Preguntar acerca de si debemos utlizar mas de una figcaption-->
@@ -58,218 +61,361 @@
         </header>
         
         <section>
+            <h1>Aventura</h1>
                 <article>
-                    <h1>Aventura</h1>
                     <figure>
-                        <img src="img/Cards/assassinscreedshadow.png" alt="Assassin's Creed Shadows">
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/assassinscreedshadow.png" alt="Assassin's Creed Shadows">
                         <figcaption>
                             <h2>Assassin's Creed Shadows</h2>
-                            <h3>$17,99 USD</h3>
-                            <button>Sacar de carrito</button>
+                            <div>
+                                <h3>$17,99 USD</h3>
+                                <button class="quitarCarrito"><img src="img/Iconos/quitarcarrito.png" alt="Icono quitar del carrito"></button>
+                            </div>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="img/Cards/spiderman2.png" alt="Spiderman 2">
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/spiderman2.png" alt="Spiderman 2">
                         <figcaption>
                             <h2>Spider-Man 2</h2>
-                            <h3>Gratis</h3>
-                            <button>Jugar></button>
+                            <div>
+                                <h3>Gratis</h3>
+                                <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                            </div>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="img/Cards/gowr.png" alt="God of War Ragnarok">
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/gowr.png" alt="God of War Ragnarok">
                         <figcaption>
                             <h2>God of War Ragnarok</h2>
-                            <h3>$3,99 USD</h3>
-                            <button>Agregar Carrito</button>
+                            <div>
+                                <h3>$3,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="img/Cards/thelastofus.png" alt="The last of us II">
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/thelastofus.png" alt="The last of us II">
                         <figcaption>
                             <h2>The Last of Us Part II</h2>
-                            <h3>$14,99 USD</h3>
-                            <button>Agregar carrito</button>
+                            <div>
+                                <h3>$14,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="img/Cards/got.png" alt="Ghost of Tsushima">
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/got.png" alt="Ghost of Tsushima">
                         <figcaption>
                             <h2>Ghost of Tsushima</h2>
-                            <h3>$12,99 USD</h3>
-                            <button>Agregar al carrito</button>
+                            <div>
+                                <h3>$12,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src="img/Cards/princepersia.png" alt="PrinceOP">
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/princepersia.png" alt="PrinceOP">
                         <figcaption>
                             <h2>Prince of Persia</h2>
-                            <h3>$0,99 USD</h3>
-                            <button>Agregar carrito</button>
+                            <div>
+                                <h3>$0,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </article>
+        
+                <h1>Carreras</h1>
+                <article>
+                    <figure>
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/dirt5.png" alt="Dirt5">
+                        <figcaption>
+                            <h2>Dirt 5</h2>
+                            <div>
+                                <h3>$5,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/thecrew.png" alt="TheCrew">
+                        <figcaption>
+                            <h2>The Crew</h2>
+                            <div>
+                                <h3>$9,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/dirt.png" alt="Dirt 2.0">
+                        <figcaption>
+                            <h2>Dirt Rally 2.0</h2>
+                            <div>
+                                <h3>$3,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/f2015.png" alt="F12015">
+                        <figcaption>
+                            <h2>F1 2015</h2>
+                            <div>
+                                <h3>Gratis</h3>
+                                <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/nfs.png" alt="NFSR">
+                        <figcaption>
+                            <h2>Need for Speed Rivals</h2>
+                            <div>
+                                <h3>$12,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                        <img class="img_card" src="img/Cards/flatout.png" alt="Flatout">
+                        <figcaption>
+                            <h2>Flatout</h2>
+                            <div>
+                                <h3>$0,99 USD</h3>
+                                <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                            </div>
                         </figcaption>
                     </figure>
                 </article>
         </section>
-
-                <article>
-                    <h1>Carreras</h1>
-                    <figure>
-                        <img src="img/Cards/dirt5.png" alt="Dirt5">
-                        <figcaption>
-                            <h2>Dirt 5</h2>
-                            <h3>$5,99 USD</h3>
-                            <button>Agregar de Carrito</button>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <img src="img/Cards/thecrew.png" alt="TheCrew">
-                        <figcaption>
-                            <h2>The Crew</h2>
-                            <h3>$9,99 USD</h3>
-                            <button>Agregar al carrito</button>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <img src="img/Cards/dirt.png" alt="Dirt 2.0">
-                        <figcaption>
-                            <h2>Dirt Rally 2.0</h2>
-                            <h3>$3,99 USD</h3>
-                            <button>Agregar Carrito</button>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <img src="img/Cards/f2015.png" alt="F12015">
-                        <figcaption>
-                            <h2>F1 2015</h2>
-                            <h3>Gratis</h3>
-                            <button>Jugar</button>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <img src="img/Cards/nfs.png" alt="NFSR">
-                        <figcaption>
-                            <h2>Need for Speed Rivals</h2>
-                            <h3>$12,99 USD</h3>
-                            <button>Agregar al carrito</button>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <img src="img/Cards/flatout.png" alt="Flatout">
-                        <figcaption>
-                            <h2>Flatout</h2>
-                            <h3>$0,99 USD</h3>
-                            <button>Agregar carrito</button>
-                        </figcaption>
-                    </figure>
-                </article>
-</section>
         <aside>
-            banner
+            <img src="img/banner.png" alt="Banner sobre el lanzamiento de Hora de Aventura 4 en linea">
         </aside>
 
         <section>
+            <h1>Multijugador</h1>
             <article>
-                <h1>Multijugador</h1>
                 <figure>
-                    <img src="img/Cards/warframe.png" alt="Warframe">
+                    <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                    <img class="img_card" src="img/Cards/warframe.png" alt="Warframe">
                     <figcaption>
                         <h2>Warframe</h2>
-                        <h3>Gratis</h3>
-                        <button>Jugar</button>
+                        <div>
+                            <h3>Gratis</h3>
+                            <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                        </div>
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="img/Cards/wow.png" alt="WOW">
+                    <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                    <img class="img_card" src="img/Cards/wow.png" alt="WOW">
                     <figcaption>
                         <h2>World of Warcraft</h2>
-                        <h3>Gratis</h3>
-                        <button>Jugar</button>
+                        <div>
+                            <h3>Gratis</h3>
+                            <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                        </div>
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="img/Cards/overwatch2.png" alt="Overwatch 2">
+                    <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                    <img class="img_card" src="img/Cards/overwatch2.png" alt="Overwatch 2">
                     <figcaption>
                         <h2>Overwatch 2</h2>
-                        <h3>$30,99 USD</h3>
-                        <button>Quitar del Carrito</button>
+                        <div>
+                            <h3>$30,99 USD</h3>
+                            <button class="quitarCarrito"><img src="img/Iconos/quitarcarrito.png" alt="Icono quitar del carrito"></button>
+                        </div>
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="img/Cards/minecraft.png" alt="Minecraft">
+                    <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                    <img class="img_card" src="img/Cards/minecraft.png" alt="Minecraft">
                     <figcaption>
                         <h2>Minecraft</h2>
-                        <h3>$0,99 USD</h3>
-                        <button>Quitar del carrito</button>
+                        <div>
+                            <h3>$0,99 USD</h3>
+                            <button class="quitarCarrito"><img src="img/Iconos/quitarcarrito.png" alt="Icono quitar del carrito"></button>
+                        </div>
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="img/Cards/rainbow.png" alt="Tom Clancy&#39;s Rainbow Six: Siege">
+                    <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                    <img class="img_card" src="img/Cards/rainbow.png" alt="Tom Clancy&#39;s Rainbow Six: Siege">
                     <figcaption>
                         <h2>Tom Clancy&#39;s Rainbow Six: Siege</h2>
-                        <h3>$38,99 USD</h3>
-                        <button>Agregar al carrito</button>
+                        <div>
+                            <h3>$38,99 USD</h3>
+                            <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                        </div>
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="img/Cards/fornite.png" alt="Fornite">
+                    <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
+                    <img class="img_card" src="img/Cards/fornite.png" alt="Fornite">
                     <figcaption>
                         <h2>Fornite</h2>
-                        <h3>Gratis</h3>
-                        <button>Jugar</button>
+                        <div>
+                            <h3>Gratis</h3>
+                            <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                        </div>
                     </figcaption>
                 </figure>
             </article>
     </section>
 
     <section>
+        <h1>Puzzles</h1>
         <article>
-            <h1>Puzzles</h1>
             <figure>
+                <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
                 <img src="img/Cards/4linea.png" alt="4 en linea">
                 <figcaption>
                     <h2>Hora de aventura 4 en línea</h2>
-                    <h3>Gratis</h3>
-                    <button>Jugar</button>
+                    <div>
+                        <h3>Gratis</h3>
+                        <button class="jugar"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                    </div>
                 </figcaption>
             </figure>
             <figure>
+                <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
                 <img src="img/Cards/ittakestwo.png" alt="It Takes Two">
                 <figcaption>
                     <h2>It Takes Two</h2>
-                    <h3>$20,99 USD</h3>
-                    <button>Quitar del carrito</button>
+                    <div>
+                        <h3>$20,99 USD</h3>
+                        <button class="quitarCarrito"><img src="img/Iconos/quitarcarrito.png" alt="Icono quitar del carrito"></button>
+                    </div>
                 </figcaption>
             </figure>
             <figure>
+                <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
                 <img src="img/Cards/breadafred.png" alt="">
                 <figcaption>
                     <h2>Bred &amp; Fred</h2>
-                    <h3>$14,99 USD</h3>
-                    <button>Agregar al Carrito</button>
+                    <div>
+                        <h3>$14,99 USD</h3>
+                        <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                    </div>
                 </figcaption>
             </figure>
             <figure>
+                <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
                 <img src="img/Cards/escapesimulator.png" alt="Escape Simulator">
                 <figcaption>
                     <h2>Escape Simulator</h2>
-                    <h3>$3,99 USD</h3>
-                    <button>Agregar al carrito</button>
+                    <div>
+                        <h3>$3,99 USD</h3>
+                        <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                    </div>
                 </figcaption>
             </figure>
             <figure>
+                <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
                 <img src="img/Cards/cato.png" alt="Cato">
                 <figcaption>
                     <h2>Cato</h2>
-                    <h3>$19,99 USD</h3>
-                    <button>Agregar al carrito</button>
+                    <div>
+                        <h3>$19,99 USD</h3>
+                        <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                    </div>
                 </figcaption>
             </figure>
             <figure>
+                <div>
+                            <p>Descripcion</p>
+                            <p>Este juego trata de...</p>
+                        </div>
                 <img src="img/Cards/webbingjourney.png" alt="A Webbing Journey">
                 <figcaption>
                     <h2>A Webbing Journey</h2>
-                    <h3>0,99 USD</h3>
-                    <button>Agregar al carrito</button>
+                    <div>
+                        <h3>0,99 USD</h3>
+                        <button class="agregarCarrito"><img src="img/Iconos/agregarcarrito.png" alt="Icono agregar al carrito"></button>
+                    </div>
                 </figcaption>
             </figure>
         </article>
@@ -279,7 +425,7 @@
 
     
     <footer>
-        <img src="img/logo.png" alt="Logo Footer">
+        <img src="img/Iconos/bmo.png" alt="Logo Footer">
         <ul>Desarrolladores
             <li>Coppini Lautaro</li>
             <li>Del Valle Matias Ezequiel</li>
@@ -315,11 +461,11 @@
             <li>Términos de servicios</li>
         </ul>
 
-        <ul>Redes Sociales
-            <li><a href=""><img src="" alt=""></a></li>
-            <li><a href=""><img src="" alt=""></a></li>
-            <li><a href=""><img src="" alt=""></a></li>
-            <li><a href=""><img src="" alt=""></a></li>
+        <ul class="redes">Redes Sociales
+            <li><a href=""><img src="img/Iconos/x.png" alt="Icono de X"></a></li>
+            <li><a href=""><img src="img/Iconos/linkedin.png" alt="Icono de Linkedin"></a></li>
+            <li><a href=""><img src="img/Iconos/instagram.png" alt="Icono de Instagram"></a></li>
+            <li><a href=""><img src="img/Iconos/gmail.png" alt="Icono de Gmail"></a></li>
         </ul>
 
     </footer>
