@@ -2,26 +2,157 @@
     margin: 0;
     padding: 0;
     border: 0;
+    max-width: 100%;
+    background-color: transparent;
 }
 
-.flechaizquierda{
-    background-color: transparent;
-    border: 0px;
+body{
+    background: #D9D9D9;;
 }
 
 nav {
-    height: 68px;
+    padding: 0px 15px;
+    height: 50px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #2F3237 ;
 }
+
+nav img.icono{
+    padding-left: 5px;
+}
+
+nav div button{
+    margin: 0px 5px;
+}
+
 nav button{
     background-color: transparent;
+    height: 30px;
 }
-nav button:nth-child(1){
-    margin: 0px 15px;
+
+nav button img{
+    height: 30px;
 }
-nav button:nth-child(1) img{
-    width: 35px;
-    height: 29.143px;
+
+nav form{
+    display: flex;
+    justify-content: left;
+    border-radius: 30px;
+    display: flex;
+    height: 40px;
+    width: auto;
+    margin-right: auto;
 }
-nav img
+
+nav form input{
+    z-index: 1;
+    position: relative;
+    width: 40px;
+    padding-left: 5px;
+    margin-left: 5px;
+    color: red;
+    background: #D9D9D9;
+    border-radius:30px;
+    transition: width 0.5s linear;
+    color: #2F3237;
+}
+
+nav form input::placeholder{
+    color: #2F3237;
+}
+
+nav form input:focus{
+    outline: none;
+    color: black;
+    width: 250px;
+}
+
+nav form label{
+    z-index: 2;
+    margin-left: -40px;
+}
+
+nav form label img{
+    z-index: 2;
+    height: 40px;
+    border-radius: 30px;
+    background-color: #D9D9D9;
+}
+
+nav div{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+header h1{
+    text-align: center;
+}
+
+header article{
+    display: flex;
+    flex-wrap: nowrap;
+}
+header article figure{
+    background: #2F3237;
+    color: white;
+    border-radius: 15px;
+    margin: 0px 5px;
+}
+
+header article figure img{
+    border-radius: 15px 15px 0px 0px;
+}
+
+header article figure figcaption{
+    padding: 10px;
+}
+
+header article figure figcaption h2, header article figure figcaption h3{
+    margin-left: 20px;
+}
+
+header article figure figcaption h3{
+    color: #CACACA;
+}
+
+header article figure figcaption aside{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header article figure figcaption aside img{
+    border-radius: 0px;
+    margin: 2px;
+    width: 45%;
+}
+
+header article figure figcaption div{
+    margin-top: 10px;
+    display: flex;
+    padding: 0px 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+p.gratis{
+    color: #51FF00;
+}
+
+.jugar{
+    border-radius: 30px;
+    background: #004D4D;
+    width: 81px;
+    height: 39px;
+    box-shadow: -4px -4px 4px 0px #013A3A inset, 4px 4px 4px 0px #007171 inset;
+}
+
+.oculto{
+    opacity: 0;
+}
+
+footer{
+    background: #2F3237;
+}
