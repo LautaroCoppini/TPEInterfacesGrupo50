@@ -89,7 +89,7 @@ nav form input:focus{
 
 nav form label{
     z-index: 2;
-    margin-left: -40px;
+    margin-left: -45px;
 }
 
 nav form label img{
@@ -223,6 +223,7 @@ section article{
 }
 
 section article figure > div{
+    font-size: 10px;
     padding-left: 10px;
     overflow: hidden;
     height: 0px;
@@ -328,7 +329,40 @@ footer a img{
 }
 
 @media only screen and (min-width:1024px){
-    body{
-        background-color: #004D4D;
+    nav{
+        justify-content: center;
+        height: 68px;
     }
+
+    nav form label img{
+        height: 50px;
+    }
+
+    nav form{
+        justify-content: center;
+        height: 50px;
+    }
+
+    nav form input{
+        transition: none;
+        width: 500px;
+    }
+
+    nav form input:focus{
+        width: 500px;
+    }
+
+    .img_card_principal{
+        display: unset;
+    }
+
+    header article figure{
+        width: 50%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    
+
 }
