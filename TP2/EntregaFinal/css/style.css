@@ -107,21 +107,34 @@ nav div{
  /* Carrusel principal */
 header{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-header h1{
-    text-align: center;
-    margin-bottom: 10px;
+    height: 500px;
+    position: relative;
 }
 
 header article{
+    position: absolute;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-wrap: nowrap;
+    z-index: 0;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    transition: all 1s;
 }
+
+header article:first-child{
+    transform: rotateY(0deg);
+    opacity: 1;
+    z-index: 1;
+}
+
+header article:target{
+    transform: rotateY(360deg);
+    opacity: 1;
+    z-index: 2;
+}
+
 header article figure{
     background: #2F3237;
     color: white;
