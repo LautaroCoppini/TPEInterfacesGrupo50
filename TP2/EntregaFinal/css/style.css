@@ -223,6 +223,7 @@ section article{
 }
 
 section article figure > div{
+    font-size: 10px;
     padding-left: 10px;
     overflow: hidden;
     height: 0px;
@@ -343,6 +344,7 @@ footer a img{
     }
 
     nav form input{
+        transition: none;
         width: 500px;
     }
 
