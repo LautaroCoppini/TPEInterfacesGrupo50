@@ -9,18 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     <title></title>
 </head>
-<body>
-    <form>
+<body class="fondo">
+    <main>
+        <form class="iniciar-sesion">
         <h1>Iniciar Sesión</h1>
-        <input class="input-login" type="text" value="Email_Login" placeholder="Email"/>
-        <input class="input-login" type="text" value="Contraseña_Login" placeholder="Contraseña"/>
-        <a href="login.html"> Olvide mi contraseña </a>
-        <button id="btn-iniciarSesion">Iniciar Sesión</button>
-        <div id="div-login">
-            <button id="btn-facebook">Continuar con Facebook</button>
-            <button id="btn-google">Continuar con Google</button>
-        </div>
-    </form>
+            <input class="input-login" type="text" placeholder="Email"/>
+            <div>
+                <input class="input-registrarse" type="password"/>
+                <button class="mostrarcontra" id="mostrarcontra"><img src="img/Iconos/mostrarcontra.png" alt="Mostrar password"></button>
+            </div>
+            <a href="login.html"> Olvide mi contraseña </a>
+            <button id="btn-iniciarSesion">Iniciar Sesión</button>
+            <div class="div-login">
+                <button id="btn-facebook"><img src="img/Iconos/continuarconfacebook.png" alt="Continuar con facebook"></button>
+                <button id="btn-google"><img src="img/Iconos/continuarcongoogle.png" alt="Continuar con Google"></button>
+            </div>
+        </form>
+    </main>
 
     <footer>
         <img src="img/Iconos/bmo.png" alt="Logo Footer">

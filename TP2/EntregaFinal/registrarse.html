@@ -9,28 +9,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     <title>Registrarse</title>
 </head>
-<body>
-    <form>
-        <h1>Registrarse Aqui</h1>
-        <label>Nombre *</label>
-        <input class="input-registrarse" type="text" value="Nombre"/>
-        <label>Apellido *</label>
-        <input class="input-registrarse" type="text" value="Apellido"/>
-        <label>Nickname</label>
-        <input class="input-registrarse" type="text" value="Nickname"/>
-        <label>Edad *</label>
-        <input class="input-registrarse" type="number" value="Edad"/>
-        <label>Email *</label>
-        <input class="input-registrarse" type="email" value="Email"/>
-        <label>Contraseña *</label>
-        <input class="input-registrarse" type="text" value="Contraseña"/>
-        <label>Repetir Contraseña *</label>
-        <input class="input-registrarse" type="text" value="RepetirContraseña"/>
-        <a href="login.html"> Ya tengo cuenta </a>
-        <p>Captcha</p>
-        <button id="btn-registrarse">Registrarse</button>
-    </form>
-
+<body class="fondo">
+    <main>
+        <form class="registrarse">
+            <h1>Registrarse Aqui</h1>
+            <label>Nombre *</label>
+            <input class="input-registrarse" type="text"/>
+            <label>Apellido *</label>
+            <input class="input-registrarse" type="text"/>
+            <label>Nickname</label>
+            <input class="input-registrarse" type="text"/>
+            <label>Edad *</label>
+            <input class="input-registrarse" type="number"/>
+            <label>Email *</label>
+            <input class="input-registrarse" type="email"/>
+            <label>Contraseña *</label>
+            <div>
+                <input class="input-registrarse" type="password"/>
+                <button class="mostrarcontra" id="mostrarcontra"><img src="img/Iconos/mostrarcontra.png" alt="Mostrar password"></button>
+            </div>
+            <label>Repetir Contraseña *</label>
+            <div>
+                <input class="input-registrarse" type="password"/>
+                <button class="mostrarcontra" id="mostrarcontrarepe"><img src="img/Iconos/mostrarcontra.png" alt="Mostrar password"></button>
+            </div>
+            <a href="login.html"> Ya tengo cuenta </a>
+            <img class="captcha" src="img/Captcha.png" alt="Captcha">
+            <button id="btn-registrarse">Registrarse</button>
+        </form>
+    </main>
     <footer>
         <img src="img/Iconos/bmo.png" alt="Logo Footer">
         <ul>Desarrolladores
