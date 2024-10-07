@@ -4,7 +4,6 @@
     border: 0;
     max-width: 100%;
     background-color: transparent;
-    color: #000;
     font-family: "Concert One";
     font-weight: 400;
 }
@@ -504,7 +503,7 @@ section.juego article img{
 
 section.juego aside{
     width: 30%;
-    padding-left: 61px;
+    padding-left: 30px;
 }
 
 section.juego aside div{
@@ -513,24 +512,26 @@ section.juego aside div{
 
 }
 
-section.juego aside > div{
-    margin-bottom: 29px;
+section.juego aside div{
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    padding: 10% 39px;
+    padding: 8% 39px;
 }
 
-section.juego aside>div h2{
+section.juego aside div h2{
     position: absolute;
-    top: 2%;
+    top: 0px;
     left: 50%;
     transform: translate(-50%, 0%);
-    
 }
 
 section.juego article{
     width: 70%;
+}
+
+.controles{
+    margin-bottom: 10px;
 }
 
 .controles h3{
@@ -538,19 +539,170 @@ section.juego article{
     width: 50%;
 }
 
+.informacion-juego{
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
 
+.juego-descripcion{
+    width: 60%;
+    position: relative;
+    padding: 34px;
+    border-radius: 15px;
+    background: #2F3237;
+}
+
+.juego-descripcion h2{
+    margin-bottom: 15px;
+}
+
+.juego-descripcion h3{
+    margin-bottom: 20px;
+}
+
+.juego-descripcion a{
+    color: #FBBC05;
+    text-decoration-line: underline;
+}
+
+.juego-descripcion a img{
+    height: 20px;
+    margin: -3px 0px;
+}
+
+.calificacion{
+    position: absolute;
+    top: 34px;
+    right: 34px;
+}
+
+.calificacion img{
+    margin: -5px -5px;
+}
+
+.multimedia-juego{
+    position: relative;
+    margin-left: 60px;
+    padding: 34px;
+    width: 40%;
+    background-color: #2F3237;
+    border-radius: 15px;
+}
+
+.multimedia-juego h2{
+    margin-bottom: 20px;
+}
+
+.multimedia-juego div{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10%;
+    height: 50%;
+}
+
+.multimedia-juego div img{
+    margin: auto;
+    width: 45%;
+}
+
+.multimedia-juego h3{
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.multimedia-juego aside{
+    padding: 34px;
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.multimedia-juego aside img{
+    width: 58px;
+}
+
+.multimedia-juego .logo-gmail{
+    margin-top: 9px;
+    height: 47px;
+}
 
 /*Seccion de comentarios*/
 
-.comments-section {
-    width: 60%;
+section.comentarios{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+section.comentarios aside{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 30%;
+}
+
+article.comentarios{
     padding: 20px;
     border-radius: 15px;
     background-color: #2F3237;
     margin: 32px 0px;
+    width: 65%;
 }
 
-.comment-box {
+.comentarios form{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.comentarios form img{
+    width: 40px;
+    height: 40px;
+}
+
+.comentarios form div{
+    background-color: rgb(136, 136, 136);
+    overflow: hidden;
+    border-radius: 15px;
+    width: 93%;
+    display: block;
+}
+
+.comentarios form div textarea{
+    resize: none;
+    padding: 10px;
+    border-bottom: 1px black solid;
+    background-color: white;
+    width: 100%;
+    height: 100px;
+}
+
+.comentarios form div textarea:focus{
+    outline: none;
+}
+
+.comentarios form div button{
+    margin: 10px 0px 10px 80%;
+    color: white;
+    width: 120px;
+    height: 40px;
+    padding: 10px 26px 9px 26px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background: #004D4D;
+    box-shadow: -4px -4px 4px 0px #013A3A inset, 4px 4px 4px 0px #007171 inset;
+
+}
+
+.comentario {
     display: flex;
     align-items: flex-start;
     margin-bottom: 15px;
@@ -567,31 +719,38 @@ section.juego article{
     margin-right: 15px;
 }
 
-.comment-content {
+.comentario-contenido {
+    position: relative;
     width: 100%;
 }
 
-.comment-content h4 {
+.comentario-contenido h4 {
     margin: 0;
     font-size: 16px;
     font-weight: bold;
 }
 
-.comment-content .date {
+.comentario-contenido .fecha {
+    position: absolute;
+    right: 0px;
     font-size: 12px;
     color: #888;
 }
 
-.comment-content p {
+.comentario-contenido p {
     margin: 5px 0;
 }
 
-.likes {
+.comentario-contenido div {
+    width: 50px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
     display: flex;
     align-items: center;
 }
 
-.like-button {
+.comentario-contenido button {
     background-color: transparent;
     border: none;
     font-size: 18px;
@@ -599,11 +758,9 @@ section.juego article{
     margin-right: 5px;
 }
 
-.like-button:hover {
-    color: blue;
+.comentario-contenido button:active {
+    background-color: blue;
 }
-
-
 
 @media only screen and (min-width:1024px){
     nav{
