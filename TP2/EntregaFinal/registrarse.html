@@ -10,7 +10,7 @@
     <title>Registrarse</title>
 </head>
 <body class="fondo">
-    <main>
+    <main class="login-registro">
         <form class="registrarse">
             <h1>Registrarse Aqui</h1>
             <label>Nombre *</label>
@@ -35,8 +35,12 @@
             </div>
             <a href="login.html"> Ya tengo cuenta </a>
             <img class="captcha" src="img/Captcha.png" alt="Captcha">
-            <button id="btn-registrarse">Registrarse</button>
+            <button id="btn-registrarse" class="botonRegistrarse">
+                <img class="registroCompletado" src="img/Iconos/bmocheck.png" alt="Registro completo">
+                <p>Registrarse</p>   
+            </button>
         </form>
+
     </main>
     <footer>
         <img src="img/Iconos/bmo.png" alt="Logo Footer">
@@ -82,5 +86,6 @@
             <li><a href=""><img src="img/Iconos/gmail.png" alt="Icono de Gmail"></a></li>
         </ul>
     </footer>
+    <script src="js/registro.js"></script>
 </body>
 </html>

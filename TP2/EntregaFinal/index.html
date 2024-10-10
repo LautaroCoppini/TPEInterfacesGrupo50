@@ -22,10 +22,10 @@
             <label for="search"><img src="img/Iconos/lupa.png" alt="Lupa de Busqueda"></label>
         </form>
         <div class="nav-botones">
-            <button>
+            <button id="btn-menuCarrito">
                 <img src="img/Iconos/carrito.png" alt="Icono de carrito">
             </button>
-            <button>
+            <button id="btn-menuUsuario">
                 <img src="img/Iconos/fotoperfil.png" alt="Foto de perfil">
             </button>
         </div>
@@ -55,8 +55,43 @@
                 <h1>Puzzles</h1>
             </div>
         </div>
-        <div id="menuCarrito" class="menu-carrito">
-
+        <div id="menuCarrito" class="menu-carrito menu-oculto">
+            <h1>Mi Carrito</h1>
+            <div>
+                <h3>Assassin’s Creed Shadows</h3>
+                <p>19,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>EA FC 25</h3>
+                <p>49,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>Tour de France 2024</h3>
+                <p>45,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>Overwatch 2</h3>
+                <p>30,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>Minecraft</h3>
+                <p>0,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>It Takes Two</h3>
+                <p>20,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <form>
+                <h3>Total a pagar</h3>
+                <p>168,94 USD</p>
+                <button><h3>Pagar</h3></button>
+            </form>
         </div>
         <div id="menuUsuario" class="menu-usuario menu-oculto">
             <div>
@@ -75,7 +110,6 @@
                 <img src="img/Iconos/Cerrar Sesión.png" alt="Cerrar Sesión">
                 <h2>Cerrar Sesión</h2> 
              </div>
-                
         </div>
     </nav>
     
@@ -513,5 +547,6 @@
             <li><a href=""><img src="img/Iconos/gmail.png" alt="Icono de Gmail"></a></li>
         </ul>
     </footer>
+    <script src="js/nav.js"></script>
 </body>
 </html>
