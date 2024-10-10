@@ -12,7 +12,7 @@
 
 <body>
     <nav>
-        <button>
+        <button id="btn-menuHamburguesa">
             <img src="img/Iconos/menuHamburguesa.png" alt="Menu hamburguesa">
         </button>
         <img class="icono" src="img/Iconos/bmo.png" alt="icono de la pagina">
@@ -21,7 +21,7 @@
             <input type="text" id="search" placeholder="Buscar...">
             <label for="search"><img src="img/Iconos/lupa.png" alt="Lupa de Busqueda"></label>
         </form>
-        <div>
+        <div class="nav-botones">
             <button>
                 <img src="img/Iconos/carrito.png" alt="Icono de carrito">
             </button>
@@ -29,10 +29,58 @@
                 <img src="img/Iconos/fotoperfil.png" alt="Foto de perfil">
             </button>
         </div>
+        <div id="menuHamburguesa" class="menu-hamburguesa menu-oculto">
+            <div>
+                <img src="img/Iconos/Juegos.png" alt="Mis juegos">
+                <h1>Mis Juegos</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Aventuras.png" alt="Acción y Aventuras">
+                <h1>Acción y Aventuras</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Carreras.png" alt="Carreras">
+                <h1>Carreras</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Deportes.png" alt="Deportes">
+                <h1>Deportes</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Multijugador.png" alt="Multijugador">
+                <h1>Multijugador</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Puzzles.png" alt="Puzzles">
+                <h1>Puzzles</h1>
+            </div>
+        </div>
+        <div id="menuCarrito" class="menu-carrito">
+
+        </div>
+        <div id="menuUsuario" class="menu-usuario menu-oculto">
+            <div>
+                <img src="img/Iconos/fotoperfil.png" alt="Foto de Perfil">
+                <h2>Mi Perfil</h2> 
+             </div>
+             <div>
+                <img src="img/Iconos/Credit card.png" alt="Mis métodos de pago">
+                <h2>Mis métodos de pago</h2> 
+             </div>
+             <div>
+                <img src="img/Iconos/Multijugador.png" alt="Amigos">
+                <h2>Amigos</h2> 
+             </div>
+             <div>
+                <img src="img/Iconos/Cerrar Sesión.png" alt="Cerrar Sesión">
+                <h2>Cerrar Sesión</h2> 
+             </div>
+                
+        </div>
     </nav>
     
     <main>
-        <h1>Juegos Recomendados del dia</h1>
+        <h1 class="titulo-Recomendados">Juegos Recomendados del dia</h1>
         <header>
             <article id="juego1">
                 <button><a href="#juego1"><img src="img/Iconos/iconoflechaizquierda.png" alt="Flecha para ir a la card anterior"></a></button>
