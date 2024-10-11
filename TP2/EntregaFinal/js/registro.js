@@ -3,7 +3,7 @@
 let btn = document.getElementById("btn-registrarse");
 btn.addEventListener("click", (e)=>{
     e.preventDefault();
-    redireccionar;
+    setTimeout(redireccionar, 1500);
 })
 
 function redireccionar() {

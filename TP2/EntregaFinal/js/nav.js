@@ -4,21 +4,45 @@ let btnMenuHamburguesa = document.getElementById("btn-menuHamburguesa");
 let btnMenuUsuario = document.getElementById("btn-menuUsuario");
 let btnMenuCarrito = document.getElementById("btn-menuCarrito");
 
-console.log(btnMenuHamburguesa);
-console.log(btnMenuUsuario);
-console.log(btnMenuCarrito);
+let idMenuHamburguesa = "menuHamburguesa";
+let idMenuUsuario = "menuUsuario";
+let idMenuCarrito = "menuCarrito";
+
 
 btnMenuHamburguesa.addEventListener("click",()=>{
-    mostrar("menuHamburguesa");
+    if(!isOculto(idMenuCarrito)){
+        mostrar(idMenuCarrito);
+    }
+    if(!isOculto(idMenuUsuario)){
+        mostrar(idMenuUsuario);
+    }
+    mostrar(idMenuHamburguesa);
 });
 btnMenuUsuario.addEventListener("click",()=>{
-    mostrar("menuUsuario");
+    if(!isOculto(idMenuCarrito)){
+        mostrar(idMenuCarrito);
+    }
+    if(!isOculto(idMenuHamburguesa)){
+        mostrar(idMenuHamburguesa);
+    }
+    mostrar(idMenuUsuario);
 });
 btnMenuCarrito.addEventListener("click",()=>{
-    mostrar("menuCarrito");
+    if(!isOculto(idMenuHamburguesa)){
+        mostrar(idMenuHamburguesa);
+    }
+    if(!isOculto(idMenuUsuario)){
+        mostrar(idMenuUsuario);
+    }
+    mostrar(idMenuCarrito);
 });
 
 function mostrar(id){
     let menu = document.getElementById(id);
     menu.classList.toggle("menu-oculto");
+}
+
+function isOculto(id){
+    let menu = document.getElementById(id);
+    return menu.classList.contains("menu-oculto");
 }
