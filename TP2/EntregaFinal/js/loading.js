@@ -6,7 +6,7 @@ let progress = 0;
 
         // Desactiva el scroll
         body.style.overflow = 'hidden';
-
+        
         const interval = setInterval(() => {
             progress += 1;
             progressText.textContent = progress + "%";
