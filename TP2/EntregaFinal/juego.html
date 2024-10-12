@@ -8,27 +8,116 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
-    <title>Juego</title>
+    <title>BMO-Games|Hora de Aventura 4 en linea</title>
+    <link rel="shortcut icon" href="img/Iconos/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
     <nav>
-        <button>
+        <button id="btn-menuHamburguesa">
             <img src="img/Iconos/menuHamburguesa.png" alt="Menu hamburguesa">
         </button>
-        <img class="icono" src="img/Iconos/bmo.png" alt="icono de la pagina">
+        <a href="index.html">
+            <img class="icono" src="img/Iconos/bmo.png" alt="icono de la pagina">
+        </a>
 
         <form>
             <input type="text" id="search" placeholder="Buscar...">
             <label for="search"><img src="img/Iconos/lupa.png" alt="Lupa de Busqueda"></label>
         </form>
-        <div>
-            <button>
+        <div class="nav-botones">
+            <button id="btn-menuCarrito">
                 <img src="img/Iconos/carrito.png" alt="Icono de carrito">
             </button>
-            <button>
+            <button id="btn-menuUsuario" class="nav-avatar">
                 <img src="img/Iconos/fotoperfil.png" alt="Foto de perfil">
             </button>
+        </div>
+        <div id="menuHamburguesa" class="menu-hamburguesa menu-oculto">
+            <div>
+                <img src="img/Iconos/Juegos.png" alt="Mis juegos">
+                <h1>Mis Juegos</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Aventuras.png" alt="Acción y Aventuras">
+                <h1>Acción y Aventuras</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Carreras.png" alt="Carreras">
+                <h1>Carreras</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Deportes.png" alt="Deportes">
+                <h1>Deportes</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Multijugador.png" alt="Multijugador">
+                <h1>Multijugador</h1>
+            </div>
+            <div>
+                <img src="img/Iconos/Puzzles.png" alt="Puzzles">
+                <h1>Puzzles</h1>
+            </div>
+        </div>
+        <div id="menuCarrito" class="menu-carrito menu-oculto">
+            <h1>Mi Carrito</h1>
+            <div>
+                <h3>Assassin’s Creed Shadows</h3>
+                <p>19,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>EA FC 25</h3>
+                <p>49,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>Tour de France 2024</h3>
+                <p>45,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>Overwatch 2</h3>
+                <p>30,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>Minecraft</h3>
+                <p>0,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <div>
+                <h3>It Takes Two</h3>
+                <p>20,99 USD</p>
+                <button><img src="img/Iconos/quitarcarrito.png" alt="Quitar del carrito"></button>
+            </div>
+            <form>
+                <h3>Total a pagar</h3>
+                <p>168,94 USD</p>
+                <button>
+                    <h3>Pagar</h3>
+                </button>
+            </form>
+        </div>
+        <div id="menuUsuario" class="menu-usuario menu-oculto">
+            <div>
+                <img src="img/Iconos/fotoperfil.png" alt="Foto de Perfil">
+                <h2>Mi Perfil</h2>
+            </div>
+            <div>
+                <img src="img/Iconos/Credit card.png" alt="Mis métodos de pago">
+                <h2>Mis métodos de pago</h2>
+            </div>
+            <div>
+                <img src="img/Iconos/Multijugador.png" alt="Amigos">
+                <h2>Amigos</h2>
+            </div>
+            <a href="registrarse.html">
+                <div>
+                    <img src="img/Iconos/Cerrar Sesión.png" alt="Cerrar Sesión">
+                    <h2>Cerrar Sesión</h2>
+                </div>
+            </a>
         </div>
     </nav>
     <main class="main-juego">
@@ -212,10 +301,7 @@
                 <a href=""><img src="img/Publicidad chica.png" alt="Publicidad de juegos"></a>
             </aside>
         </section>
-
     </main>
-
-
     <footer>
         <img src="img/Iconos/bmo.png" alt="Logo Footer">
         <ul>Desarrolladores
@@ -260,6 +346,7 @@
             <li><a href=""><img src="img/Iconos/gmail.png" alt="Icono de Gmail"></a></li>
         </ul>
     </footer>
+    <script src="js/nav.js"></script>
 </body>
 
 </html>

@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
-    <title></title>
+    <title>BMO-Games</title>
+    <link rel="shortcut icon" href="img/Iconos/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -25,7 +26,6 @@
             <img src="img/Iconos/menuHamburguesa.png" alt="Menu hamburguesa">
         </button>
         <img class="icono" src="img/Iconos/bmo.png" alt="icono de la pagina">
-
         <form>
             <input type="text" id="search" placeholder="Buscar...">
             <label for="search"><img src="img/Iconos/lupa.png" alt="Lupa de Busqueda"></label>
@@ -117,10 +117,12 @@
                 <img src="img/Iconos/Multijugador.png" alt="Amigos">
                 <h2>Amigos</h2>
             </div>
-            <div>
-                <img src="img/Iconos/Cerrar Sesión.png" alt="Cerrar Sesión">
-                <h2>Cerrar Sesión</h2>
-            </div>
+            <a href="registrarse.html">
+                <div>
+                    <img src="img/Iconos/Cerrar Sesión.png" alt="Cerrar Sesión">
+                    <h2>Cerrar Sesión</h2>
+                </div>
+            </a>
         </div>
     </nav>
 
@@ -143,10 +145,12 @@
                         </aside>
                         <div>
                             <p class="gratis">Gratis</p>
-                            <button class="jugar jugarPrincipal">
-                                <img class="jugar-imagen" src="img/Iconos/jugar.png" alt="Boton jugar">
-                                <img class="hover" src="img/Iconos/JakeConFondo.png">
-                            </button>
+                            <a href="juego.html">
+                                <button class="jugar jugarPrincipal">
+                                    <img class="jugar-imagen" src="img/Iconos/jugar.png" alt="Boton jugar">
+                                    <img class="hover" src="img/Iconos/JakeConFondo.png">
+                                </button>
+                            </a>
                         </div>
                     </figcaption>
                 </figure>
@@ -164,7 +168,10 @@
                         </aside>
                         <div>
                             <p class="gratis">Gratis</p>
-                            <button class="jugar jugarPrincipal"><img src="img/Iconos/jugar.png" alt="Boton jugar"></button>
+                            <button class="jugar jugarPrincipal">
+                                <img class="jugar-imagen" src="img/Iconos/jugar.png" alt="Boton jugar">
+                                <img class="hover" src="img/Iconos/JakeConFondo.png">
+                            </button>
                         </div>
                     </figcaption>
                 </figure>
@@ -176,16 +183,9 @@
             <h1>Aventura</h1>
             <article>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
-                        <p>Assassin's Creed Shadows es un juego de acción y aventuras con sigilo similar a sus
-                            predecesores. Ambientado en el Japón del siglo XVI, hacia el final del período Sengoku, el
-                            juego se centrará en la lucha milenaria entre la Hermandad de Asesinos, que lucha por la paz
-                            y la libertad, y la Orden de los Templarios, que desea la paz a través del control. La
-                            historia se desarrollará desde la perspectiva de dos protagonistas: Naoe, una shinobi, y
-                            Yasuke, un personaje africano inspirado en la figura histórica del mismo nombre. Los dos
-                            personajes tienen estilos de juego diferentes, lo que permite abordar las misiones de
-                            diversas maneras.
+                        <p>Assassin's Creed Shadows es un juego de acción sigilosa ambientado en un mundo abierto. Los jugadores controlan asesinos mientras exploran ciudades, ejecutan misiones secretas y enfrentan conspiraciones históricas intrigantes.
                     </div>
                     <img class="img_card" src="img/Cards/assassinscreedshadow.png" alt="Assassin's Creed Shadows">
                     <figcaption>
@@ -198,8 +198,8 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
-                        <p>Descripcion</p>
+                    <div class="descripcion">
+                        <p>Descripcion:</p>
                         <p>Peter Parker y Miles Morales regresan en una nueva aventura de Marvel's Spider-Man, donde
                             podrás balancearte por Nueva York, usar alas de telaraña y alternar entre ambos héroes.
                             Enfréntate a Venom, que amenaza con destruir la ciudad y sus vidas.</p>
@@ -217,8 +217,8 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
-                        <p>Descripcion</p>
+                    <div class="descripcion">
+                        <p>Descripcion:</p>
                         <p>Tres años después del juego anterior, Kratos y Atreus buscan evitar el Ragnarök mientras
                             exploran los nueve reinos y descubren la verdadera identidad de Atreus como Loki.
                             Enfrentarán a Thor, Odín y Freya, quienes buscan venganza por la muerte de Baldur.</p>
@@ -234,8 +234,8 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
-                        <p>Descripcion</p>
+                    <div class="descripcion">
+                        <p>Descripcion:</p>
                         <p>The Last of Us: Parte II es un videojuego de drama, survival horror y acción-aventura en
                             tercera persona, desarrollado por Naughty Dog y publicado por Sony. Escrita y dirigida por
                             Neil Druckmann, esta secuela cuenta con la coescritura de Halley Gross.</p>
@@ -251,7 +251,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Adéntrate en el DIRECTOR'S CUT de Ghost of Tsushima para PC y forja tu camino en esta
                             aventura de acción en mundo abierto. Desarrollado por Sucker Punch Productions, Nixxes
@@ -268,7 +268,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Adéntrate en un elegante juego de plataformas repleto de acción y aventura. Viaja por la
                             mitología persa y manipula los límites del espacio y el tiempo.</p>
@@ -288,7 +288,7 @@
             <h1>Carreras</h1>
             <article>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Suéltate en DIRT 5: la experiencia todoterreno más audaz de todos los tiempos, con un modo
                             Carrera plagado de estrellas, pantalla dividida para cuatro jugadores, innovadores modos en
@@ -305,7 +305,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Adéntrate en el mundo de los deportes de motor norteamericanos mientras exploras todo Estados
                             Unidos por tierra, mar y aire. Ponte al mando de una amplia variedad de coches, motos,
@@ -322,7 +322,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>DiRT Rally 2.0 te reta a abrirte camino a través de una selección de ubicaciones de rally
                             icónicas por todo el mundo, en los vehículos todoterreno más potentes de la historia,
@@ -339,14 +339,9 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
-                        <p>El videojuego permite a los jugadores elegir entre la temporada 2014 y la temporada 2015,
-                            para así disfrutar la temporada pasada en la nueva generación, permite escoger entre las
-                            escuderías de ambas temporadas, cada una con sus respectivos pilotos, aparte de la mejora
-                            gráfica, se añade un nuevo equipo de box, un nuevo ingeniero, la posibilidad de hablar a
-                            través del micrófono y solicitar una parada en boxes, la posibilidad de hablar con el
-                            ingeniero durante la carrera.</p>
+                        <p>F1 2015 es un simulador de carreras que recrea la temporada oficial de Fórmula 1. Con gráficos realistas y físicas detalladas, los jugadores compiten en los circuitos más icónicos con pilotos y equipos auténticos.</p>
                     </div>
                     <img class="img_card" src="img/Cards/f2015.png" alt="F12015">
                     <figcaption>
@@ -361,7 +356,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Hazte con la experiencia completa de Need for Speed Rivals. Consigue el juego completo,
                             además de los seis packs de contenido descargable, con la Complete Edition..</p>
@@ -377,7 +372,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Experimenta la conducción de tu vida mientras te lanzas dentro y fuera de la pista, haciendo
                             que las vallas se destrocen, los muros de neumáticos exploten y los tanques de agua y
@@ -395,12 +390,15 @@
                 </figure>
             </article>
         </section>
+
         <aside class="banner">
             <img src="img/banner.png" alt="Banner sobre el lanzamiento de Hora de Aventura 4 en linea">
             <a href="juego.html">
-                <button  class="jugar jugarPrincipal">
-                    <img class="jugar-imagen" src="img/Iconos/jugar.png" alt="Boton jugar">
-                    <img class="hover" src="img/Iconos/JakeConFondo.png">
+                <button class="jugarBanner">
+                    <h3>Jugar</h3>
+                    <div class="hover">
+                        <img  src="img/Iconos/BMOCara.png">
+                    </div>
                 </button>
             </a>
         </aside>
@@ -409,7 +407,7 @@
             <h1>Multijugador</h1>
             <article>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Despierta como un guerrero imparable y lucha junto a tus amigos en este juego de acción
                             gratuito en línea y basado en historias.</p>
@@ -427,7 +425,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>World of Warcraft es un juego online en el que los jugadores crean un personaje y exploran un
                             mundo virtual lleno de misiones, aventuras y desafíos. Los jugadores pueden formar grupos
@@ -446,7 +444,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Overwatch® 2 es un shooter por equipos aclamado por la crítica ambientado en un futuro
                             optimista con un plantel de héroes en evolución. Júntate con amigos y jugad hoy mismo.</p>
@@ -462,7 +460,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Minecraft es un videojuego sandbox enfocado en permitirle al jugador explorar y modificar un
                             mundo generado dinámicamente hecho de bloques de un metro cúbico. Es mantenido por Mojang
@@ -479,7 +477,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Tom Clancy's Rainbow Six® Siege es un shooter táctico realista por equipos donde una
                             cuidadosa planificación y ejecución son claves para la victoria.</p>
@@ -495,7 +493,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Fortnite es un mundo lleno de experiencias. Lánzate a la isla y compite hasta ser el último
                             jugador (o equipo) en pie. Crea una isla personalizada con tus propias reglas. Reúnete con
@@ -519,7 +517,7 @@
             <h1>Puzzles</h1>
             <article>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>¡Prepárate para conectar 4 como un verdadero héroe! Para ganar, solo tienes que alinear
                             cuatro fichas del mismo color, ya sea en horizontal, vertical o diagonal.</p>
@@ -529,15 +527,17 @@
                         <h2>Hora de aventura 4 en línea</h2>
                         <div>
                             <h3>Gratis</h3>
-                            <button class="jugar">
-                                <img class="jugar-imagen" src="img/Iconos/jugar.png" alt="Boton jugar">
-                                <img class="hover" src="img/Iconos/JakeConFondo.png">
-                            </button>
+                            <a href="juego.html">
+                                <button class="jugar">
+                                    <img class="jugar-imagen" src="img/Iconos/jugar.png" alt="Boton jugar">
+                                    <img class="hover" src="img/Iconos/JakeConFondo.png">
+                                </button>
+                            </a>
                         </div>
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Embárcate en la aventura de tu vida en It Takes Two. Invita a un amigo a acompañarte gratis
                             con el Pase de amigo* para colaborar en una gran variedad de desafíos deliciosamente
@@ -554,7 +554,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>¡Acompaña a Bred y Fred! Un rage game donde tendrás que cooperar para saltar y escalar hasta
                             el pico de la montaña. Eso si, tendrás que tener mucho cuidado de no caer, y no arrastrar a
@@ -572,7 +572,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>Un juego de enigmas en primera persona al que puedes jugar en solitario o cooperativamente en
                             línea. Descubre un conjunto de salas de escape totalmente interactivas. ¡Traslada muebles,
@@ -590,7 +590,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>CATO: Buttered Cat es un adorable juego de plataformas inspirado en la paradoja del gato con
                             tostada, donde al atar una tostada con mantequilla a un gato, ¡creas una máquina de
@@ -607,7 +607,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <div>
+                    <div class="descripcion">
                         <p>Descripcion:</p>
                         <p>A Webbing Journey es un juego sandbox con interacciones de física en el que encarnas a una
                             adorable arañita. Explora una casa gigantesca, diseña telarañas espectaculares y completa

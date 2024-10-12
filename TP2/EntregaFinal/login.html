@@ -7,22 +7,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
-    <title></title>
+    <title>BMO-Games|Inicio Sesión</title>
+    <link rel="shortcut icon" href="img/Iconos/favicon.ico" type="image/x-icon">
 </head>
 <body class="fondo">
-    <main>
+    <main class="login-registro">
         <form class="iniciar-sesion">
         <h1>Iniciar Sesión</h1>
             <input class="input-login" type="text" placeholder="Email"/>
             <div>
-                <input class="input-registrarse" type="password"/>
+                <input class="input-registrarse" type="password" placeholder="Contraseña"/>
                 <button class="mostrarcontra" id="mostrarcontra"><img src="img/Iconos/mostrarcontra.png" alt="Mostrar password"></button>
             </div>
-            <a href="login.html"> Olvide mi contraseña </a>
-            <button id="btn-iniciarSesion">Iniciar Sesión</button>
+            <a>Olvide mi contraseña</a>
+            <a href="index.html" class="btn">
+                <button type="button" id="btn-iniciarSesion">Iniciar Sesión</button>
+            </a>
             <div class="div-login">
-                <button id="btn-facebook"><img src="img/Iconos/continuarconfacebook.png" alt="Continuar con facebook"></button>
-                <button id="btn-google"><img src="img/Iconos/continuarcongoogle.png" alt="Continuar con Google"></button>
+                <a href="index.html" class="btn">
+                    <button type="button" id="btn-facebook"><img src="img/Iconos/continuarconfacebook.png" alt="Continuar con facebook"></button>
+                </a>
+                <a href="index.html" class="btn">
+                    <button type="button" id="btn-google"><img src="img/Iconos/continuarcongoogle.png" alt="Continuar con Google"></button>
+                </a>
             </div>
         </form>
     </main>
