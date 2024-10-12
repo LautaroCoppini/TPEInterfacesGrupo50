@@ -815,10 +815,12 @@ section ::-webkit-scrollbar-thumb {
 /* Footer */
 
 footer{
+    position: relative;
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
     background: #2F3237;
+    color: white;
 }
 footer > img{
     display: none;
@@ -841,12 +843,10 @@ footer a img{
     opacity: 0.75;
     margin: 5px;
 }
-.redes{
+
+.redes div{
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: flex-start;
+    flex-wrap: nowrap;
 }
 
 /* Registrarse/login */
@@ -1423,8 +1423,9 @@ article.comentarios{
         display: unset;
     }
 
-    .redes{
-        display: block;
+    .derechosRegistrados{
+        position: absolute;
+        right: 10px;
+        bottom: 20%;
     }
-
 }
