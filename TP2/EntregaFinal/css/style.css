@@ -286,8 +286,8 @@ nav div{
 .menu-carrito{
     overflow: hidden;
     width: 400px;
-    height: 100vh;
     right: 30px;
+    height: 510px;
 }
 
 .menu-carrito img{
@@ -393,7 +393,6 @@ header{
 
 .img_card_principal{
     width: 760px;
-    height: 400px;
     display: none;
     border-radius: 15px 15px 0px 0px;
 }
@@ -852,13 +851,13 @@ footer a img{
 /* Registrarse/login */
 
 .fondo{
+    height: 100vh;
     background-image: url("../img/fondo.jpg");
     backdrop-filter: blur(2px) brightness(30%);
 }
 
 .fondo main{
-    padding: 100px 0px;
-
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1164,12 +1163,10 @@ section.juego article{
 .multimedia-juego div{
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10%;
-    height: 50%;
 }
 
 .multimedia-juego div img{
-    margin: auto;
+    margin: 10px auto;
     width: 45%;
 }
 
@@ -1182,9 +1179,6 @@ section.juego article{
 
 .multimedia-juego aside{
     padding: 34px;
-    position: absolute;
-    bottom: 20px;
-    right: 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
