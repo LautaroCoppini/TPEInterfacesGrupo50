@@ -1312,6 +1312,7 @@ article.comentarios{
 }
 
 @media only screen and (min-width:1024px){
+
     nav{
         justify-content: center;
         height: 68px;
@@ -1344,7 +1345,8 @@ article.comentarios{
     }
 
     .titulo-Recomendados{
-        text-align: start;
+        text-align:left;
+        margin-left: 8.5%;
     }
 
     .img_card_principal{
