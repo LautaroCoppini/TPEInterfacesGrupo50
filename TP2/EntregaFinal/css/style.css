@@ -304,7 +304,7 @@ nav div{
 }
 
 .menu-carrito form{
-    padding: 10px;
+    padding: 10px 0px;
     display: block;
     position: relative;
 }
@@ -314,22 +314,10 @@ nav div{
     height: 39px;
     padding: 9.977px 32px 13.605px 32px;
     border-radius: 30px;
-    background: #3FC700;
-    box-shadow: 4px 4px 4px 0px #73FF32 inset, -4px -4px 4px 0px #329F00 inset;
     position: absolute;
     right: 20px;
     z-index: 1;
-    top: 50%;
-    transform: translate(0%, -50%);
-}
-
-.menu-carrito div button{
-    right: 5px;
-    width: 86.786px;
-    height: 39px;
-    border-radius: 30px;
-    background: #FF1506;
-    box-shadow: 4px 4px 4px 0px #FF5B51 inset, -4px -4px 4px 0px #980B02 inset;
+    top: 25%;
 }
 
 .menu-carrito form button h3{
