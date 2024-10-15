@@ -865,7 +865,7 @@ footer a img{
 
 .registrarse{
     width: 570px;
-    height: 848px;
+    height: 100%;
 }
 
 .iniciar-sesion{
@@ -920,7 +920,7 @@ footer a img{
     padding-left: 10px;
     border-radius: 10px;
     border: 1px solid #C4C4C4;
-    height: 47px;
+    height: 37.5px;
 }
 
 .fondo form div{
