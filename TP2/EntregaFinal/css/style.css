@@ -1192,23 +1192,24 @@ section.comentarios{
 section.comentarios aside{
     margin-top: auto;
     margin-bottom: auto;
-    width: 30%;
+    width: 20%;
 }
 
 article.comentarios{
-    padding: 20px;
     border-radius: 15px;
     background-color: #2F3237;
-    margin: 32px 0px;
-    width: 65%;
+    width: 75%;
 }
 
 .comentarios form{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    width: 100%;
+    width: 95%;
     margin-bottom: 30px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .comentarios form img{
@@ -1220,7 +1221,7 @@ article.comentarios{
     background-color: rgb(136, 136, 136);
     overflow: hidden;
     border-radius: 15px;
-    width: 93%;
+    width: 95%;
     display: block;
 }
 
@@ -1254,11 +1255,11 @@ article.comentarios{
 .comentario {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 15px;
     padding: 10px;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
 }
 
 .avatar {
