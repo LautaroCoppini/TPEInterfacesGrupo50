@@ -839,13 +839,13 @@ footer a img{
 /* Registrarse/login */
 
 .fondo{
-    height: 100vh;
     background-image: url("../img/fondo.jpg");
     backdrop-filter: blur(2px) brightness(30%);
+    min-height: 100vh;
 }
 
 .fondo main{
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -865,7 +865,6 @@ footer a img{
 
 .registrarse{
     width: 570px;
-    height: 100%;
 }
 
 .iniciar-sesion{
@@ -940,6 +939,7 @@ footer a img{
     color: white;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
     width: 120px;
     height: 40px;
     padding: 10px 26px 9px 26px;
