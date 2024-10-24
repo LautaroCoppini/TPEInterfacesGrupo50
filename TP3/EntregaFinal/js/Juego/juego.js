@@ -10,6 +10,8 @@ let width = canvas.width;
 
 let columnas = 7;
 let filas = 6;
+let tamanioCasillero = 58;
+let radioFicha = 24;
 
 // Verificacion carga de items //
 
@@ -44,26 +46,29 @@ imagenCeldaTablero.src = "./img/Juego/Fichas/secciontablero.jpg";
 itemsTotales ++;
 imagenCeldaTablero.addEventListener("load", cargaCompleta);
 
+let imagenJugadorGanador = new Image();
+imagenJugadorGanador.src = "./img/Juego/fondoGanador.jpeg";
+itemsTotales ++;
+imagenJugadorGanador.addEventListener("load", cargaCompleta);
+
 let tablero;
 
-let ficha1;
+let fichaJugador1;
 
-let ficha2;
+let fichaJugador2;
 
 let turno;
 
 function iniciarJuego(){
     dibujarFondo();
+    fichaJugador1 = new Ficha(50,50, radioFicha, imagenFicha1, ctx, "J1");
+    fichaJugador2 = new Ficha(800,50, radioFicha, imagenFicha2, ctx, "J2");
+    turno = fichaJugador1;
     dibujarTablero();
 }
 
 function dibujarFondo(){
     ctx.drawImage(fondo, 0, 0, width, height);
-    ficha1 = new Ficha(50,50, 24, imagenFicha1, ctx);
-    ficha1.dibujar();
-    ficha2 = new Ficha(800,50, 24, imagenFicha2, ctx);
-    ficha2.dibujar();
-    turno = ficha1;
 }
 
 function dibujarTablero(){
@@ -74,25 +79,54 @@ function dibujarTablero(){
 canvas.addEventListener('mousedown', function (e) {
     let x = e.offsetX;
     let y = e.offsetY;
-    if(seClickeoAdentro(x,y)){
+    if(seClickeoAdentro(x,y)&&!hayGanador()){
         for (let i = columnas-1; i >= 0; i--) {
-            if (x>width/2-58*(columnas/2)+i*58){
+            if (x>width/2-tamanioCasillero*(columnas/2)+i*tamanioCasillero){
                 tablero.insertarFicha(i, turno);
-                cambioTurno();
+                if(hayGanador()){
+                    setTimeout(() => {
+                        terminarJuego();
+                      }, 1000);
+                }else{
+                    cambioTurno();
+                }
                 break;
             }
         }
     }
 })
 
+function hayGanador(){
+    return tablero.hayGanador();
+}
+
+function terminarJuego(){
+    dibujarFondo();
+    ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
+    document.fonts.load('10pt "Concert One"').then(() => {
+        ctx.font = '35px "Concert One"';
+        ctx.fillStyle = "#FBBC05";
+        ctx.fillRect(width/2-125, height/2-100, 250, 210);
+        ctx.fillStyle = 'black';
+        ctx.beginPath()
+        ctx.rect(width/2-125, height/2-100, 250, 210)
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fillText('Ganador:', width/2-70, height/2-65);
+        turno.setPos(width/2, height/2+radioFicha);
+        turno.setRadio(50);
+        turno.dibujar();
+    });
+}
+
 function cambioTurno(){
-    if(turno == ficha1){
-        turno = ficha2;
+    if(turno == fichaJugador1){
+        turno = fichaJugador2;
     }else{
-        turno = ficha1;
+        turno = fichaJugador1;
     }
 }
 
 function seClickeoAdentro(x,y){
-    return (x>width/2-58*(columnas/2) && x< width/2+58*(columnas/2) && y>height/2-58*(filas/2) && y< height/2+58*(filas/2));
+    return (x>width/2-tamanioCasillero*(columnas/2) && x< width/2+tamanioCasillero*(columnas/2) && y>height/2-tamanioCasillero*(filas/2) && y< height/2+tamanioCasillero*(filas/2));
 }

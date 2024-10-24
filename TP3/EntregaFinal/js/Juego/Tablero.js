@@ -39,4 +39,53 @@ class Tablero{
             }
         }
     }
+
+    hayGanador(){
+        // Direcciones de búsqueda: [fila, columna] //
+        const direcciones = [
+            [0, 1],   // Derecha //
+            [1, 0],   // Abajo //
+            [1, 1],   // Diagonal descendente //
+            [1, -1]   // Diagonal ascendente //
+        ];
+        for (let fila = 0; fila < this.fil; fila++) {
+            for (let columna = 0; columna < this.col; columna++) {
+                let fichaActual = this.matriz[[fila, columna]];
+                
+                // Si la celda está vacía, pasamos a la siguiente iteracion //
+                if (fichaActual == null) {
+                    continue;
+                }
+                // Revisar cada dirección a partir de la posición actual //
+                for (let [sigDirFila, sigDirCol] of direcciones) {
+                    let contador = 1; // Contamos la ficha actual //
+
+                    // Verificar las siguientes 3 posiciones en la dirección actual //
+                    for (let paso = 1; paso < 4; paso++) {
+                        let nuevaFila = fila + paso * sigDirFila;
+                        let nuevaColumna = columna + paso * sigDirCol;
+    
+                        // Comprobamos si las coordenadas están dentro del tablero //
+                        if (nuevaFila < 0 || nuevaFila >= this.fil || nuevaColumna < 0 || nuevaColumna >= this.col) {
+                            break;
+                        }
+    
+                        // Comparamos con la ficha actual //
+                        if (fichaActual.esIgual(this.matriz[[nuevaFila, nuevaColumna]])) {
+                            contador++;
+                        } else {
+                            break;
+                        }
+                    }
+    
+                    // Si encontramos 4 en línea, retornamos true //
+                    if (contador === 4) {
+                        return true;
+                    }
+                }
+            }
+        }
+    
+        return false;
+    }
 }

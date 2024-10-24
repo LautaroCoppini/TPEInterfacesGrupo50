@@ -1,11 +1,12 @@
 class Ficha{
-    constructor(posX,posY,radio,fondo,ctx){
+    constructor(posX,posY,radio,fondo,ctx, nombre){
         this.posX = posX;
         this.posY = posY;
         this.fondo = fondo;
         this.radio = radio;
         /** @type {CanvasRenderingContext2D} */
         this.ctx = ctx;
+        this.nombre = nombre;
     }
 
     dibujar() {
@@ -22,6 +23,21 @@ class Ficha{
     setPos(x,y){
         this.posX = x;
         this.posY = y;
+    }
+
+    setRadio(radio){
+        this.radio = radio;
+    }
+
+    getNombre(){
+        return this.nombre;
+    }
+
+    esIgual(ficha){
+        if(ficha == null){
+            return false;
+        }
+        return this.nombre == ficha.getNombre();
     }
 
 }
