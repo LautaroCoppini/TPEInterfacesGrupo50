@@ -29,6 +29,10 @@ class Ficha{
         this.radio = radio;
     }
 
+    getRadio(){
+        return this.radio;
+    }
+
     getNombre(){
         return this.nombre;
     }

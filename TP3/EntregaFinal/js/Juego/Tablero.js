@@ -1,10 +1,11 @@
 class Tablero{
-    constructor(col,fil,ctx,imagen){
+    constructor(col,fil,ctx,imagen,tamanioCasillero){
         this.col = col;
         this.fil = fil;
         /** @type {CanvasRenderingContext2D} */
         this.ctx = ctx;
-        this.imagen = imagen
+        this.imagen = imagen;
+        this.tamanioCasillero = tamanioCasillero;
         this.matriz = [[]];
         for (let fila = 0; fila < this.fil; fila++) {
             for (let columna = 0; columna < this.col; columna++) {
@@ -15,7 +16,7 @@ class Tablero{
     dibujar(){
         this.ctx.save();
         this.ctx.beginPath();
-        this.ctx.rect(width/2-58*(this.col/2),height/2-58*(this.fil/2), this.col*58, this.fil * 58);
+        this.ctx.rect(width/2-this.tamanioCasillero*(this.col/2),height/2-this.tamanioCasillero*(this.fil/2), this.col*this.tamanioCasillero, this.fil * this.tamanioCasillero);
         this.ctx.strokeStyle = "#013636";
         this.ctx.lineWidth = 7;
         this.ctx.stroke();
@@ -24,7 +25,7 @@ class Tablero{
         for (let fila = 0; fila < this.fil; fila++) {
             for (let columna = 0; columna < this.col; columna++) {
                 this.ctx.beginPath();
-                this.ctx.drawImage(this.imagen,width/2-58*(this.col/2)+columna*58,height/2-58*(this.fil/2)+fila*58, 58, 58);
+                this.ctx.drawImage(this.imagen,width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero,height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero, this.tamanioCasillero, this.tamanioCasillero);
                 this.ctx.closePath();
             }
         }
@@ -33,7 +34,7 @@ class Tablero{
         for (let fila = this.fil-1; fila >= 0; fila--) {
             if(this.matriz[[fila, columna]] == null){
                 this.matriz[[fila, columna]] = ficha;
-                ficha.setPos((width/2-58*(this.col/2)+columna*58)+29,(height/2-58*(this.fil/2)+fila*58)+29);
+                ficha.setPos((width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero)+(this.tamanioCasillero/2),(height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero)+(this.tamanioCasillero/2));
                 ficha.dibujar();
                 break;
             }
