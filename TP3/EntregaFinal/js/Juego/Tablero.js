@@ -13,7 +13,12 @@ class Tablero{
             }
         }
     }
+
+    /*
+    Dibuja el tablero con sus respectivas fichas
+    */
     dibujar(){
+        // Estilos para el tablero entero y su borde
         this.ctx.save();
         this.ctx.beginPath();
         this.ctx.rect(width/2-this.tamanioCasillero*(this.col/2),height/2-this.tamanioCasillero*(this.fil/2), this.col*this.tamanioCasillero, this.fil * this.tamanioCasillero);
@@ -21,72 +26,76 @@ class Tablero{
         this.ctx.lineWidth = 7;
         this.ctx.stroke();
         this.ctx.closePath();
-        this.ctx.restore();
         for (let fila = 0; fila < this.fil; fila++) {
             for (let columna = 0; columna < this.col; columna++) {
+                // Estilos para cada cuadrante del tablero
                 this.ctx.beginPath();
                 this.ctx.drawImage(this.imagen,width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero,height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero, this.tamanioCasillero, this.tamanioCasillero);
                 this.ctx.closePath();
+                this.ctx.restore();
+                // Dibujo la ficha, si es que hay una en esa posicion y seteo sus coordenadas para que coincidan con la del cuadrante
+                if(this.matriz[[fila, columna]] != null){
+                    this.matriz[[fila, columna]].setPos((width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero)+(this.tamanioCasillero/2),(height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero)+(this.tamanioCasillero/2));
+                    this.matriz[[fila, columna]].dibujar();
+                }
             }
         }
     }
+
+    /*
+    Inserta la ficha en la matriz, en su fila correspondiente
+    */
     insertarFicha(columna, ficha){
         for (let fila = this.fil-1; fila >= 0; fila--) {
             if(this.matriz[[fila, columna]] == null){
                 this.matriz[[fila, columna]] = ficha;
-                ficha.setPos((width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero)+(this.tamanioCasillero/2),(height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero)+(this.tamanioCasillero/2));
-                ficha.dibujar();
                 break;
             }
         }
     }
-
+    
+    /*
+    Verifica si hay 4 fichas iguales contiguas en todas las direcciones
+    */
     hayGanador(){
-        // Direcciones de búsqueda: [fila, columna] //
+        // Direcciones de búsqueda: [fila, columna]
         const direcciones = [
-            [0, 1],   // Derecha //
-            [1, 0],   // Abajo //
-            [1, 1],   // Diagonal descendente //
-            [1, -1]   // Diagonal ascendente //
+            [0, 1],   // Derecha
+            [1, 0],   // Abajo
+            [1, 1],   // Diagonal descendente
+            [1, -1]   // Diagonal ascendente
         ];
         for (let fila = 0; fila < this.fil; fila++) {
             for (let columna = 0; columna < this.col; columna++) {
                 let fichaActual = this.matriz[[fila, columna]];
-                
-                // Si la celda está vacía, pasamos a la siguiente iteracion //
                 if (fichaActual == null) {
                     continue;
                 }
-                // Revisar cada dirección a partir de la posición actual //
+                // Revisar cada dirección a partir de la posición actual
                 for (let [sigDirFila, sigDirCol] of direcciones) {
-                    let contador = 1; // Contamos la ficha actual //
-
-                    // Verificar las siguientes 3 posiciones en la dirección actual //
+                    let contador = 1; // Contamos la ficha actual
+                    // Verificar las siguientes 3 posiciones en la dirección actual
                     for (let paso = 1; paso < 4; paso++) {
                         let nuevaFila = fila + paso * sigDirFila;
                         let nuevaColumna = columna + paso * sigDirCol;
-    
-                        // Comprobamos si las coordenadas están dentro del tablero //
+                        // Comprobamos si las coordenadas están dentro del tablero
                         if (nuevaFila < 0 || nuevaFila >= this.fil || nuevaColumna < 0 || nuevaColumna >= this.col) {
                             break;
                         }
-    
-                        // Comparamos con la ficha actual //
+                        // Comparamos con la ficha actual
                         if (fichaActual.esIgual(this.matriz[[nuevaFila, nuevaColumna]])) {
                             contador++;
                         } else {
                             break;
                         }
                     }
-    
-                    // Si encontramos 4 en línea, retornamos true //
+                    // Si encontramos 4 en línea, retornamos true
                     if (contador === 4) {
                         return true;
                     }
                 }
             }
         }
-    
         return false;
     }
 }
