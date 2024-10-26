@@ -18,7 +18,7 @@ let tamanioCasillero = 60;
 let radioFicha = (41 * tamanioCasillero / 100);
 let nombreJugador1 = "J1";
 let nombreJugador2 = "J2";
-let tiempo=1;
+let tiempo=300;
 
 // Variables de funciones //
 
