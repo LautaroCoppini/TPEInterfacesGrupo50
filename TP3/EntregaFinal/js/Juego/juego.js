@@ -18,6 +18,7 @@ let tamanioCasillero = 60;
 let radioFicha = (41 * tamanioCasillero / 100);
 let nombreJugador1 = "J1";
 let nombreJugador2 = "J2";
+let tiempo=1;
 
 // Variables de funciones //
 
@@ -28,6 +29,7 @@ let fichas = [[],[]];
 let turno = -1; // -1 para cuando no se especificó un turno, 0 para el jugador 1, y 1 para el jugador 2
 let fichaSeleccionada = null; // ficha que el jugador quiere mover
 let ganador;
+let temporizador;
 
 // modoDeJuego/columnas/filas/tamanioCasillero
 // 7/10/9/40
@@ -75,6 +77,42 @@ imagenJugadorGanador.src = "./img/Juego/fondoGanador.jpeg";
 itemsTotales++;
 imagenJugadorGanador.addEventListener("load", cargaCompleta);
 
+let imagenEmpate=new Image();
+imagenEmpate.src="./img/Juego/empate.png";
+itemsTotales++;
+imagenEmpate.addEventListener("load", cargaCompleta);
+
+let imagenReiniciar = new Image();
+imagenReiniciar.src="./img/Juego/Botones/reiniciar.png";
+itemsTotales++;
+imagenReiniciar.addEventListener("load", cargaCompleta);
+
+let imagenJugar = new Image();
+imagenJugar.src="./img/Juego/Botones/jugar.png";
+itemsTotales++;
+imagenJugar.addEventListener("load", cargaCompleta);
+
+let imagenActivarSonido = new Image();
+imagenActivarSonido.src="./img/Juego/Botones/sonido.png";
+itemsTotales++;
+imagenActivarSonido.addEventListener("load", cargaCompleta);
+
+let imagenDesactivarSonido = new Image();
+imagenDesactivarSonido.src="./img/Juego/Botones/mutear.png";
+itemsTotales++;
+imagenDesactivarSonido.addEventListener("load", cargaCompleta);
+
+let imagenPausar = new Image();
+imagenPausar.src="./img/Juego/Botones/pause.png";
+itemsTotales++;
+imagenPausar.addEventListener("load", cargaCompleta);
+
+
+let imagenReanudar = new Image();
+imagenReanudar.src="./img/Juego/Botones/inpause.png";
+itemsTotales++;
+imagenReanudar.addEventListener("load", cargaCompleta);
+
 // Funciones //
 
 /*
@@ -84,6 +122,8 @@ function iniciarJuego() {
     fichas[0] = asignarFichaJugador(imagenFicha1, nombreJugador1);
     fichas[1] = asignarFichaJugador(imagenFicha2, nombreJugador2);
     tablero = new Tablero(columnas, filas, ctx, imagenCeldaTablero, tamanioCasillero);
+    temporizador=new Temporizador(tiempo,ctx,imagenEmpate);
+    temporizador.iniciar();
     reDibujar();
     cambioTurno();
 };
@@ -177,11 +217,46 @@ function hayGanador() {
     return tablero.hayGanador();
 };
 
+
+/*
+Reiniciar juego
+*/
+
+function reiniciarJuego(){
+    ctx.save;
+    //ctx.drawImage(imagenReiniciar,  )
+}
+
+
+/*
+Dibuja los botones
+*/
+
+function dibujarBotones(){
+    dibujarBotonPausa();
+    dibujarBotonDesactivarSonido();
+
+}
+
+
+function dibujarBotonPausa(){
+    ctx.save;
+    ctx.drawImage(imagenPausar, 10, 10, 30, 30);
+}
+
+function dibujarBotonDesactivarSonido(){
+    ctx.save;
+    ctx.drawImage(imagenDesactivarSonido, width-40, 10, 30, 30);
+}
+
+
+
 /*
 Presenta la pantalla con el ganador
 */
 function terminarJuego(ficha) {
     dibujarFondo();
+    ctx.save();
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
@@ -193,6 +268,8 @@ function terminarJuego(ficha) {
         ctx.stroke();
         ctx.closePath();
         ctx.fillText('Ganador:', width / 2 - 70, height / 2 - 65);
+        ctx.restore();
+        temporizador.pausar();
         mostrarGanador(ficha);
     });
 };
@@ -302,4 +379,6 @@ function reDibujar(){
     dibujarFondo();
     tablero.dibujar();
     dibujarGruposFichas();
+    dibujarBotones();
+    temporizador.dibujar();
 }
