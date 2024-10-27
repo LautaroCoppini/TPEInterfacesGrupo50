@@ -1,9 +1,8 @@
 class Temporizador{
-    constructor(tiempo, ctx, imagen){
+    constructor(tiempo, ctx){
         this.tiempo = tiempo;
         this.ctx = ctx;
         this.pausado = true;
-        this.imagen = imagen;
     }
 
     dibujar(){
@@ -45,10 +44,12 @@ class Temporizador{
 
     empate(){
     ctx.save();
-    ctx.drawImage(this.imagen, 0, 0, width, height);
+    ctx.drawImage(imagenEmpate, 0, 0, width, height);
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
         ctx.fillText('Empate', width / 2 - 90, height / 2 - 140);
+        dibujarBotonNuevoJuego();
+        dibujarBotonReiniciar();
         ctx.restore();
         this.pausar();
         });
