@@ -157,9 +157,9 @@ sumando el contador cuando se termina de cargar cada uno y lo compare con la can
 */
 function cargaCompleta() {
     itemsCargados++;
-    if(itemsCargados < itemsTotales){
+    if (itemsCargados < itemsTotales) {
         dibujarProgresoCarga();
-    } else{
+    } else {
         audioJuego.removeEventListener("canplaythrough", cargaCompleta);
         audioMenu.removeEventListener("canplaythrough", cargaCompleta);
         opening();
@@ -171,11 +171,11 @@ function dibujarProgresoCarga() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, width, height);
     ctx.fillStyle = "White";
-    ctx.fillRect(width / 4, height / 2 - 10, (width / 2) *(itemsCargados / itemsTotales), 20);
+    ctx.fillRect(width / 4, height / 2 - 10, (width / 2) * (itemsCargados / itemsTotales), 20);
     let texto = itemsCargados + "/" + itemsTotales;
     let anchoTexto = ctx.measureText(texto).width;
     ctx.font = '20px Arial';
-    ctx.fillText(texto, width/2-anchoTexto/2, height/1.8)
+    ctx.fillText(texto, width / 2 - anchoTexto / 2, height / 1.8)
     ctx.restore();
 }
 
@@ -327,13 +327,13 @@ itemsTotales++;
 audioJuego.addEventListener("canplaythrough", cargaCompleta);
 
 // Funciones //
-function opening(){
+function opening() {
     openingReproducido = false;
     pantalla = 0;
     dibujarOpening();
 }
 
-function dibujarOpening(){
+function dibujarOpening() {
     ctx.drawImage(fondoOpening, 0, 0, width, height);
     ctx.drawImage(imagenJugar, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)
 }
@@ -645,11 +645,11 @@ function terminarJuego(ficha) {
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
-        ctx.drawImage(fondoMadera, width / 2 - 125, height / 2.2 , 250, 220);
+        ctx.drawImage(fondoMadera, width / 2 - 125, height / 2.2, 250, 220);
         ctx.fillStyle = 'black';
         let texto = "Ganador:";
         let anchoTexto = ctx.measureText(texto).width;
-        ctx.fillText(texto , width / 2 - anchoTexto / 2, height / 1.9 );
+        ctx.fillText(texto, width / 2 - anchoTexto / 2, height / 1.9);
         ctx.restore();
         temporizador.pausar();
         mostrarGanador(ficha);
@@ -725,12 +725,12 @@ function mousedown(e) {
     let x = e.offsetX;
     let y = e.offsetY;
     switch (pantalla) {
-        case 0:
-            if(mouseDentroArea(x,y,botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)){
+        case 0: // Opening
+            if (mouseDentroArea(x, y, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)) {
                 seleccionarModo();
             }
             break;
-        case 1:
+        case 1: // Seleccion de modo de juego
             for (let index = 0; index < botones.modoJuego.length; index++) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
                 if (distancia <= botones.modoJuego[index].radio) {
@@ -739,7 +739,7 @@ function mousedown(e) {
                 }
             }
             break;
-        case 2:
+        case 2: // Seleccion de personaje
             for (let index = 0; index < personajes.length; index++) {
                 if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length, height / 1.3 - 105)) {
                     if (personajes[index].jugador <= 0) {
@@ -756,7 +756,7 @@ function mousedown(e) {
                 }
             }
             break;
-        case 3:
+        case 3: // Juego
             if (turno != -1) {
                 let ficha = fichas[turno][fichas[turno].length - 1];
                 if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) {
@@ -800,11 +800,10 @@ function mousedown(e) {
                 }
             }
             break;
-        case 4:
-            if (mouseDentroArea(x, y, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height)) {
+        case 4: // Ganador
+            if (mouseDentroArea(x, y, botones.nuevoJuego[2].x, botones.nuevoJuego[2].y, botones.nuevoJuego[2].width, botones.nuevoJuego[2].height)) {
                 pausado = false;
                 audioJuego.pause();
-
                 seleccionarModo();
             }
             if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) {
@@ -829,9 +828,7 @@ function mousemove(e) {
     let x = e.offsetX;
     let y = e.offsetY;
     switch (pantalla) {
-        case 0:
-            break;
-        case 1:
+        case 1: // Seleccionar modo de juego
             audioMenu.play();
             for (let index = 0; index < botones.modoJuego.length; index++) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
@@ -843,7 +840,7 @@ function mousemove(e) {
                 }
             }
             break;
-        case 2:
+        case 2: // Seleccionar personaje
             for (let index = 0; index < personajes.length; index++) {
                 if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length + 1, height / 1.3 - 105)) {
                     for (let index2 = 0; index2 < personajes.length; index2++) {
@@ -872,19 +869,13 @@ function mousemove(e) {
 
             }
             break;
-        case 3:
+        case 3: // Juego
             audioMenu.pause();
             audioJuego.play();
             if (fichaSeleccionada != null && !pausado) {
-                let x = e.offsetX;
-                let y = e.offsetY;
                 fichaSeleccionada.setPos(x, y);
             }
             break;
-        case 4:
-
-        case 5:
-
     }
 
 }
@@ -899,7 +890,7 @@ Pregunta si el usuario quiere soltar la ficha en la zona correcta y la inserta, 
 vuelve a poner en la pila correspondiente
 */
 function soltarFicha(e) {
-    if (fichaSeleccionada != null && !pausado) {
+    if (fichaSeleccionada != null && !pausado && pantalla == 3) {
         let x = e.offsetX;
         let y = e.offsetY;
         if (zonaParaSoltarFicha(x, y) && colocarFicha(e)) {
