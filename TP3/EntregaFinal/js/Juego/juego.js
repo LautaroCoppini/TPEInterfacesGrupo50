@@ -19,6 +19,7 @@ let radioFicha;
 let nombreJugador1 = "J1";
 let nombreJugador2 = "J2";
 let tiempo = 300;
+let volumen = 0.1;
 let modosDeJuegos = [
     {
         "nombre": 4,
@@ -46,12 +47,6 @@ let modosDeJuegos = [
     }
 ];
 
-// modoDeJuego/columnas/filas/tamanioCasillero
-// 7/10/9/40
-// 6/9/8/45
-// 5/8/7/50
-// 4/7/6/60 
-
 // Variables de funciones //
 
 let itemsCargados = 0;
@@ -64,74 +59,81 @@ let ganador;
 let temporizador;
 let pantalla;
 let modoDeJuego;
+let muteado;
+let pausado;
+let hintCaida;
+let posHint = {
+    "x": width / 2 - 10,
+    "y": -30
+};
 
 
 // Botones //
 
 let botones = {
-    "modoJuego":[
+    "modoJuego": [
         {
-            "x": width/4.5,
-            "y": height/1.36,
+            "x": width / 4.5,
+            "y": height / 1.36,
             "radio": 35
         },
         {
-            "x": width/2.54,
-            "y": height/1.32,
+            "x": width / 2.54,
+            "y": height / 1.32,
             "radio": 35
         },
         {
-            "x": width/1.69,
-            "y": height/1.32,
+            "x": width / 1.69,
+            "y": height / 1.32,
             "radio": 35
         },
         {
-            "x": width/1.27,
-            "y": height/1.36,
+            "x": width / 1.27,
+            "y": height / 1.36,
             "radio": 35
         }
     ],
-    "reiniciar":[
+    "reiniciar": [
         { // Pantalla pausa
-            "x": width/2,
-            "y": height/2,
+            "x": width / 2.5,
+            "y": height / 2,
             "width": 200,
             "height": 50
         },
         { // Pantalla juego terminado
-            "x": width/1.3,
-            "y": height/1.2,
+            "x": width / 1.3,
+            "y": height / 1.2,
             "width": 200,
             "height": 50
         }
     ],
-    "nuevoJuego":[
+    "nuevoJuego": [
         { // Pantalla pausa
-            "x": width/2.5,
-            "y": height/2.6,
+            "x": width / 2.5,
+            "y": height / 2.6,
             "width": 200,
             "height": 50
         },
         { // Pantalla juego terminado
-            "x": width/1.3,
-            "y": height/1.4,
+            "x": width / 1.3,
+            "y": height / 1.4,
             "width": 200,
             "height": 50
         }
     ],
-    "pausa":{
+    "pausa": {
         "x": 10,
         "y": 10,
         "width": 30,
         "height": 30
     },
-    "desactivarSonido":{
+    "desactivarSonido": {
         "x": width - 40,
         "y": 10,
         "width": 30,
         "height": 30
     },
-    
+
 
 }
 
@@ -216,15 +218,22 @@ pantallaModoDeJuego.src = "./img/Juego/modosJuego.png";
 itemsTotales++;
 pantallaModoDeJuego.addEventListener("load", cargaCompleta);
 
+let hint = new Image();
+hint.src = "./img/Juego/hint.png";
+itemsTotales++;
+hint.addEventListener("load", cargaCompleta);
+
 let audioMenu = new Audio();
 audioMenu.src = "./audio/Juego/menu.mp3";
 audioMenu.loop = true;
+audioMenu.volume = volumen;
 itemsTotales++;
 audioMenu.addEventListener("canplaythrough", cargaCompleta);
 
 let audioJuego = new Audio();
 audioJuego.src = "./audio/Juego/juego.mp3";
 audioJuego.loop = true;
+audioJuego.volume = volumen;
 itemsTotales++;
 audioJuego.addEventListener("canplaythrough", cargaCompleta);
 // Funciones //
@@ -239,16 +248,16 @@ function dibujarSeleccionModo() {
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
         ctx.fillStyle = "black";
-        ctx.fillText("Elije el modo de juego!", width/3.2, 70);
-        dibujarBotonModoJuego(width/4.5, height/1.36, 4);
-        dibujarBotonModoJuego(width/2.54, height/1.32, 5);
-        dibujarBotonModoJuego(width/1.69, height/1.32, 6);
-        dibujarBotonModoJuego(width/1.27, height/1.36, 7);
+        ctx.fillText("Elije el modo de juego!", width / 3.2, 70);
+        dibujarBotonModoJuego(width / 4.5, height / 1.36, 4);
+        dibujarBotonModoJuego(width / 2.54, height / 1.32, 5);
+        dibujarBotonModoJuego(width / 1.69, height / 1.32, 6);
+        dibujarBotonModoJuego(width / 1.27, height / 1.36, 7);
     })
     audioMenu.play();
 }
 
-function dibujarBotonModoJuego(x,y,m, fondo = "transparent"){
+function dibujarBotonModoJuego(x, y, m, fondo = "transparent") {
     ctx.save();
     ctx.beginPath();
     ctx.arc(x, y, 35, 0, Math.PI * 2, true);
@@ -256,7 +265,7 @@ function dibujarBotonModoJuego(x,y,m, fondo = "transparent"){
     ctx.fillStyle = fondo;
     ctx.fill();
     ctx.fillStyle = "black";
-    ctx.fillText(m, x-10, y+10);
+    ctx.fillText(m, x - 10, y + 10);
     ctx.stroke();
     ctx.closePath();
     ctx.clip();
@@ -267,14 +276,16 @@ function dibujarBotonModoJuego(x,y,m, fondo = "transparent"){
 Asigna las fichas, el tablero, el turno inicial y dibuja los componentes
 */
 function iniciarJuego() {
+    muteado = false;
     pantalla = 2;
     fichas[0] = asignarFichaJugador(imagenFicha1, nombreJugador1);
     fichas[1] = asignarFichaJugador(imagenFicha2, nombreJugador2);
-    tablero = new Tablero(modosDeJuegos[modoDeJuego].columnas, modosDeJuegos[modoDeJuego].filas, ctx, imagenCeldaTablero, modosDeJuegos[modoDeJuego].tamanioCasillero);
+    tablero = new Tablero(modosDeJuegos[modoDeJuego].columnas, modosDeJuegos[modoDeJuego].filas, ctx, imagenCeldaTablero, modosDeJuegos[modoDeJuego].tamanioCasillero, modosDeJuegos[modoDeJuego].nombre);
     temporizador = new Temporizador(tiempo, ctx, imagenEmpate);
     temporizador.iniciar();
     reDibujar();
     cambioTurno();
+    
 };
 
 /*
@@ -371,30 +382,83 @@ Dibuja los botones
 */
 
 function dibujarBotones() {
-    dibujarBotonPausa();
-    dibujarBotonDesactivarSonido();
+    if (muteado) {
+        dibujarBotonDesactivarSonido();
+    } else {
+        dibujarBotonActivarSonido();
+    }
+    if (pausado) {
+        dibujarBotonReanudar();
+    } else {
+        dibujarBotonPausa();
+    }
 }
 
 function dibujarBotonPausa() {
     ctx.drawImage(imagenPausar, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height);
 }
 
+function dibujarBotonReanudar() {
+    ctx.drawImage(imagenReanudar, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height);
+}
+
 function dibujarBotonDesactivarSonido() {
     ctx.drawImage(imagenDesactivarSonido, botones.desactivarSonido.x, botones.desactivarSonido.y, botones.desactivarSonido.width, botones.desactivarSonido.height);
 }
 
+function dibujarBotonActivarSonido() {
+    ctx.drawImage(imagenActivarSonido, botones.desactivarSonido.x, botones.desactivarSonido.y, botones.desactivarSonido.width, botones.desactivarSonido.height);
+}
+
 function dibujarBotonReiniciar() {
-    ctx.drawImage(imagenReiniciar, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height);
+    let index = 1;
+    if (pausado) {
+        index = 0;
+    }
+    ctx.drawImage(imagenReiniciar, botones.reiniciar[index].x, botones.reiniciar[index].y, botones.reiniciar[index].width, botones.reiniciar[index].height);
 }
 
 function dibujarBotonNuevoJuego() {
-    ctx.drawImage(imagenJugar, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height);
+    let index = 1;
+    if (pausado) {
+        index = 0;
+    }
+    ctx.drawImage(imagenJugar, botones.nuevoJuego[index].x, botones.nuevoJuego[index].y, botones.nuevoJuego[index].width, botones.nuevoJuego[index].height);
 }
 
+function dibujarHint() {
+    let hintX = (width/2 - modosDeJuegos[modoDeJuego].columnas*modosDeJuegos[modoDeJuego].tamanioCasillero/2)+10;
+    if (fichaSeleccionada != null) {
+        for (let index = 0; index < modosDeJuegos[modoDeJuego].columnas; index++) {
+            ctx.drawImage(hint, hintX+modosDeJuegos[modoDeJuego].tamanioCasillero*index, posHint.y, 40, 60);
+        }
+    }
+}
+
+function animarHint() {
+    if (fichaSeleccionada != null) {
+        requestAnimationFrame(animarHint);
+        if (posHint.y == 0) {
+            hintCaida = false
+        }
+        if (posHint.y == -60) {
+            hintCaida = true;
+        }
+        if (hintCaida) {
+            posHint.y++;
+        } else {
+            posHint.y--;
+        }
+        reDibujar();
+        dibujarHint();
+        fichaSeleccionada.dibujar();
+    }
+}
 /*
 Presenta la pantalla con el ganador
 */
 function terminarJuego(ficha) {
+    pantalla = 3;
     dibujarFondo();
     ctx.save();
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
@@ -412,6 +476,8 @@ function terminarJuego(ficha) {
         temporizador.pausar();
         mostrarGanador(ficha);
     });
+    dibujarBotonNuevoJuego();
+    dibujarBotonReiniciar();
 };
 
 /*
@@ -429,10 +495,12 @@ function mostrarGanador(ficha) {
 Animacion para la ficha del ganador, se hace mas grande
 */
 function animate() {
-    requestAnimationFrame(animate);
-    if (ganador.getRadio() <= 50) {
-        ganador.setRadio(ganador.getRadio() + 1);
-        ganador.dibujar();
+    if (pantalla == 3) {
+        requestAnimationFrame(animate);
+        if (ganador.getRadio() <= 50) {
+            ganador.setRadio(ganador.getRadio() + 1);
+            ganador.dibujar();
+        }
     }
 }
 
@@ -457,13 +525,13 @@ function cambiarModoDeJuego(modo) {
     radioFicha = (41 * modosDeJuegos[modoDeJuego].tamanioCasillero / 100);
 }
 
-function distanciaEntreDosPuntos(x,y,x2,y2){
+function distanciaEntreDosPuntos(x, y, x2, y2) {
     let dx = x - x2;
     let dy = y - y2;
     return Math.sqrt(dx * dx + dy * dy);
 }
 
-function mouseDentroArea(x,y,x2,y2,w,h){
+function mouseDentroArea(x, y, x2, y2, w, h) {
     return (x > x2 && x < x2 + w && y > y2 && y < y2 + h);
 }
 
@@ -481,8 +549,8 @@ function mousedown(e) {
     switch (pantalla) {
         case 0:
             for (let index = 0; index < botones.modoJuego.length; index++) {
-                let distancia = distanciaEntreDosPuntos(x,y,botones.modoJuego[index].x,botones.modoJuego[index].y);
-                if(distancia <= botones.modoJuego[index].radio){
+                let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
+                if (distancia <= botones.modoJuego[index].radio) {
                     cambiarModoDeJuego(index);
                     audioMenu.pause();
                     audioJuego.play();
@@ -495,16 +563,61 @@ function mousedown(e) {
         case 2:
             if (turno != -1) {
                 let ficha = fichas[turno][fichas[turno].length - 1];
-                if (ficha.mouseDentro(x, y) && !ficha.isBloqueada()) {
+                if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) {
                     fichaSeleccionada = ficha;
                     fichas[turno].pop();
+                    animarHint();
+                }
+            }
+            if (mouseDentroArea(x, y, botones.desactivarSonido.x, botones.desactivarSonido.y, botones.desactivarSonido.width, botones.desactivarSonido.height)) {
+                if (muteado) {
+                    audioJuego.volume = volumen;
+                    muteado = false;
+                } else {
+                    audioJuego.volume = 0;
+                    muteado = true;
+                }
+                reDibujar();
+            }
+            if (mouseDentroArea(x, y, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height)) {
+                if (pausado) {
+                    pausado = false;
+                    temporizador.reanudar();
+                } else {
+                    pausado = true;
+                    temporizador.pausar();
+                }
+                reDibujar();
+            }
+            if (pausado) {
+                if (mouseDentroArea(x, y, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)) {
+                    pausado = false;
+                    audioJuego.pause();
+                    audioJuego.currentTime = 0;
+                    audioMenu.currentTime = 0;
+                    seleccionarModo();
+                }
+                if (mouseDentroArea(x, y, botones.reiniciar[0].x, botones.reiniciar[0].y, botones.reiniciar[0].width, botones.reiniciar[0].height)) {
+                    pausado = false;
+                    audioJuego.currentTime = 0;
+                    iniciarJuego();
                 }
             }
             break;
         case 3:
-
-        case 4:
-
+            if (mouseDentroArea(x, y, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height)) {
+                pausado = false;
+                audioJuego.pause();
+                audioJuego.currentTime = 0;
+                audioMenu.currentTime = 0;
+                seleccionarModo();
+            }
+            if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) {
+                pausado = false;
+                audioJuego.currentTime = 0;
+                iniciarJuego();
+            }
+            break;
     }
 }
 
@@ -517,18 +630,19 @@ canvas.addEventListener("mousemove", (e) => { mousemove(e) });
 Actualiza la posicion de la ficha y redibuja lo demás
 */
 function mousemove(e) {
+
     let x = e.offsetX;
     let y = e.offsetY;
     switch (pantalla) {
         case 0:
             audioMenu.play();
             for (let index = 0; index < botones.modoJuego.length; index++) {
-                let distancia = distanciaEntreDosPuntos(x,y,botones.modoJuego[index].x,botones.modoJuego[index].y);
-                if(distancia <= botones.modoJuego[index].radio){
-                    dibujarBotonModoJuego(botones.modoJuego[index].x, botones.modoJuego[index].y,modosDeJuegos[index].nombre,"#FBBC05")
+                let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
+                if (distancia <= botones.modoJuego[index].radio) {
+                    dibujarBotonModoJuego(botones.modoJuego[index].x, botones.modoJuego[index].y, modosDeJuegos[index].nombre, "#FBBC05")
                 }
-                else{
-                    dibujarBotonModoJuego(botones.modoJuego[index].x, botones.modoJuego[index].y,modosDeJuegos[index].nombre, "white")
+                else {
+                    dibujarBotonModoJuego(botones.modoJuego[index].x, botones.modoJuego[index].y, modosDeJuegos[index].nombre, "white")
                 }
             }
             break;
@@ -537,19 +651,18 @@ function mousemove(e) {
         case 2:
             audioMenu.pause();
             audioJuego.play();
-            if (fichaSeleccionada != null) {
-                reDibujar();
+            if (fichaSeleccionada != null && !pausado) {
                 let x = e.offsetX;
                 let y = e.offsetY;
                 fichaSeleccionada.setPos(x, y);
-                fichaSeleccionada.dibujar();
             }
+
         case 3:
 
         case 4:
 
     }
- 
+
 }
 
 /*
@@ -562,7 +675,7 @@ Pregunta si el usuario quiere soltar la ficha en la zona correcta y la inserta, 
 vuelve a poner en la pila correspondiente
 */
 function soltarFicha(e) {
-    if (fichaSeleccionada != null) {
+    if (fichaSeleccionada != null && !pausado) {
         let x = e.offsetX;
         let y = e.offsetY;
         if (zonaParaSoltarFicha(x, y)) {
@@ -583,7 +696,20 @@ function reDibujar() {
     dibujarFondo();
     tablero.dibujar();
     dibujarGruposFichas();
-    dibujarBotones();
     temporizador.dibujar();
+    if (pausado) {
+        dibujarJuegoPausado();
+        dibujarBotonNuevoJuego();
+        dibujarBotonReiniciar();
+    }
+    dibujarBotones();
 
+}
+
+function dibujarJuegoPausado() {
+    ctx.save();
+    ctx.filter = 'blur(2px)';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
 }

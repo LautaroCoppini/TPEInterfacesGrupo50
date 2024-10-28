@@ -1,11 +1,12 @@
 class Tablero{
-    constructor(col,fil,ctx,imagen,tamanioCasillero){
+    constructor(col,fil,ctx,imagen,tamanioCasillero,modoJuego){
         this.col = col;
         this.fil = fil;
         /** @type {CanvasRenderingContext2D} */
         this.ctx = ctx;
         this.imagen = imagen;
         this.tamanioCasillero = tamanioCasillero;
+        this.modoJuego = modoJuego;
         this.matriz = [[]];
         for (let fila = 0; fila < this.fil; fila++) {
             for (let columna = 0; columna < this.col; columna++) {
@@ -74,8 +75,8 @@ class Tablero{
                 // Revisar cada dirección a partir de la posición actual
                 for (let [sigDirFila, sigDirCol] of direcciones) {
                     let contador = 1; // Contamos la ficha actual
-                    // Verificar las siguientes 3 posiciones en la dirección actual
-                    for (let paso = 1; paso < 4; paso++) {
+                    // Verificar las siguientes posiciones en la dirección actual
+                    for (let paso = 1; paso < this.modoJuego; paso++) {
                         let nuevaFila = fila + paso * sigDirFila;
                         let nuevaColumna = columna + paso * sigDirCol;
                         // Comprobamos si las coordenadas están dentro del tablero
@@ -89,8 +90,8 @@ class Tablero{
                             break;
                         }
                     }
-                    // Si encontramos 4 en línea, retornamos true
-                    if (contador === 4) {
+                    // Si encontramos 4 en línea (o las que diga el modo de juego), retornamos true
+                    if (contador === this.modoJuego) {
                         return true;
                     }
                 }

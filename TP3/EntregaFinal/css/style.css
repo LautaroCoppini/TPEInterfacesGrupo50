@@ -1026,6 +1026,7 @@ footer a img{
 .main-juego{
     padding:20px 59px; 
 }
+
 .main-juego ul{
     list-style: none;
     display: flex;
@@ -1045,6 +1046,11 @@ section.juego{
     flex-wrap:nowrap;
     justify-content: space-between;
     align-items: center;
+}
+
+section.juego canvas{
+    user-select: none;
+    border-radius: 15px;
 }
 
 section.juego div h2, section.juego div h3{
