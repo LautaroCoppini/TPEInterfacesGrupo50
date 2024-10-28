@@ -499,10 +499,6 @@ p.gratis, figcaption h3{
   }
  /* Carruseles y botones*/
 
-h1{
-    margin-top: 20px;
-}
-
 section{
     margin-bottom: 20px;
 }
@@ -638,6 +634,7 @@ section{
 }
 
 .carruseles_categorias article{
+    margin-bottom: 20px;
     scroll-snap-type: x mandatory;
     display: flex;
     max-width: 100%;
@@ -1024,7 +1021,7 @@ footer a img{
 /*Seccion del Juego principal*/
 
 .main-juego{
-    padding:20px 59px; 
+    padding:0px 59px; 
 }
 
 .main-juego ul{
@@ -1062,7 +1059,7 @@ section.juego article img{
 }
 
 section.juego aside{
-    width: 30%;
+    width: 40%;
     padding-left: 30px;
 }
 

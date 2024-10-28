@@ -619,9 +619,11 @@ function terminarJuego(ficha) {
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
-        ctx.drawImage(fondoMadera, width / 2 - 125, height / 2 - 100, 250, 210);
+        ctx.drawImage(fondoMadera, width / 2 - 125, height / 2.2 , 250, 220);
         ctx.fillStyle = 'black';
-        ctx.fillText('Ganador:', width / 2 - 70, height / 2 - 65);
+        let texto = "Ganador:";
+        let anchoTexto = ctx.measureText(texto).width;
+        ctx.fillText(texto , width / 2 - anchoTexto / 2, height / 1.9 );
         ctx.restore();
         temporizador.pausar();
         mostrarGanador(ficha);
@@ -634,7 +636,7 @@ function terminarJuego(ficha) {
 Muestra la ficha del ganador
 */
 function mostrarGanador(ficha) {
-    ficha.setPos(width / 2, height / 2 + radioFicha);
+    ficha.setPos(width / 2, height / 1.5);
     ficha.setRadio(0);
     ficha.dibujar();
     ganador = ficha;
@@ -903,6 +905,8 @@ function dibujarJuegoPausado() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FBBC05";
     ctx.filter = 'none';
-    ctx.fillText("Juego pausado", width / 2 - 100, 100)
+    let texto = "Juego pausado";
+    let anchoTexto = ctx.measureText(texto).width;
+    ctx.fillText("Juego pausado", width / 2 - anchoTexto / 2, height / 4)
     ctx.restore();
 }
