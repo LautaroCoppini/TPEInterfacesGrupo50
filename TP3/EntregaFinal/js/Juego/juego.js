@@ -61,7 +61,7 @@ let ganador;
 let temporizador;
 let pantalla;
 let modoDeJuego;
-let muteado;
+let muteado = false;
 let pausado;
 let hintCaida;
 let posHint = {
@@ -70,6 +70,7 @@ let posHint = {
 };
 let columnasLlenas;
 let personajes;
+let openingReproducido;
 
 
 
@@ -113,6 +114,12 @@ let botones = {
         }
     ],
     "nuevoJuego": [
+        { // Pantalla opening
+            "x": width / 2 - 100,
+            "y": height / 1.1,
+            "width": 200,
+            "height": 50
+        },
         { // Pantalla pausa
             "x": width / 2.5,
             "y": height / 2.6,
@@ -155,7 +162,7 @@ function cargaCompleta() {
     } else{
         audioJuego.removeEventListener("canplaythrough", cargaCompleta);
         audioMenu.removeEventListener("canplaythrough", cargaCompleta);
-        seleccionarModo();
+        opening();
     }
 }
 
@@ -300,6 +307,11 @@ fondoMadera.src = "./img/Juego/fondoMadera.png";
 itemsTotales++;
 fondoMadera.addEventListener("load", cargaCompleta);
 
+let fondoOpening = new Image();
+fondoOpening.src = "./img/Juego/fondoOpening.jpg";
+itemsTotales++;
+fondoOpening.addEventListener("load", cargaCompleta);
+
 let audioMenu = new Audio();
 audioMenu.src = "./audio/Juego/menu.mp3";
 audioMenu.loop = true;
@@ -313,10 +325,23 @@ audioJuego.loop = true;
 audioJuego.volume = volumen;
 itemsTotales++;
 audioJuego.addEventListener("canplaythrough", cargaCompleta);
+
 // Funciones //
+function opening(){
+    openingReproducido = false;
+    pantalla = 0;
+    dibujarOpening();
+}
+
+function dibujarOpening(){
+    ctx.drawImage(fondoOpening, 0, 0, width, height);
+    ctx.drawImage(imagenJugar, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)
+}
 
 function seleccionarModo() {
-    pantalla = 0;
+    pantalla = 1;
+    audioMenu.play();
+    audioMenu.currentTime = 0;
     jugador1 = null;
     jugador2 = null;
     dibujarSeleccionModo();
@@ -352,7 +377,7 @@ function dibujarBotonModoJuego(x, y, m, fondo = "transparent") {
 }
 
 function seleccionarPersonaje() {
-    pantalla = 1;
+    pantalla = 2;
     cargarPersonajes();
     dibujarSeleccionPersonaje();
 }
@@ -435,8 +460,9 @@ function dibujarSeleccionPersonaje() {
 Asigna las fichas, el tablero, el turno inicial y dibuja los componentes
 */
 function iniciarJuego() {
-    muteado = false;
-    pantalla = 2;
+    pantalla = 3;
+    audioJuego.currentTime = 0;
+    audioJuego.play();
     fichas[0] = asignarFichaJugador(jugador1, 1);
     fichas[1] = asignarFichaJugador(jugador2, 2);
     tablero = new Tablero(modosDeJuegos[modoDeJuego].columnas, modosDeJuegos[modoDeJuego].filas, ctx, imagenCeldaTablero, modosDeJuegos[modoDeJuego].tamanioCasillero, modosDeJuegos[modoDeJuego].nombre);
@@ -573,9 +599,9 @@ function dibujarBotonReiniciar() {
 }
 
 function dibujarBotonNuevoJuego() {
-    let index = 1;
+    let index = 2;
     if (pausado) {
-        index = 0;
+        index = 1;
     }
     ctx.drawImage(imagenJugar, botones.nuevoJuego[index].x, botones.nuevoJuego[index].y, botones.nuevoJuego[index].width, botones.nuevoJuego[index].height);
 }
@@ -613,7 +639,7 @@ function animarHint() {
 Presenta la pantalla con el ganador
 */
 function terminarJuego(ficha) {
-    pantalla = 3;
+    pantalla = 4;
     dibujarFondo();
     ctx.save();
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
@@ -647,7 +673,7 @@ function mostrarGanador(ficha) {
 Animacion para la ficha del ganador, se hace mas grande
 */
 function animate() {
-    if (pantalla == 3) {
+    if (pantalla == 4) {
         requestAnimationFrame(animate);
         if (ganador.getRadio() <= 50) {
             ganador.setRadio(ganador.getRadio() + 1);
@@ -700,6 +726,11 @@ function mousedown(e) {
     let y = e.offsetY;
     switch (pantalla) {
         case 0:
+            if(mouseDentroArea(x,y,botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)){
+                seleccionarModo();
+            }
+            break;
+        case 1:
             for (let index = 0; index < botones.modoJuego.length; index++) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
                 if (distancia <= botones.modoJuego[index].radio) {
@@ -708,7 +739,7 @@ function mousedown(e) {
                 }
             }
             break;
-        case 1:
+        case 2:
             for (let index = 0; index < personajes.length; index++) {
                 if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length, height / 1.3 - 105)) {
                     if (personajes[index].jugador <= 0) {
@@ -719,14 +750,13 @@ function mousedown(e) {
                             personajes[index].jugador = 2;
                             jugador2 = personajes[index].ficha;
                             audioMenu.pause();
-                            audioJuego.play();
                             iniciarJuego();
                         }
                     }
                 }
             }
             break;
-        case 2:
+        case 3:
             if (turno != -1) {
                 let ficha = fichas[turno][fichas[turno].length - 1];
                 if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) {
@@ -756,7 +786,7 @@ function mousedown(e) {
                 reDibujar();
             }
             if (pausado) {
-                if (mouseDentroArea(x, y, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)) {
+                if (mouseDentroArea(x, y, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height)) {
                     pausado = false;
                     audioJuego.pause();
                     audioJuego.currentTime = 0;
@@ -770,12 +800,11 @@ function mousedown(e) {
                 }
             }
             break;
-        case 3:
+        case 4:
             if (mouseDentroArea(x, y, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height)) {
                 pausado = false;
                 audioJuego.pause();
-                audioJuego.currentTime = 0;
-                audioMenu.currentTime = 0;
+
                 seleccionarModo();
             }
             if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) {
@@ -801,6 +830,8 @@ function mousemove(e) {
     let y = e.offsetY;
     switch (pantalla) {
         case 0:
+            break;
+        case 1:
             audioMenu.play();
             for (let index = 0; index < botones.modoJuego.length; index++) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
@@ -812,7 +843,7 @@ function mousemove(e) {
                 }
             }
             break;
-        case 1:
+        case 2:
             for (let index = 0; index < personajes.length; index++) {
                 if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length + 1, height / 1.3 - 105)) {
                     for (let index2 = 0; index2 < personajes.length; index2++) {
@@ -841,7 +872,7 @@ function mousemove(e) {
 
             }
             break;
-        case 2:
+        case 3:
             audioMenu.pause();
             audioJuego.play();
             if (fichaSeleccionada != null && !pausado) {
@@ -849,10 +880,10 @@ function mousemove(e) {
                 let y = e.offsetY;
                 fichaSeleccionada.setPos(x, y);
             }
-
-        case 3:
-
+            break;
         case 4:
+
+        case 5:
 
     }
 

@@ -43,7 +43,7 @@ class Temporizador {
     }
 
     empate() {
-        pantalla = 3;
+        pantalla = 4;
         ctx.save();
         ctx.drawImage(imagenEmpate, 0, 0, width, height);
         document.fonts.load('10pt "Concert One"').then(() => {
