@@ -18,6 +18,8 @@ let tamanioCasillero = 60;
 let radioFicha;
 let nombreJugador1 = "J1";
 let nombreJugador2 = "J2";
+let jugador1;
+let jugador2;
 let tiempo = 300;
 let volumen = 0.1;
 let modosDeJuegos = [
@@ -66,6 +68,9 @@ let posHint = {
     "x": width / 2 - 10,
     "y": -30
 };
+let columnasLlenas;
+let personajes;
+
 
 
 // Botones //
@@ -145,9 +150,26 @@ sumando el contador cuando se termina de cargar cada uno y lo compare con la can
 */
 function cargaCompleta() {
     itemsCargados++;
-    if (itemsCargados === itemsTotales) {
+    if(itemsCargados < itemsTotales){
+        dibujarProgresoCarga();
+    } else{
+        audioJuego.removeEventListener("canplaythrough", cargaCompleta);
+        audioMenu.removeEventListener("canplaythrough", cargaCompleta);
         seleccionarModo();
     }
+}
+
+function dibujarProgresoCarga() {
+    ctx.save();
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "White";
+    ctx.fillRect(width / 4, height / 2 - 10, (width / 2) *(itemsCargados / itemsTotales), 20);
+    let texto = itemsCargados + "/" + itemsTotales;
+    let anchoTexto = ctx.measureText(texto).width;
+    ctx.font = '20px Arial';
+    ctx.fillText(texto, width/2-anchoTexto/2, height/1.8)
+    ctx.restore();
 }
 
 // Carga de items //
@@ -157,15 +179,35 @@ fondo.src = "./img/Juego/fondoTablero.jpg";
 itemsTotales++;
 fondo.addEventListener("load", cargaCompleta);
 
-let imagenFicha1 = new Image()
-imagenFicha1.src = "./img/Juego/Fichas/fichaJake.png";
+let fichaBmo = new Image()
+fichaBmo.src = "./img/Juego/Fichas/fichaBmo.png";
 itemsTotales++;
-imagenFicha1.addEventListener("load", cargaCompleta);
+fichaBmo.addEventListener("load", cargaCompleta);
 
-let imagenFicha2 = new Image()
-imagenFicha2.src = "./img/Juego/Fichas/fichaMentita.png";
+let fichaDulcePrincesa = new Image()
+fichaDulcePrincesa.src = "./img/Juego/Fichas/fichaDulce.png";
 itemsTotales++;
-imagenFicha2.addEventListener("load", cargaCompleta);
+fichaDulcePrincesa.addEventListener("load", cargaCompleta);
+
+let fichaFinn = new Image()
+fichaFinn.src = "./img/Juego/Fichas/fichaFinn.png";
+itemsTotales++;
+fichaFinn.addEventListener("load", cargaCompleta);
+
+let fichaJake = new Image()
+fichaJake.src = "./img/Juego/Fichas/fichaJake.png";
+itemsTotales++;
+fichaJake.addEventListener("load", cargaCompleta);
+
+let fichaMentita = new Image()
+fichaMentita.src = "./img/Juego/Fichas/fichaMentita.png";
+itemsTotales++;
+fichaMentita.addEventListener("load", cargaCompleta);
+
+let fichaReyHelado = new Image()
+fichaReyHelado.src = "./img/Juego/Fichas/fichaReyHelado.png";
+itemsTotales++;
+fichaReyHelado.addEventListener("load", cargaCompleta);
 
 let imagenCeldaTablero = new Image();
 imagenCeldaTablero.src = "./img/Juego/Fichas/secciontablero.jpg";
@@ -218,10 +260,45 @@ pantallaModoDeJuego.src = "./img/Juego/modosJuego.png";
 itemsTotales++;
 pantallaModoDeJuego.addEventListener("load", cargaCompleta);
 
+let pjBmo = new Image();
+pjBmo.src = "./img/Juego/Personajes/bmo.jpg";
+itemsTotales++;
+pjBmo.addEventListener("load", cargaCompleta);
+
+let pjDulcePrincesa = new Image();
+pjDulcePrincesa.src = "./img/Juego/Personajes/dulcePrincesa.jpg";
+itemsTotales++;
+pjDulcePrincesa.addEventListener("load", cargaCompleta);
+
+let pjFinn = new Image();
+pjFinn.src = "./img/Juego/Personajes/finn.jpg";
+itemsTotales++;
+pjFinn.addEventListener("load", cargaCompleta);
+
+let pjJake = new Image();
+pjJake.src = "./img/Juego/Personajes/jake.jpg";
+itemsTotales++;
+pjJake.addEventListener("load", cargaCompleta);
+
+let pjMentita = new Image();
+pjMentita.src = "./img/Juego/Personajes/mentita.jpg";
+itemsTotales++;
+pjMentita.addEventListener("load", cargaCompleta);
+
+let pjReyHelado = new Image();
+pjReyHelado.src = "./img/Juego/Personajes/reyHelado.jpg";
+itemsTotales++;
+pjReyHelado.addEventListener("load", cargaCompleta);
+
 let hint = new Image();
 hint.src = "./img/Juego/hint.png";
 itemsTotales++;
 hint.addEventListener("load", cargaCompleta);
+
+let fondoMadera = new Image();
+fondoMadera.src = "./img/Juego/fondoMadera.png";
+itemsTotales++;
+fondoMadera.addEventListener("load", cargaCompleta);
 
 let audioMenu = new Audio();
 audioMenu.src = "./audio/Juego/menu.mp3";
@@ -240,6 +317,8 @@ audioJuego.addEventListener("canplaythrough", cargaCompleta);
 
 function seleccionarModo() {
     pantalla = 0;
+    jugador1 = null;
+    jugador2 = null;
     dibujarSeleccionModo();
 }
 
@@ -272,20 +351,100 @@ function dibujarBotonModoJuego(x, y, m, fondo = "transparent") {
     ctx.restore();
 }
 
+function seleccionarPersonaje() {
+    pantalla = 1;
+    cargarPersonajes();
+    dibujarSeleccionPersonaje();
+}
+
+function cargarPersonajes() {
+    personajes = [];
+    personajes.push({
+        "imagen": pjBmo,
+        "nombre": "BMO",
+        "jugador": 0,
+        "ficha": fichaBmo
+    });
+    personajes.push({
+        "imagen": pjDulcePrincesa,
+        "nombre": "Dulce Princesa",
+        "jugador": 0,
+        "ficha": fichaDulcePrincesa
+    });
+    personajes.push({
+        "imagen": pjFinn,
+        "nombre": "Finn el humano",
+        "jugador": 0,
+        "ficha": fichaFinn
+    });
+    personajes.push({
+        "imagen": pjJake,
+        "nombre": "Jake el perro",
+        "jugador": 0,
+        "ficha": fichaJake
+    });
+    personajes.push({
+        "imagen": pjMentita,
+        "nombre": "Mentita",
+        "jugador": 0,
+        "ficha": fichaMentita
+    });
+    personajes.push({
+        "imagen": pjReyHelado,
+        "nombre": "Rey Helado",
+        "jugador": 0,
+        "ficha": fichaReyHelado
+    });
+}
+
+function dibujarSeleccionPersonaje() {
+
+    ctx.save();
+    for (let index = 0; index < personajes.length; index++) {
+        ctx.drawImage(personajes[index].imagen, width / personajes.length * index, height / 2 - height / 1.3 / 2, width / personajes.length, height / 1.3);
+        if (personajes[index].jugador == -1) {
+            ctx.save();
+            ctx.filter = 'blur(2px)';
+            ctx.drawImage(personajes[index].imagen, width / personajes.length * index, height / 2 - height / 1.3 / 2, width / personajes.length, height / 1.3);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(width / personajes.length * index - 2, height / 2 - height / 1.3 / 2, width / personajes.length + 6, height / 1.3);
+            ctx.restore();
+        }
+        ctx.beginPath();
+        ctx.rect(width / personajes.length * index, height / 2 - height / 1.3 / 2, width / personajes.length, height / 1.3);
+        ctx.fillStyle = "black";
+        ctx.stroke();
+        ctx.closePath();
+    }
+    ctx.beginPath();
+    ctx.ellipse(width / 2, 0, width / 1.5, width / 8, 0, 0, 2 * Math.PI);
+    ctx.fillStyle = "#004D4D"; // Color de relleno
+    ctx.ellipse(width / 2, height, width / 1.5, width / 8, 0, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.fillStyle = "white";
+    let texto = "Elige tu personaje";
+    let anchoTexto = ctx.measureText(texto).width;
+    ctx.fillText("Elige tu personaje", width / 2 - anchoTexto / 2, 70)
+    ctx.restore();
+
+}
+
 /*
 Asigna las fichas, el tablero, el turno inicial y dibuja los componentes
 */
 function iniciarJuego() {
     muteado = false;
     pantalla = 2;
-    fichas[0] = asignarFichaJugador(imagenFicha1, nombreJugador1);
-    fichas[1] = asignarFichaJugador(imagenFicha2, nombreJugador2);
+    fichas[0] = asignarFichaJugador(jugador1, 1);
+    fichas[1] = asignarFichaJugador(jugador2, 2);
     tablero = new Tablero(modosDeJuegos[modoDeJuego].columnas, modosDeJuegos[modoDeJuego].filas, ctx, imagenCeldaTablero, modosDeJuegos[modoDeJuego].tamanioCasillero, modosDeJuegos[modoDeJuego].nombre);
     temporizador = new Temporizador(tiempo, ctx, imagenEmpate);
     temporizador.iniciar();
     reDibujar();
     cambioTurno();
-    
+
 };
 
 /*
@@ -324,19 +483,11 @@ function dibujarGruposFichas() {
 Dibuja el contenedor para las fichas y las ubica una arriba de la otra
 */
 function dibujarGrupoFichas(x, y, fichas) {
-    ctx.save();
-    ctx.fillStyle = "#FBBC05";
-    ctx.fillRect(x, y, tamanioGrupoFichas, tamanioGrupoFichas);
-    ctx.beginPath();
-    ctx.fillStyle = 'black';
-    ctx.rect(x, y, tamanioGrupoFichas, tamanioGrupoFichas);
-    ctx.stroke();
-    ctx.closePath();
+    ctx.drawImage(fondoMadera, x, y, tamanioGrupoFichas, tamanioGrupoFichas);
     for (let i = 0; i < fichas.length; i++) {
-        fichas[i].setPos(x + tamanioGrupoFichas / 2, (y - i * 3) + tamanioGrupoFichas / 1.5);
+        fichas[i].setPos(x + tamanioGrupoFichas / 2, (y - i * 3) + tamanioGrupoFichas / 2);
         fichas[i].dibujar()
     }
-    ctx.restore();
 };
 
 /*
@@ -347,6 +498,9 @@ function colocarFicha(e) {
     if (!hayGanador()) {
         for (let i = modosDeJuegos[modoDeJuego].columnas - 1; i >= 0; i--) {
             if (x > width / 2 - modosDeJuegos[modoDeJuego].tamanioCasillero * (modosDeJuegos[modoDeJuego].columnas / 2) + i * modosDeJuegos[modoDeJuego].tamanioCasillero) {
+                if (columnasLlenas[i]) {
+                    return false;
+                }
                 tablero.insertarFicha(i, fichaSeleccionada);
                 ganador = fichaSeleccionada;
                 reDibujar();
@@ -357,7 +511,7 @@ function colocarFicha(e) {
                 } else {
                     cambioTurno();
                 }
-                break;
+                return true;
             }
         }
     }
@@ -427,10 +581,11 @@ function dibujarBotonNuevoJuego() {
 }
 
 function dibujarHint() {
-    let hintX = (width/2 - modosDeJuegos[modoDeJuego].columnas*modosDeJuegos[modoDeJuego].tamanioCasillero/2)+10;
+    let hintX = (width / 2 - modosDeJuegos[modoDeJuego].columnas * modosDeJuegos[modoDeJuego].tamanioCasillero / 2) + 10;
     if (fichaSeleccionada != null) {
         for (let index = 0; index < modosDeJuegos[modoDeJuego].columnas; index++) {
-            ctx.drawImage(hint, hintX+modosDeJuegos[modoDeJuego].tamanioCasillero*index, posHint.y, 40, 60);
+            if (!columnasLlenas[index])
+                ctx.drawImage(hint, hintX + modosDeJuegos[modoDeJuego].tamanioCasillero * index, posHint.y, 40, 60);
         }
     }
 }
@@ -464,13 +619,8 @@ function terminarJuego(ficha) {
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
-        ctx.fillStyle = "#FBBC05";
-        ctx.fillRect(width / 2 - 125, height / 2 - 100, 250, 210);
+        ctx.drawImage(fondoMadera, width / 2 - 125, height / 2 - 100, 250, 210);
         ctx.fillStyle = 'black';
-        ctx.beginPath()
-        ctx.rect(width / 2 - 125, height / 2 - 100, 250, 210)
-        ctx.stroke();
-        ctx.closePath();
         ctx.fillText('Ganador:', width / 2 - 70, height / 2 - 65);
         ctx.restore();
         temporizador.pausar();
@@ -552,14 +702,28 @@ function mousedown(e) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
                 if (distancia <= botones.modoJuego[index].radio) {
                     cambiarModoDeJuego(index);
-                    audioMenu.pause();
-                    audioJuego.play();
-                    iniciarJuego();
+                    seleccionarPersonaje();
                 }
             }
             break;
         case 1:
-
+            for (let index = 0; index < personajes.length; index++) {
+                if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length, height / 1.3 - 105)) {
+                    if (personajes[index].jugador <= 0) {
+                        if (jugador1 == null) {
+                            personajes[index].jugador = 1;
+                            jugador1 = personajes[index].ficha;
+                        } else if (jugador2 == null) {
+                            personajes[index].jugador = 2;
+                            jugador2 = personajes[index].ficha;
+                            audioMenu.pause();
+                            audioJuego.play();
+                            iniciarJuego();
+                        }
+                    }
+                }
+            }
+            break;
         case 2:
             if (turno != -1) {
                 let ficha = fichas[turno][fichas[turno].length - 1];
@@ -647,7 +811,34 @@ function mousemove(e) {
             }
             break;
         case 1:
+            for (let index = 0; index < personajes.length; index++) {
+                if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length + 1, height / 1.3 - 105)) {
+                    for (let index2 = 0; index2 < personajes.length; index2++) {
+                        if (index2 != index && personajes[index2].jugador == 0) {
+                            personajes[index2].jugador = -1;
+                        }
+                        else if (index2 == index && personajes[index2].jugador == -1) {
+                            personajes[index2].jugador = 0;
+                        }
+                    }
+                    dibujarSeleccionPersonaje();
+                    ctx.save();
+                    ctx.fillStyle = "white";
+                    let texto = personajes[index].nombre;
+                    let anchoTexto = ctx.measureText(texto).width;
+                    ctx.fillText(texto, width / 2 - anchoTexto / 2, height - 50);
+                    ctx.restore();
+                    return;
+                }
+            }
+            for (let index2 = 0; index2 < personajes.length; index2++) {
+                if (personajes[index2].jugador == -1) {
+                    personajes[index2].jugador = 0;
+                    dibujarSeleccionPersonaje();
+                }
 
+            }
+            break;
         case 2:
             audioMenu.pause();
             audioJuego.play();
@@ -678,9 +869,8 @@ function soltarFicha(e) {
     if (fichaSeleccionada != null && !pausado) {
         let x = e.offsetX;
         let y = e.offsetY;
-        if (zonaParaSoltarFicha(x, y)) {
+        if (zonaParaSoltarFicha(x, y) && colocarFicha(e)) {
             fichaSeleccionada.setBloqueada(true);
-            colocarFicha(e);
         } else {
             fichas[turno].push(fichaSeleccionada);
             reDibujar();
@@ -713,6 +903,6 @@ function dibujarJuegoPausado() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FBBC05";
     ctx.filter = 'none';
-    ctx.fillText("Juego pausado", width/2 - 100, 100)
+    ctx.fillText("Juego pausado", width / 2 - 100, 100)
     ctx.restore();
 }

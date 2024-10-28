@@ -19,6 +19,7 @@ class Tablero{
     Dibuja el tablero con sus respectivas fichas
     */
     dibujar(){
+        columnasLlenas = [];
         // Estilos para el tablero entero y su borde
         this.ctx.save();
         this.ctx.beginPath();
@@ -36,7 +37,14 @@ class Tablero{
                 this.ctx.restore();
                 // Dibujo la ficha, si es que hay una en esa posicion y seteo sus coordenadas para que coincidan con la del cuadrante
                 if(this.matriz[[fila, columna]] != null){
+                    if(fila == 0){
+                        columnasLlenas.push(true);
+                    }
                     this.matriz[[fila,columna]].dibujar();
+                }else{
+                    if(fila == 0){
+                        columnasLlenas.push(false);
+                    }
                 }
             }
         }
