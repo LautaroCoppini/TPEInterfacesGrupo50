@@ -248,7 +248,7 @@ function dibujarSeleccionModo() {
     document.fonts.load('10pt "Concert One"').then(() => {
         ctx.font = '35px "Concert One"';
         ctx.fillStyle = "black";
-        ctx.fillText("Elije el modo de juego!", width / 3.2, 70);
+        ctx.fillText("Elige el modo de juego!", width / 3.2, 70);
         dibujarBotonModoJuego(width / 4.5, height / 1.36, 4);
         dibujarBotonModoJuego(width / 2.54, height / 1.32, 5);
         dibujarBotonModoJuego(width / 1.69, height / 1.32, 6);
@@ -711,5 +711,8 @@ function dibujarJuegoPausado() {
     ctx.filter = 'blur(2px)';
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#FBBC05";
+    ctx.filter = 'none';
+    ctx.fillText("Juego pausado", width/2 - 100, 100)
     ctx.restore();
 }

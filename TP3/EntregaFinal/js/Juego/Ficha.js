@@ -8,6 +8,7 @@ class Ficha{
         this.ctx = ctx;
         this.nombre = nombre;
         this.bloqueada = bloqueada;
+        this.caerEn;
     }
 
     /*
@@ -28,6 +29,23 @@ class Ficha{
         this.ctx.clip();
         this.ctx.drawImage(this.fondo, this.posX - this.radio, this.posY - this.radio, this.radio * 2, this.radio * 2);
         this.ctx.restore();
+    }
+
+    soltarEn(x,y){
+        this.caerEn = y;
+        this.posX = x;
+        this.caer();
+    }
+
+    caer(){
+        if(this.posY<this.caerEn){
+            this.posY += 20;
+            reDibujar();
+            requestAnimationFrame(() => this.caer());
+        }if(this.posY>this.caerEn){
+            this.posY = this.caerEn;
+            reDibujar();
+        }
     }
 
     /*

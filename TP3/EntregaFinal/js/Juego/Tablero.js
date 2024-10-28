@@ -36,8 +36,7 @@ class Tablero{
                 this.ctx.restore();
                 // Dibujo la ficha, si es que hay una en esa posicion y seteo sus coordenadas para que coincidan con la del cuadrante
                 if(this.matriz[[fila, columna]] != null){
-                    this.matriz[[fila, columna]].setPos((width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero)+(this.tamanioCasillero/2),(height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero)+(this.tamanioCasillero/2));
-                    this.matriz[[fila, columna]].dibujar();
+                    this.matriz[[fila,columna]].dibujar();
                 }
             }
         }
@@ -50,6 +49,9 @@ class Tablero{
         for (let fila = this.fil-1; fila >= 0; fila--) {
             if(this.matriz[[fila, columna]] == null){
                 this.matriz[[fila, columna]] = ficha;
+                let x = (width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero)+(this.tamanioCasillero/2);
+                let y = (height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero)+(this.tamanioCasillero/2);
+                this.matriz[[fila, columna]].soltarEn(x,y);
                 break;
             }
         }
