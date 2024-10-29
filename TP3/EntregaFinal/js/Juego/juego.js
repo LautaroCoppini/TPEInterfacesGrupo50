@@ -70,7 +70,6 @@ let posHint = {
 };
 let columnasLlenas;
 let personajes;
-let openingReproducido;
 
 
 
@@ -162,6 +161,13 @@ function cargaCompleta() {
     } else {
         audioJuego.removeEventListener("canplaythrough", cargaCompleta);
         audioMenu.removeEventListener("canplaythrough", cargaCompleta);
+        audioSeleccionJake.removeEventListener("canplaythrough", cargaCompleta);
+        audioSeleccionBmo.removeEventListener("canplaythrough", cargaCompleta);
+        audioSeleccionDulcePrincesa.removeEventListener("canplaythrough", cargaCompleta);
+        audioSeleccionFinn.removeEventListener("canplaythrough", cargaCompleta);
+        audioSeleccionMentita.removeEventListener("canplaythrough", cargaCompleta);
+        audioSeleccionReyHelado.removeEventListener("canplaythrough", cargaCompleta);
+
         opening();
     }
 }
@@ -326,9 +332,44 @@ audioJuego.volume = volumen;
 itemsTotales++;
 audioJuego.addEventListener("canplaythrough", cargaCompleta);
 
+let audioSeleccionBmo = new Audio();
+audioSeleccionBmo.src = "./audio/Juego/seleccionBmo.mp3";
+audioSeleccionBmo.volume = 1;
+itemsTotales++;
+audioSeleccionBmo.addEventListener("canplaythrough", cargaCompleta);
+
+let audioSeleccionDulcePrincesa = new Audio();
+audioSeleccionDulcePrincesa.src = "./audio/Juego/seleccionDulcePrincesa.mp3";
+audioSeleccionDulcePrincesa.volume = 1;
+itemsTotales++;
+audioSeleccionDulcePrincesa.addEventListener("canplaythrough", cargaCompleta);
+
+let audioSeleccionFinn = new Audio();
+audioSeleccionFinn.src = "./audio/Juego/seleccionFinn.mp3";
+audioSeleccionFinn.volume = 1;
+itemsTotales++;
+audioSeleccionFinn.addEventListener("canplaythrough", cargaCompleta);
+
+let audioSeleccionJake = new Audio();
+audioSeleccionJake.src = "./audio/Juego/seleccionJake.mp3";
+audioSeleccionJake.volume = 1;
+itemsTotales++;
+audioSeleccionJake.addEventListener("canplaythrough", cargaCompleta);
+
+let audioSeleccionMentita = new Audio();
+audioSeleccionMentita.src = "./audio/Juego/seleccionMentita.mp3";
+audioSeleccionMentita.volume = 1;
+itemsTotales++;
+audioSeleccionMentita.addEventListener("canplaythrough", cargaCompleta);
+
+let audioSeleccionReyHelado = new Audio();
+audioSeleccionReyHelado.src = "./audio/Juego/seleccionReyHelado.mp3";
+audioSeleccionReyHelado.volume = 1;
+itemsTotales++;
+audioSeleccionReyHelado.addEventListener("canplaythrough", cargaCompleta);
+
 // Funciones //
 function opening() {
-    openingReproducido = false;
     pantalla = 0;
     dibujarOpening();
 }
@@ -339,6 +380,7 @@ function dibujarOpening() {
 }
 
 function seleccionarModo() {
+    audioMenu.volume = volumen;
     pantalla = 1;
     audioMenu.play();
     audioMenu.currentTime = 0;
@@ -387,38 +429,44 @@ function cargarPersonajes() {
     personajes.push({
         "imagen": pjBmo,
         "nombre": "BMO",
-        "jugador": 0,
-        "ficha": fichaBmo
+        "jugador": -1,
+        "ficha": fichaBmo,
+        "sonido": audioSeleccionBmo
     });
     personajes.push({
         "imagen": pjDulcePrincesa,
         "nombre": "Dulce Princesa",
-        "jugador": 0,
-        "ficha": fichaDulcePrincesa
+        "jugador": -1,
+        "ficha": fichaDulcePrincesa,
+        "sonido": audioSeleccionDulcePrincesa
     });
     personajes.push({
         "imagen": pjFinn,
         "nombre": "Finn el humano",
-        "jugador": 0,
-        "ficha": fichaFinn
+        "jugador": -1,
+        "ficha": fichaFinn,
+        "sonido": audioSeleccionFinn
     });
     personajes.push({
         "imagen": pjJake,
         "nombre": "Jake el perro",
-        "jugador": 0,
-        "ficha": fichaJake
+        "jugador": -1,
+        "ficha": fichaJake,
+        "sonido": audioSeleccionJake
     });
     personajes.push({
         "imagen": pjMentita,
         "nombre": "Mentita",
-        "jugador": 0,
-        "ficha": fichaMentita
+        "jugador": -1,
+        "ficha": fichaMentita,
+        "sonido": audioSeleccionMentita
     });
     personajes.push({
         "imagen": pjReyHelado,
         "nombre": "Rey Helado",
-        "jugador": 0,
-        "ficha": fichaReyHelado
+        "jugador": -1,
+        "ficha": fichaReyHelado,
+        "sonido": audioSeleccionReyHelado
     });
 }
 
@@ -463,8 +511,8 @@ function iniciarJuego() {
     pantalla = 3;
     audioJuego.currentTime = 0;
     audioJuego.play();
-    fichas[0] = asignarFichaJugador(jugador1, 1);
-    fichas[1] = asignarFichaJugador(jugador2, 2);
+    fichas[0] = asignarFichaJugador(jugador1.ficha, 1);
+    fichas[1] = asignarFichaJugador(jugador2.ficha, 2);
     tablero = new Tablero(modosDeJuegos[modoDeJuego].columnas, modosDeJuegos[modoDeJuego].filas, ctx, imagenCeldaTablero, modosDeJuegos[modoDeJuego].tamanioCasillero, modosDeJuegos[modoDeJuego].nombre);
     temporizador = new Temporizador(tiempo, ctx, imagenEmpate);
     temporizador.iniciar();
@@ -735,6 +783,7 @@ function mousedown(e) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
                 if (distancia <= botones.modoJuego[index].radio) {
                     cambiarModoDeJuego(index);
+                    audioMenu.volume = 0.015;
                     seleccionarPersonaje();
                 }
             }
@@ -745,12 +794,16 @@ function mousedown(e) {
                     if (personajes[index].jugador <= 0) {
                         if (jugador1 == null) {
                             personajes[index].jugador = 1;
-                            jugador1 = personajes[index].ficha;
-                        } else if (jugador2 == null) {
+                            jugador1 = personajes[index];
+                            personajes[index].sonido.play();
+                            
+                        } else if(jugador2 == null) {
+                            jugador1.sonido.pause();
+                            jugador1.sonido.currentTime = 0;
                             personajes[index].jugador = 2;
-                            jugador2 = personajes[index].ficha;
-                            audioMenu.pause();
-                            iniciarJuego();
+                            jugador2 = personajes[index];
+                            personajes[index].sonido.play();
+                            setTimeout(iniciarJuego,jugador2.sonido.duration*1000);
                         }
                     }
                 }
@@ -841,6 +894,7 @@ function mousemove(e) {
             }
             break;
         case 2: // Seleccionar personaje
+            if(jugador2==null){
             for (let index = 0; index < personajes.length; index++) {
                 if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length + 1, height / 1.3 - 105)) {
                     for (let index2 = 0; index2 < personajes.length; index2++) {
@@ -852,9 +906,16 @@ function mousemove(e) {
                         }
                     }
                     dibujarSeleccionPersonaje();
+                    let texto;
+                    if(jugador1 == null){
+                        texto = personajes[index].nombre;
+                    }else if(jugador2!=null){
+                        texto = jugador1.nombre + " VS " + jugador2.nombre;
+                    }else{
+                        texto = jugador1.nombre + " VS " + personajes[index].nombre;
+                    }
                     ctx.save();
                     ctx.fillStyle = "white";
-                    let texto = personajes[index].nombre;
                     let anchoTexto = ctx.measureText(texto).width;
                     ctx.fillText(texto, width / 2 - anchoTexto / 2, height - 50);
                     ctx.restore();
@@ -862,12 +923,12 @@ function mousemove(e) {
                 }
             }
             for (let index2 = 0; index2 < personajes.length; index2++) {
-                if (personajes[index2].jugador == -1) {
-                    personajes[index2].jugador = 0;
+                if (personajes[index2].jugador == 0) {
+                    personajes[index2].jugador = -1;
                     dibujarSeleccionPersonaje();
                 }
 
-            }
+            }}
             break;
         case 3: // Juego
             audioMenu.pause();
