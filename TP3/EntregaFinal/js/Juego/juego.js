@@ -547,13 +547,13 @@ function dibujarSeleccionPersonaje() {
         }
         ctx.save()
         ctx.fillStyle = "black";
-        ctx.fillRect(width / personajes.length * index, height / 2 - height / 1.3 / 2, width / personajes.length, height / 1.3); 
+        ctx.fillRect(width / personajes.length * index, height / 2 - height / 1.3 / 2, width / personajes.length, height / 1.3);
         ctx.drawImage(personajes[index].imagen, posX, posY, pjWidth, pjHeight);
         if (personajes[index].jugador == -1) { //le da los efectos a los no seleccionados
             ctx.restore();
             ctx.save();
             ctx.filter = 'blur(2px)';
-            ctx.drawImage(personajes[index].imagen, posX+2, posY+2, pjWidth-4, pjHeight-4);
+            ctx.drawImage(personajes[index].imagen, posX + 2, posY + 2, pjWidth - 4, pjHeight - 4);
             ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
             ctx.fillRect(posX, posY, pjWidth, pjHeight);
             ctx.restore();
@@ -578,6 +578,14 @@ function dibujarSeleccionPersonaje() {
     ctx.fillText("Elige tu personaje", width / 2 - anchoTexto / 2, 70)
     ctx.restore();
     dibujarFichasDeLosPersonajes();
+    if(personajeJugador2!=null){
+        texto = personajeJugador1.nombre + " VS " + personajeJugador2.nombre;
+        ctx.save();
+        ctx.fillStyle = "white";
+        anchoTexto = ctx.measureText(texto).width;
+        ctx.fillText(texto, width / 2 - anchoTexto / 2, height - 50);
+        ctx.restore();
+    }
 }
 
 /*
@@ -872,11 +880,10 @@ function animacionDesplazarPersonajeJugador1() {
         personajeJugador1.y -= 20;
         dibujarSeleccionPersonaje();
         requestAnimationFrame(animacionDesplazarPersonajeJugador1);
-    }else{
-        fichaDelPersonaje1 = asignarFichaJugador(personajeJugador1.ficha,1)[0];
-        fichaDelPersonaje1.setPos(personajeJugador1.x+personajeJugador1.w/2, height/2);
+    } else {
+        fichaDelPersonaje1 = asignarFichaJugador(personajeJugador1.ficha, 1)[0];
+        fichaDelPersonaje1.setPos(personajeJugador1.x + personajeJugador1.w / 2, height / 2);
         fichaDelPersonaje1.setRadio(0);
-        console.log(fichaDelPersonaje1)
         animacionMostrarFichaJugador1();
     }
 }
@@ -890,21 +897,20 @@ function animacionDesplazarPersonajeJugador2() {
         personajeJugador2.y -= 20;
         dibujarSeleccionPersonaje();
         requestAnimationFrame(animacionDesplazarPersonajeJugador2);
-    }else{
-        fichaDelPersonaje2 = asignarFichaJugador(personajeJugador2.ficha,1)[0];
-        fichaDelPersonaje2.setPos(personajeJugador2.x+personajeJugador2.w/2, height/2);
+    } else {
+        fichaDelPersonaje2 = asignarFichaJugador(personajeJugador2.ficha, 1)[0];
+        fichaDelPersonaje2.setPos(personajeJugador2.x + personajeJugador2.w / 2, height / 2);
         fichaDelPersonaje2.setRadio(0);
-        console.log(fichaDelPersonaje2)
         animacionMostrarFichaJugador2();
     }
 }
 
 /*
 Animacion para mostrar ficha jugador 1
-*/ 
-function animacionMostrarFichaJugador1(){
-    if(fichaDelPersonaje1.radio<personajeJugador1.w/4){
-        fichaDelPersonaje1.setRadio(fichaDelPersonaje1.radio+=2);
+*/
+function animacionMostrarFichaJugador1() {
+    if (fichaDelPersonaje1.radio < personajeJugador1.w / 4) {
+        fichaDelPersonaje1.setRadio(fichaDelPersonaje1.radio += 2);
         dibujarFichasDeLosPersonajes();
         requestAnimationFrame(animacionMostrarFichaJugador1)
     }
@@ -912,10 +918,10 @@ function animacionMostrarFichaJugador1(){
 
 /*
 Animacion para mostrar ficha jugador 2
-*/ 
-function animacionMostrarFichaJugador2(){
-    if(fichaDelPersonaje2.radio<personajeJugador2.w/4){
-        fichaDelPersonaje2.setRadio(fichaDelPersonaje2.radio+=2);
+*/
+function animacionMostrarFichaJugador2() {
+    if (fichaDelPersonaje2.radio < personajeJugador2.w / 4) {
+        fichaDelPersonaje2.setRadio(fichaDelPersonaje2.radio += 2);
         dibujarFichasDeLosPersonajes();
         requestAnimationFrame(animacionMostrarFichaJugador2)
     }
@@ -924,22 +930,22 @@ function animacionMostrarFichaJugador2(){
 /*
 Dibuja las fichas de ambos personajes
 */
-function dibujarFichasDeLosPersonajes(){
-    if(fichaDelPersonaje1 !=null){
+function dibujarFichasDeLosPersonajes() {
+    if (fichaDelPersonaje1 != null) {
         ctx.save();
         ctx.fillStyle = "white";
         let texto = "Jugador 1";
         let anchoTexto = ctx.measureText(texto).width;
-        ctx.fillText(texto, (personajeJugador1.x+personajeJugador1.w/2)-anchoTexto/2,height/3);
+        ctx.fillText(texto, (personajeJugador1.x + personajeJugador1.w / 2) - anchoTexto / 2, height / 3);
         ctx.restore();
         fichaDelPersonaje1.dibujar();
     }
-    if(fichaDelPersonaje2 !=null){
+    if (fichaDelPersonaje2 != null) {
         ctx.save();
         ctx.fillStyle = "white";
         let texto = "Jugador 2";
         let anchoTexto = ctx.measureText(texto).width;
-        ctx.fillText(texto, (personajeJugador2.x+personajeJugador2.w/2)-anchoTexto/2,height/3);
+        ctx.fillText(texto, (personajeJugador2.x + personajeJugador2.w / 2) - anchoTexto / 2, height / 3);
         ctx.restore();
         fichaDelPersonaje2.dibujar();
     }
@@ -998,7 +1004,7 @@ function mousedown(e) {
         case 3: // Juego
             if (turno != -1) { //Selecciona la ficha del jugador activo cuando el juego no está pausado, mostrando como resultado un Hint Animado de donde puede ubicarse la ficha
                 let ficha = fichas[turno][fichas[turno].length - 1];
-                if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) { 
+                if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) {
                     fichaSeleccionada = ficha;
                     fichas[turno].pop();
                     animarHint();
@@ -1095,8 +1101,6 @@ function mousemove(e) {
                         let texto;
                         if (personajeJugador1 == null) {
                             texto = personajes[index].nombre;
-                        } else if (personajeJugador2 != null) {
-                            texto = personajeJugador1.nombre + " VS " + personajeJugador2.nombre;
                         } else {
                             texto = personajeJugador1.nombre + " VS " + personajes[index].nombre;
                         }
