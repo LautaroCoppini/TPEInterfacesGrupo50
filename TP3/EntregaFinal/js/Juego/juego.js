@@ -55,8 +55,8 @@ let turno = -1; // -1 para cuando no se especificó un turno, 0 para el jugador 
 let fichaSeleccionada = null; // ficha que el jugador quiere mover
 let ganador;
 let temporizador;
-let pantalla;
-let modoDeJuego;
+let pantalla; //0 para el Jugar, 1 para Seleccion de Modo, 2 para la Seleccion de Personaje, 3 para el Juego y 4 en caso de Empate en la partida
+let modoDeJuego;// Modo de Juego Seleccionado
 let muteado = false;
 let pausado;
 let hintCaida;
@@ -64,7 +64,7 @@ let posHint = {
     "x": width / 2 - 10,
     "y": -30
 };
-let columnasLlenas;
+let columnasLlenas;//En caso de que la columna llegue a su tope no se muestra el hint, ni tampoco se agregan fichas
 let personajes;
 let jugador;
 let personajeJugador1;
@@ -153,13 +153,14 @@ let botones = {
 
 /*
 Cada vez que se agrega un nuevo recurso, hay que llamar a esta funcion para que asincronicamente vaya 
-sumando el contador cuando se termina de cargar cada uno y lo compare con la cantidad total de recursos
+sumando el contador cuando se termina de cargar cada uno y lo compare con la cantidad total de recursos,
+para llamar a la pantalla de Juego
 */
 function cargaCompleta() {
     itemsCargados++;
     if (itemsCargados < itemsTotales) {
         dibujarProgresoCarga();
-    } else {
+    } else { //Se quitan los eventos de los audios, para que no se disparen, en caso de cambiar su timepo 
         audioJuego.removeEventListener("canplaythrough", cargaCompleta);
         audioMenu.removeEventListener("canplaythrough", cargaCompleta);
         audioSeleccionJake.removeEventListener("canplaythrough", cargaCompleta);
@@ -168,10 +169,13 @@ function cargaCompleta() {
         audioSeleccionFinn.removeEventListener("canplaythrough", cargaCompleta);
         audioSeleccionMentita.removeEventListener("canplaythrough", cargaCompleta);
         audioSeleccionReyHelado.removeEventListener("canplaythrough", cargaCompleta);
-
         opening();
     }
 }
+
+/*
+Dependiendo de los Items CArgados, va dibujando una barra con el Porcentaje Actual
+*/
 
 function dibujarProgresoCarga() {
     ctx.save();
@@ -274,7 +278,7 @@ pantallaModoDeJuego.src = "./img/Juego/modosJuego.png";
 itemsTotales++;
 pantallaModoDeJuego.addEventListener("load", cargaCompleta);
 
-let pjBmo = new Image();
+let pjBmo = new Image();//pj: significa personaje abreviado
 pjBmo.src = "./img/Juego/Personajes/bmo.png";
 itemsTotales++;
 pjBmo.addEventListener("load", cargaCompleta);
@@ -370,16 +374,26 @@ itemsTotales++;
 audioSeleccionReyHelado.addEventListener("canplaythrough", cargaCompleta);
 
 // Funciones //
+
+/* 
+Setea la pantalla en 0, y llama a dibujar la Pantalla Principal
+*/
 function opening() {
     pantalla = 0;
     dibujarOpening();
 }
 
+/* 
+Dibuja la pantalla principal y el botón de New Game
+*/
 function dibujarOpening() {
     ctx.drawImage(fondoOpening, 0, 0, width, height);
     ctx.drawImage(imagenJugar, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)
 }
 
+/* 
+Dibuja la pantalla de Seleccionar Modo, al setearse el valor en 1, el personaje elegido por cada jugador pasa a null y  la música vuelve a default
+*/
 function seleccionarModo() {
     audioMenu.volume = volumen;
     pantalla = 1;
@@ -390,6 +404,9 @@ function seleccionarModo() {
     dibujarSeleccionModo();
 }
 
+/* 
+Dibuja el fondo y los botones en el Menu de Selección de Modo
+*/
 function dibujarSeleccionModo() {
     ctx.drawImage(pantallaModoDeJuego, 0, 0, width, height);
     document.fonts.load('10pt "Concert One"').then(() => {
@@ -404,6 +421,9 @@ function dibujarSeleccionModo() {
     audioMenu.play();
 }
 
+/* 
+Dibuja el botón para seleccionar Modo
+*/
 function dibujarBotonModoJuego(x, y, m, fondo = "transparent") {
     ctx.save();
     ctx.beginPath();
@@ -419,6 +439,9 @@ function dibujarBotonModoJuego(x, y, m, fondo = "transparent") {
     ctx.restore();
 }
 
+/* 
+Setea la pantalla en 2, carga los personajes, resetea las variables utilizadas y llama a dibujar la Selección de Personajes
+*/
 function seleccionarPersonaje() {
     pantalla = 2;
     cargarPersonajes();
@@ -429,6 +452,9 @@ function seleccionarPersonaje() {
     dibujarSeleccionPersonaje();
 }
 
+/* 
+Carga los personajes con sus respectivos atributos(Jugador=-1, significa que no está seleccionado y no esta el mosue encima de el)
+*/
 function cargarPersonajes() {
     personajes = [];
     personajes.push({
@@ -499,6 +525,9 @@ function cargarPersonajes() {
     });
 }
 
+/* 
+Dibuja cada personaje y dependiendo de si esta siendo seleccionado o no, realiza un desenfocando y oscurecimiento
+*/
 function dibujarSeleccionPersonaje() {
     ctx.save();
     for (let index = 0; index < personajes.length; index++) {
@@ -506,7 +535,7 @@ function dibujarSeleccionPersonaje() {
         let posY = personajes[index].y;
         let pjWidth = personajes[index].w;
         let pjHeight = personajes[index].h;
-        if (personajes[index].x == 0 && personajes[index].y == 0 && personajes[index].w == 0 && personajes[index].h == 0) {
+        if (personajes[index].x == 0 && personajes[index].y == 0 && personajes[index].w == 0 && personajes[index].h == 0) { //setea la posicion en pantalla de cada personaje, sin seleccionar
             posX = width / personajes.length * index;
             posY = height / 2 - height / 1.3 / 2;
             pjWidth = width / personajes.length;
@@ -520,7 +549,7 @@ function dibujarSeleccionPersonaje() {
         ctx.fillStyle = "black";
         ctx.fillRect(width / personajes.length * index, height / 2 - height / 1.3 / 2, width / personajes.length, height / 1.3); 
         ctx.drawImage(personajes[index].imagen, posX, posY, pjWidth, pjHeight);
-        if (personajes[index].jugador == -1) {
+        if (personajes[index].jugador == -1) { //le da los efectos a los no seleccionados
             ctx.restore();
             ctx.save();
             ctx.filter = 'blur(2px)';
@@ -793,21 +822,33 @@ function cambioTurno() {
     reDibujar();
 };
 
+/* 
+Cambia el modo de juego y el tamaño de la ficha, en relacion con el tamaño de casilleros de cada modo de juego
+*/
 function cambiarModoDeJuego(modo) {
     modoDeJuego = modo;
     radioFicha = (41 * modosDeJuegos[modoDeJuego].tamanioCasillero / 100);
 }
 
+/*
+Calcula la distancia entre dos puntos usando sus coordenadas
+*/
 function distanciaEntreDosPuntos(x, y, x2, y2) {
     let dx = x - x2;
     let dy = y - y2;
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+/* 
+Corrobora que el mouse esta dentro de un area rectangular
+*/
 function mouseDentroArea(x, y, x2, y2, w, h) {
     return (x > x2 && x < x2 + w && y > y2 && y < y2 + h);
 }
 
+/* 
+Asigna el personaje dependiendo del jugador activo y reproduce el sonido de este
+*/
 function asignarPersonaje(index) {
     if (jugador == 1) {
         personajeJugador1 = personajes[index];
@@ -822,6 +863,9 @@ function asignarPersonaje(index) {
     personajes[index].sonido.play();
 }
 
+/* 
+Desplaza hacia arriba el personaje del jugador 1 y muestra su ficha
+*/
 function animacionDesplazarPersonajeJugador1() {
     let tope = 0 - personajeJugador1.h;
     if (personajeJugador1.y > tope) {
@@ -837,6 +881,9 @@ function animacionDesplazarPersonajeJugador1() {
     }
 }
 
+/* 
+Desplaza hacia arriba el personaje del jugador 2 y muestra su ficha
+*/
 function animacionDesplazarPersonajeJugador2() {
     let tope = 0 - personajeJugador2.h;
     if (personajeJugador2.y > tope) {
@@ -852,6 +899,9 @@ function animacionDesplazarPersonajeJugador2() {
     }
 }
 
+/*
+Animacion para mostrar ficha jugador 1
+*/ 
 function animacionMostrarFichaJugador1(){
     if(fichaDelPersonaje1.radio<personajeJugador1.w/4){
         fichaDelPersonaje1.setRadio(fichaDelPersonaje1.radio+=2);
@@ -860,6 +910,9 @@ function animacionMostrarFichaJugador1(){
     }
 }
 
+/*
+Animacion para mostrar ficha jugador 2
+*/ 
 function animacionMostrarFichaJugador2(){
     if(fichaDelPersonaje2.radio<personajeJugador2.w/4){
         fichaDelPersonaje2.setRadio(fichaDelPersonaje2.radio+=2);
@@ -868,6 +921,9 @@ function animacionMostrarFichaJugador2(){
     }
 }
 
+/*
+Dibuja las fichas de ambos personajes
+*/
 function dibujarFichasDeLosPersonajes(){
     if(fichaDelPersonaje1 !=null){
         ctx.save();
@@ -902,14 +958,14 @@ function mousedown(e) {
     let y = e.offsetY;
     switch (pantalla) {
         case 0: // Opening
-            if (mouseDentroArea(x, y, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)) {
+            if (mouseDentroArea(x, y, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)) { //Cuando el usuario da click a New Game lo manda a la pantalla de Seleccion de Modo
                 seleccionarModo();
             }
             break;
         case 1: // Seleccion de modo de juego
             for (let index = 0; index < botones.modoJuego.length; index++) {
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
-                if (distancia <= botones.modoJuego[index].radio) {
+                if (distancia <= botones.modoJuego[index].radio) { //cuando el usuario hace click para seleccionar el modo, le baja el volumne a la musica y muestra los personajes
                     cambiarModoDeJuego(index);
                     audioMenu.volume = 0.015;
                     seleccionarPersonaje();
@@ -918,7 +974,7 @@ function mousedown(e) {
             break;
         case 2: // Seleccion de personaje
             for (let index = 0; index < personajes.length; index++) {
-                if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length, height / 1.3 - 105)) {
+                if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length, height / 1.3 - 105)) { //Cuando el jugador activo da click en el personaje se lo asigna, cuando ambos seleccionan su personaje, empieza la partida
                     if (personajes[index].jugador <= 0) {
                         if (personajeJugador1 == null) {
                             jugador = 1;
@@ -940,15 +996,15 @@ function mousedown(e) {
             }
             break;
         case 3: // Juego
-            if (turno != -1) {
+            if (turno != -1) { //Selecciona la ficha del jugador activo cuando el juego no está pausado, mostrando como resultado un Hint Animado de donde puede ubicarse la ficha
                 let ficha = fichas[turno][fichas[turno].length - 1];
-                if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) {
+                if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) { 
                     fichaSeleccionada = ficha;
                     fichas[turno].pop();
                     animarHint();
                 }
             }
-            if (mouseDentroArea(x, y, botones.desactivarSonido.x, botones.desactivarSonido.y, botones.desactivarSonido.width, botones.desactivarSonido.height)) {
+            if (mouseDentroArea(x, y, botones.desactivarSonido.x, botones.desactivarSonido.y, botones.desactivarSonido.width, botones.desactivarSonido.height)) { //Activa o desactiva el sonido del Juego
                 if (muteado) {
                     audioJuego.volume = volumen;
                     muteado = false;
@@ -958,7 +1014,7 @@ function mousedown(e) {
                 }
                 reDibujar();
             }
-            if (mouseDentroArea(x, y, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height)) {
+            if (mouseDentroArea(x, y, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height)) { //Activa o desactiva la pausa del Juego
                 if (pausado) {
                     pausado = false;
                     temporizador.reanudar();
@@ -969,14 +1025,14 @@ function mousedown(e) {
                 reDibujar();
             }
             if (pausado) {
-                if (mouseDentroArea(x, y, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height)) {
+                if (mouseDentroArea(x, y, botones.nuevoJuego[1].x, botones.nuevoJuego[1].y, botones.nuevoJuego[1].width, botones.nuevoJuego[1].height)) {// Empieza una nueva partida si el Juego está Pausado
                     pausado = false;
                     audioJuego.pause();
                     audioJuego.currentTime = 0;
                     audioMenu.currentTime = 0;
                     seleccionarModo();
                 }
-                if (mouseDentroArea(x, y, botones.reiniciar[0].x, botones.reiniciar[0].y, botones.reiniciar[0].width, botones.reiniciar[0].height)) {
+                if (mouseDentroArea(x, y, botones.reiniciar[0].x, botones.reiniciar[0].y, botones.reiniciar[0].width, botones.reiniciar[0].height)) {// Reinicia la partida si el Juego está pausado 
                     pausado = false;
                     audioJuego.currentTime = 0;
                     iniciarJuego();
@@ -984,12 +1040,12 @@ function mousedown(e) {
             }
             break;
         case 4: // Ganador
-            if (mouseDentroArea(x, y, botones.nuevoJuego[2].x, botones.nuevoJuego[2].y, botones.nuevoJuego[2].width, botones.nuevoJuego[2].height)) {
+            if (mouseDentroArea(x, y, botones.nuevoJuego[2].x, botones.nuevoJuego[2].y, botones.nuevoJuego[2].width, botones.nuevoJuego[2].height)) { //Inicia una nueva partida si hay un ganador
                 pausado = false;
                 audioJuego.pause();
                 seleccionarModo();
             }
-            if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) {
+            if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) { //Reinicia una nueva partida si hay un ganador
                 pausado = false;
                 audioJuego.currentTime = 0;
                 iniciarJuego();
@@ -1013,7 +1069,7 @@ function mousemove(e) {
     switch (pantalla) {
         case 1: // Seleccionar modo de juego
             audioMenu.play();
-            for (let index = 0; index < botones.modoJuego.length; index++) {
+            for (let index = 0; index < botones.modoJuego.length; index++) { //Muestra el Home y los botones para seleccionar el modo
                 let distancia = distanciaEntreDosPuntos(x, y, botones.modoJuego[index].x, botones.modoJuego[index].y);
                 if (distancia <= botones.modoJuego[index].radio) {
                     dibujarBotonModoJuego(botones.modoJuego[index].x, botones.modoJuego[index].y, modosDeJuegos[index].nombre, "#FBBC05")
@@ -1026,7 +1082,7 @@ function mousemove(e) {
         case 2: // Seleccionar personaje
             if (personajeJugador2 == null) {
                 for (let index = 0; index < personajes.length; index++) {
-                    if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length + 1, height / 1.3 - 105)) {
+                    if (mouseDentroArea(x, y, width / personajes.length * index, height / 2 - height / 1.3 / 2 + 50, width / personajes.length + 1, height / 1.3 - 105)) { //muestra el hover de los personajes y sus nombres
                         for (let index2 = 0; index2 < personajes.length; index2++) {
                             if (index2 != index && personajes[index2].jugador == 0) {
                                 personajes[index2].jugador = -1;
@@ -1062,7 +1118,7 @@ function mousemove(e) {
             }
             break;
         case 3: // Juego
-            if (fichaSeleccionada != null && !pausado) {
+            if (fichaSeleccionada != null && !pausado) { //Mueve la ficha seleccionada a la posicion del mouse
                 fichaSeleccionada.setPos(x, y);
             }
             break;
@@ -1110,6 +1166,9 @@ function reDibujar() {
 
 }
 
+/*
+Dibuja el juego pausado
+*/
 function dibujarJuegoPausado() {
     ctx.save();
     ctx.filter = 'blur(2px)';

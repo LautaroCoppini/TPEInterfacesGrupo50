@@ -35,7 +35,7 @@ class Tablero{
                 this.ctx.drawImage(this.imagen,width/2-this.tamanioCasillero*(this.col/2)+columna*this.tamanioCasillero,height/2-this.tamanioCasillero*(this.fil/2)+fila*this.tamanioCasillero, this.tamanioCasillero, this.tamanioCasillero);
                 this.ctx.closePath();
                 this.ctx.restore();
-                // Dibujo la ficha, si es que hay una en esa posicion y seteo sus coordenadas para que coincidan con la del cuadrante
+                // Dibujo la ficha y si es la ultima de la columna, agrego un true al arreglo columna llena
                 if(this.matriz[[fila, columna]] != null){
                     if(fila == 0){
                         columnasLlenas.push(true);
@@ -51,7 +51,7 @@ class Tablero{
     }
 
     /*
-    Inserta la ficha en la matriz, en su fila correspondiente
+    Inserta la ficha en la matriz, en su fila correspondiente y anima su caída
     */
     insertarFicha(columna, ficha){
         for (let fila = this.fil-1; fila >= 0; fila--) {
@@ -66,7 +66,7 @@ class Tablero{
     }
     
     /*
-    Verifica si hay 4 fichas iguales contiguas en todas las direcciones
+    Verifica si hay X fichas iguales contiguas en todas las direcciones. (X depende del modo de Juego)
     */
     hayGanador(){
         // Direcciones de búsqueda: [fila, columna]
@@ -100,7 +100,7 @@ class Tablero{
                             break;
                         }
                     }
-                    // Si encontramos 4 en línea (o las que diga el modo de juego), retornamos true
+                    // Si encontramos X en línea, retornamos true
                     if (contador === this.modoJuego) {
                         return true;
                     }

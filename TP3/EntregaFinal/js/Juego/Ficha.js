@@ -1,5 +1,5 @@
-class Ficha{
-    constructor(posX,posY,radio,fondo,ctx, nombre, bloqueada){
+class Ficha {
+    constructor(posX, posY, radio, fondo, ctx, nombre, bloqueada) {
         this.posX = posX;
         this.posY = posY;
         this.fondo = fondo;
@@ -16,10 +16,10 @@ class Ficha{
     */
     dibujar() {
         this.ctx.save();
-        if(!this.bloqueada){
+        if (!this.bloqueada) {
             this.ctx.strokeStyle = "red";
             this.ctx.lineWidth = 7;
-        }else{
+        } else {
             this.ctx.lineWidth = 3;
         }
         this.ctx.beginPath();
@@ -30,19 +30,24 @@ class Ficha{
         this.ctx.drawImage(this.fondo, this.posX - this.radio, this.posY - this.radio, this.radio * 2, this.radio * 2);
         this.ctx.restore();
     }
-
-    soltarEn(x,y){
+    /* 
+    Setea en que coordenadas caerá la ficha
+    */
+    soltarEn(x, y) {
         this.caerEn = y;
         this.posX = x;
         this.caer();
     }
 
-    caer(){
-        if(this.posY<this.caerEn){
+    /*
+    Animación de caída
+    */
+    caer() {
+        if (this.posY < this.caerEn) {
             this.posY += 20;
             reDibujar();
             requestAnimationFrame(() => this.caer());
-        }if(this.posY>this.caerEn){
+        } if (this.posY > this.caerEn) {
             this.posY = this.caerEn;
             reDibujar();
         }
@@ -51,7 +56,7 @@ class Ficha{
     /*
     Setea la posicion de la ficha por otra
     */
-    setPos(x,y){
+    setPos(x, y) {
         this.posX = x;
         this.posY = y;
     }
@@ -59,28 +64,28 @@ class Ficha{
     /*
     Setea el radio de la ficha por otra
     */
-    setRadio(radio){
+    setRadio(radio) {
         this.radio = radio;
     }
 
     /*
     Retorna el radio de la ficha
     */
-    getRadio(){
+    getRadio() {
         return this.radio;
     }
 
     /*
     Retorna el nombre de la ficha
     */
-    getNombre(){
+    getNombre() {
         return this.nombre;
     }
 
     /*
     Verifica si el mouse está sobre la ficha
     */
-    mouseDentro(x,y){
+    mouseDentro(x, y) {
         let dx = x - this.posX;
         let dy = y - this.posY;
         let distancia = Math.sqrt(dx * dx + dy * dy);
@@ -90,8 +95,8 @@ class Ficha{
     /*
     Verifica si una ficha es igual a la otra por su nombre
     */
-    esIgual(ficha){
-        if(ficha == null){
+    esIgual(ficha) {
+        if (ficha == null) {
             return false;
         }
         return this.nombre == ficha.getNombre();
@@ -100,14 +105,14 @@ class Ficha{
     /*
     Verifica si la ficha se puede mover
     */
-    isBloqueada(){
+    isBloqueada() {
         return this.bloqueada;
     }
 
     /*
     Bloquea la ficha para que no se pueda mover
     */
-    setBloqueada(bloqueada){
+    setBloqueada(bloqueada) {
         this.bloqueada = bloqueada;
     }
 
