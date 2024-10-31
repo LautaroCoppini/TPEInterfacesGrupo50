@@ -470,7 +470,7 @@ function mousedown(e) {
                 }
                 reDibujar();
             }
-            if (mouseDentroArea(x, y, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height)) { //Activa o desactiva la pausa del Juego
+            if (mouseDentroArea(x, y, botones.pausa.x, botones.pausa.y, botones.pausa.width, botones.pausa.height) && fichaSeleccionada == null) { //Activa o desactiva la pausa del Juego
                 if (pausado) {
                     pausado = false;
                     temporizador.reanudar();
