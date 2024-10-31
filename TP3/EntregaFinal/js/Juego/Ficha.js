@@ -2,8 +2,8 @@ class Ficha {
     constructor(posX, posY, radio, fondo, ctx, nombre, bloqueada) {
         this.posX = posX;
         this.posY = posY;
-        this.fondo = fondo;
         this.radio = radio;
+        this.fondo = fondo;
         /** @type {CanvasRenderingContext2D} */
         this.ctx = ctx;
         this.nombre = nombre;
