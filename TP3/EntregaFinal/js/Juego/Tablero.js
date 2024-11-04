@@ -109,4 +109,17 @@ class Tablero{
         }
         return false;
     }
+
+    /*
+    Verifica si el tablero está lleno
+    */
+    lleno(){
+        console.log(columnasLlenas)
+        for (let index = 0; index < columnasLlenas.length; index++) {
+            if(!columnasLlenas[index]){
+                return false;
+            }
+        }
+        return true;
+    }
 }

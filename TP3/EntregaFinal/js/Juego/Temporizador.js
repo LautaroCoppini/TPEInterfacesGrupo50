@@ -5,6 +5,9 @@ class Temporizador {
         this.pausado = true;
     }
 
+    /*
+    Dibuja el temporizador con el tiempo actual
+    */
     dibujar() {
         this.ctx.save();
         document.fonts.load('10pt "Concert One"').then(() => {
@@ -15,22 +18,34 @@ class Temporizador {
         });
     }
 
+    /*
+    Inicia el temporizador
+    */
     iniciar() {
         this.pausado = false;
         this.decrementarTiempo();
     }
 
+    /*
+    Pausa el temporizador
+    */
     pausar() {
         this.pausado = true;
     }
 
+    /*
+    Reanuda el temporizador
+    */
     reanudar() {
         this.pausado = false;
     }
 
+    /*
+    Cada 1 segundo reduce el tiempo en 1 y dibuja el temporizador
+    */
     decrementarTiempo() {
         if (this.tiempo == 0) {
-            this.empate();
+            empate();
         } else {
             if (!this.pausado) {
                 this.tiempo--;
@@ -40,19 +55,5 @@ class Temporizador {
                 this.decrementarTiempo();
             }, 1000);
         }
-    }
-
-    empate() {
-        pantalla = 4;
-        ctx.save();
-        ctx.drawImage(imagenEmpate, 0, 0, width, height);
-        document.fonts.load('10pt "Concert One"').then(() => {
-            ctx.font = '35px "Concert One"';
-            ctx.fillText('Empate', width / 2 - 90, height / 2 - 140);
-            dibujarBotonNuevoJuego();
-            dibujarBotonReiniciar();
-            ctx.restore();
-            this.pausar();
-        });
     }
 }

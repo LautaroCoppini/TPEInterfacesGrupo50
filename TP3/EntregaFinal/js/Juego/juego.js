@@ -68,7 +68,7 @@ let pausado;
 let hintCaida;
 let posHint = {
     "x": width / 2 - 10,
-    "y": -30
+    "y": -60
 };
 let columnasLlenas;//En caso de que la columna llegue a su tope no se muestra el hint, ni tampoco se agregan fichas
 
@@ -169,6 +169,10 @@ function cargaCompleta() {
         audioSeleccionFinn.removeEventListener("canplaythrough", cargaCompleta);
         audioSeleccionMentita.removeEventListener("canplaythrough", cargaCompleta);
         audioSeleccionReyHelado.removeEventListener("canplaythrough", cargaCompleta);
+        audioAgarrarFicha.removeEventListener("canplaythrough", cargaCompleta);
+        audioSoltarFicha.removeEventListener("canplaythrough", cargaCompleta);
+        audioGanador.removeEventListener("canplaythrough", cargaCompleta);
+        audioEmpate.removeEventListener("canplaythrough", cargaCompleta);
         opening();
     }
 }
@@ -344,6 +348,30 @@ audioJuego.volume = volumen;
 itemsTotales++;
 audioJuego.addEventListener("canplaythrough", cargaCompleta);
 
+let audioAgarrarFicha = new Audio();
+audioAgarrarFicha.src = "./audio/Juego/agarrarFicha.mp3";
+audioAgarrarFicha.volume = volumen;
+itemsTotales++;
+audioAgarrarFicha.addEventListener("canplaythrough", cargaCompleta);
+
+let audioSoltarFicha = new Audio();
+audioSoltarFicha.src = "./audio/Juego/soltarFicha.mp3";
+audioSoltarFicha.volume = volumen;
+itemsTotales++;
+audioSoltarFicha.addEventListener("canplaythrough", cargaCompleta);
+
+let audioGanador = new Audio();
+audioGanador.src = "./audio/Juego/ganador.mp3";
+audioGanador.volume = volumen;
+itemsTotales++;
+audioGanador.addEventListener("canplaythrough", cargaCompleta);
+
+let audioEmpate = new Audio();
+audioEmpate.src = "./audio/Juego/empate.mp3";
+audioEmpate.volume = volumen;
+itemsTotales++;
+audioEmpate.addEventListener("canplaythrough", cargaCompleta);
+
 //Fichas
 
 let fichaBmo = new Image()
@@ -416,6 +444,7 @@ function mousedown(e) {
         case 0: // Opening
             if (mouseDentroArea(x, y, botones.nuevoJuego[0].x, botones.nuevoJuego[0].y, botones.nuevoJuego[0].width, botones.nuevoJuego[0].height)) { //Cuando el usuario da click a New Game lo manda a la pantalla de Seleccion de Modo
                 seleccionarModo();
+                animarHint();
             }
             break;
         case 1: // Seleccion de modo de juego
@@ -457,7 +486,8 @@ function mousedown(e) {
                 if (ficha.mouseDentro(x, y) && !ficha.isBloqueada() && !pausado) {
                     fichaSeleccionada = ficha;
                     fichas[turno].pop();
-                    animarHint();
+                    audioAgarrarFicha.play();
+
                 }
             }
             if (mouseDentroArea(x, y, botones.desactivarSonido.x, botones.desactivarSonido.y, botones.desactivarSonido.width, botones.desactivarSonido.height)) { //Activa o desactiva el sonido del Juego
@@ -495,15 +525,21 @@ function mousedown(e) {
                 }
             }
             break;
-        case 4: // Ganador
-            if (mouseDentroArea(x, y, botones.nuevoJuego[2].x, botones.nuevoJuego[2].y, botones.nuevoJuego[2].width, botones.nuevoJuego[2].height)) { //Inicia una nueva partida si hay un ganador
+        case 4: // Ganador y empate
+            if (mouseDentroArea(x, y, botones.nuevoJuego[2].x, botones.nuevoJuego[2].y, botones.nuevoJuego[2].width, botones.nuevoJuego[2].height)) { //Inicia una nueva partida si hay un ganador o empatan
                 pausado = false;
-                audioJuego.pause();
+                audioEmpate.pause();
+                audioGanador.pause();
+                audioEmpate.currentTime = 0;
+                audioGanador.currentTime = 0;
                 seleccionarModo();
             }
-            if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) { //Reinicia una nueva partida si hay un ganador
+            if (mouseDentroArea(x, y, botones.reiniciar[1].x, botones.reiniciar[1].y, botones.reiniciar[1].width, botones.reiniciar[1].height)) { //Reinicia una nueva partida si hay un ganador o empatan
                 pausado = false;
-                audioJuego.currentTime = 0;
+                audioEmpate.pause();
+                audioGanador.pause();
+                audioEmpate.currentTime = 0;
+                audioGanador.currentTime = 0;
                 iniciarJuego();
             }
             break;
@@ -594,6 +630,7 @@ function mouseUp(e) {
         let x = e.offsetX;
         let y = e.offsetY;
         if (zonaParaSoltarFicha(x, y) && colocarFicha(e)) {
+            audioSoltarFicha.play();
             fichaSeleccionada.setBloqueada(true);
         } else {
             fichas[turno].push(fichaSeleccionada);
@@ -963,6 +1000,7 @@ function reDibujar() {
         dibujarBotonReiniciar();
     }
     dibujarBotones();
+    dibujarHint();
 
 }
 
@@ -1099,8 +1137,8 @@ function cambioTurno() {
 Anima el hint haciendo que suba y baje hasta un tope, tambien dibuja la ficha para que no desaparezca en la animacion
 */
 function animarHint() {
+    requestAnimationFrame(animarHint);
     if (fichaSeleccionada != null) {
-        requestAnimationFrame(animarHint);
         if (posHint.y == 0) {
             hintCaida = false
         }
@@ -1113,8 +1151,13 @@ function animarHint() {
             posHint.y--;
         }
         reDibujar();
-        dibujarHint();
         fichaSeleccionada.dibujar();
+    }
+    else {
+        if (posHint.y > -60) {
+            posHint.y--;
+            reDibujar();
+        }
     }
 }
 
@@ -1123,11 +1166,9 @@ Dibuja el hint dependiendo de si está la columna llena o no
 */
 function dibujarHint() {
     let hintX = (width / 2 - modosDeJuegos[modoDeJuego].columnas * modosDeJuegos[modoDeJuego].tamanioCasillero / 2) + 10;
-    if (fichaSeleccionada != null) {
-        for (let index = 0; index < modosDeJuegos[modoDeJuego].columnas; index++) {
-            if (!columnasLlenas[index])
-                ctx.drawImage(hint, hintX + modosDeJuegos[modoDeJuego].tamanioCasillero * index, posHint.y, 40, 60);
-        }
+    for (let index = 0; index < modosDeJuegos[modoDeJuego].columnas; index++) {
+        if (!columnasLlenas[index])
+            ctx.drawImage(hint, hintX + modosDeJuegos[modoDeJuego].tamanioCasillero * index, posHint.y, 40, 60);
     }
 }
 
@@ -1157,6 +1198,12 @@ function colocarFicha(e) {
                         terminarJuego(ganador);
                     }, 1000);
                 } else {
+                    if (tablero.lleno()) {
+                        setTimeout(() => {
+                            empate();
+                        }, 1000);
+                        return true;
+                    }
                     cambioTurno();
                 }
                 return true;
@@ -1177,6 +1224,9 @@ Cambia la pantalla al 4 y presenta al ganador con los botones para resetear o em
 */
 function terminarJuego(ficha) {
     pantalla = 4;
+    audioJuego.pause();
+    audioJuego.currentTime = 0;
+    audioGanador.play();
     dibujarFondo();
     ctx.save();
     ctx.drawImage(imagenJugadorGanador, 0, 0, width, height);
@@ -1217,4 +1267,24 @@ function animarFichaGanador() {
             ganador.dibujar();
         }
     }
+}
+
+/*
+Cambia la pantalla a 4, reproduce el audio correspondiente y dibuja el empate
+*/
+function empate() {
+    pantalla = 4;
+    audioJuego.pause();
+    audioJuego.currentTime = 0;
+    audioEmpate.play();
+    ctx.save();
+    ctx.drawImage(imagenEmpate, 0, 0, width, height);
+    document.fonts.load('10pt "Concert One"').then(() => {
+        ctx.font = '35px "Concert One"';
+        ctx.fillText('Empate', width / 2 - 90, height / 2 - 140);
+        dibujarBotonNuevoJuego();
+        dibujarBotonReiniciar();
+        ctx.restore();
+        temporizador.pausar();
+    });
 }
