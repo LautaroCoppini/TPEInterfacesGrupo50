@@ -669,12 +669,15 @@ function dibujarSeleccionModo() {
         ctx.font = '35px "Concert One"';
         ctx.fillStyle = "black";
         ctx.fillText("Elige el modo de juego!", width / 3.2, 70);
-        dibujarBotonModoJuego(width / 4.5, height / 1.36, 4);
-        dibujarBotonModoJuego(width / 2.54, height / 1.32, 5);
-        dibujarBotonModoJuego(width / 1.69, height / 1.32, 6);
-        dibujarBotonModoJuego(width / 1.27, height / 1.36, 7);
+        dibujarBotonesModoJuego();
     })
     audioMenu.play();
+}
+
+function dibujarBotonesModoJuego(){
+    for (let index = 0; index < botones.modoJuego.length; index++) {
+        dibujarBotonModoJuego(botones.modoJuego[index].x, botones.modoJuego[index].y, modosDeJuegos[index].nombre, "white");
+    }
 }
 
 /* 
