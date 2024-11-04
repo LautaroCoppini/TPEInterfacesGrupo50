@@ -14,7 +14,8 @@ class Temporizador {
             this.ctx.font = '35px "Concert One"';
             ctx.drawImage(fondoMadera, width / 2 - 70, height - 60, 140, 50);
             this.ctx.fillStyle = 'black';
-            this.ctx.fillText(this.tiempo, width / 2 - 25, height - 25);
+            let anchoTexto = this.ctx.measureText(this.tiempo).width;
+            this.ctx.fillText(this.tiempo, width / 2 - anchoTexto/2, height - 25);
         });
     }
 
