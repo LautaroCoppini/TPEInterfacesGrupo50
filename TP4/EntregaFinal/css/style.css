@@ -37,23 +37,96 @@ main {
 }
 
 nav div {
+    position: relative;
     filter: drop-shadow(4px 5px 0px #02187E);
+    height: 26px;
+    width: 34px;
 }
 
-#menuHamburguesa.mostrar #menuHamburguesaPos1{
-    
+#menuHamburguesaPos1{
+    top: 0px;
 }
 
-#menuHamburguesa.mostrar #menuHamburguesaPos1{
-    
+#menuHamburguesaPos2{
+    top: 11px;
 }
 
+#menuHamburguesaPos3{
+    top: 22px;
+}
+
+
 #menuHamburguesa.mostrar #menuHamburguesaPos1{
-    
+    animation: animacionMenuMoverCentro 0.5s forwards, animacionMenuRotarDerecha 0.5s forwards 0.5s;
+}
+
+#menuHamburguesa.mostrar #menuHamburguesaPos2{
+    animation:animacionMenuRotarDerecha 0.5s forwards 0.5s;
+
+}
+
+#menuHamburguesa.mostrar #menuHamburguesaPos3{
+    animation: animacionMenuMoverCentro 0.5s forwards, animacionMenuRotarIzquierda 0.5s forwards 0.5s;
+}
+
+#menuHamburguesa.ocultar #menuHamburguesaPos1{
+    transform: rotate(45deg);
+    top: 11px;
+    animation: animacionMenuRotarOrigen 0.5s forwards, animacionMenuMoverArriba 0.5s forwards 0.5s;
+}
+
+#menuHamburguesa.ocultar #menuHamburguesaPos2{
+    transform: rotate(45deg);
+    top: 11px;
+    animation:animacionMenuRotarOrigen 0.5s forwards;
+
+}
+
+#menuHamburguesa.ocultar #menuHamburguesaPos3{
+    transform: rotate(-45deg);
+    top: 11px;
+    animation: animacionMenuRotarOrigen 0.5s forwards, animacionMenuMoverAbajo 0.5s forwards 0.5s;
+}
+
+@keyframes animacionMenuMoverCentro {
+    100%{
+        top: 11px;
+    }
+}
+
+@keyframes animacionMenuMoverArriba {
+    100%{
+        top: 0px;
+    }
+}
+
+@keyframes animacionMenuMoverAbajo {
+    100%{
+        top: 22px;
+    }
+}
+
+@keyframes animacionMenuRotarDerecha {
+    100%{
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes animacionMenuRotarIzquierda {
+    100%{
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes animacionMenuRotarOrigen {
+    100%{
+        transform: rotate(0deg);
+    }
 }
 
 
 nav div div {
+    position: absolute;
     translate: -4px -4px;
     width: 34px;
     height: 4px;
@@ -96,12 +169,13 @@ nav button p {
 }
 
 header {
+    overflow-x: clip;
     translate: 0 -103px;
-    overflow: hidden;
     width: 1279.074px;
     height: 959.305px;
     background: url('../img/fondohome.png') lightgray 50% / cover no-repeat;
     position: relative;
+    z-index: 1;
 }
 
 header img {
@@ -324,4 +398,8 @@ header img {
     @starting-style {
         top: 1080px;
     }
+}
+
+.fondolaappmas{
+    translate: -100px;
 }
