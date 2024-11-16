@@ -1,33 +1,47 @@
-*{
+* {
     font-family: "Lato";
 }
 
-body{
-    margin: 0px;
-    border: 0px;
-    padding: 21px 100px 0px 100px;
+.oculto{
+    display: none;
+}
+
+nav {
+    top: 0;
+    padding: 21px 100px 0 100px;
+    z-index: 999;
+    position: sticky;
+    width: 1080px;
+    display: flex;
+    justify-content: space-between;
+    height: 82px;
+}
+
+nav.sticky {
+    background: linear-gradient(180deg, #00D1D5 0%, rgba(0, 209, 213, 0.12) 87.91%, rgba(1, 208, 213, 0.00) 100%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
     max-width: 1280px;
     height: 14780px;
 }
 
-main{
+main {
+    translate: 0 -103px;
+    margin: auto;
     background-color: green;
     width: 1080px;
     height: 14780px;
-
 }
 
-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav div{
+nav div {
     filter: drop-shadow(4px 5px 0px #02187E);
 }
 
-nav div div{
+nav div div {
+    translate: -4px -4px;
     width: 34px;
     height: 4px;
     border-radius: 111px;
@@ -36,22 +50,29 @@ nav div div{
     filter: none;
 }
 
-nav img{
+nav img {
+    position: absolute;
+    top: 6px;
+    left: 565px;
+    display: none;
     width: 150px;
     height: 86px;
 }
 
-nav button{
-    min-width:216px;
+nav button {
+    translate: 8px -8px;
+    min-width: 216px;
     min-height: 66px;
+    max-width: 216px;
+    max-height: 66px;
     padding: 0px;
     border-radius: 111px;
     border: 8px solid #FFF;
     background: #83C252;
     box-shadow: 4px 5px 0px 0px #02187E;
-} 
+}
 
-nav button p{
+nav button p {
     margin: 0;
     color: #FFF;
     font-size: 20px;
@@ -59,4 +80,235 @@ nav button p{
     font-weight: 900;
     line-height: 94.5%;
     letter-spacing: 2.2px;
+}
+
+header {
+    translate: 0 -103px;
+    overflow: hidden;
+    width: 1279.074px;
+    height: 959.305px;
+    background: url('../img/fondohome.png') lightgray 50% / cover no-repeat;
+    position: relative;
+}
+
+header img {
+    position: absolute;
+}
+
+.sombrapersonaje1 {
+    top: 734px;
+    left: 470px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.sombrapersonaje2 {
+    top: 702px;
+    left: 589px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.sombrapersonaje3 {
+    top: 674px;
+    left: 696px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.logohero {
+    top: 55px;
+    left: 360px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.arbol1 {
+    top: -1px;
+    left: -153px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 2;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.piedra2 {
+    top: 793.37px;
+    left: 129.07px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 3;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.arbusto4 {
+    top: 717.97px;
+    left: 161.38px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 1;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.planta3 {
+    top: 821.65px;
+    left: 197.06px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 4;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.personaje1 {
+    top: 501.28px;
+    left: 411px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 3;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.personaje2 {
+    top: 404.04px;
+    left: 536px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 2;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.personaje3 {
+    top: 338px;
+    left: 695.25px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 1;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.planta1 {
+    z-index: 1;
+    top: 630.46px;
+    left: 1028.46px;
+    gap: 0px;
+    opacity: 0px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.piedra3 {
+    z-index: 5;
+    top: 737.5px;
+    left: 1034.84px;
+    gap: 0px;
+    opacity: 0px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.piedra4 {
+    top: 786.64px;
+    left: 1040.84px;
+    z-index: 7;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.piedra1 {
+    top: 737.5px;
+    left: 1072.22px;
+    z-index: 6;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.arbol2 {
+    top: 106.71px;
+    left: 881.03px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 4;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.planta2 {
+    top: 662.1px;
+    left: 1080.97px;
+    gap: 0px;
+    opacity: 0px;
+    z-index: 3;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
+}
+
+.arbol3 {
+    z-index: 2;
+    top: 278.38px;
+    left: 1080.97px;
+    gap: 0px;
+    opacity: 0px;
+    transition: top 1s ease;
+
+    @starting-style {
+        top: 1080px;
+    }
 }
