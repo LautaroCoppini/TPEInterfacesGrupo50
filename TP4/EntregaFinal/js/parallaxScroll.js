@@ -20,26 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let arbol3 = document.querySelector('.arbol3');
     let nav = document.querySelector('nav');
     let logonav = document.querySelector('#logonav');
+    
+    let titulo = document.querySelector('.laappmasdivertida h1');
+    let descripcion = document.querySelector('.laappmasdivertida h2')
+    let bordeCard = document.querySelector('.laappmasdivertida .bordeCard')
+    let card = document.querySelector('.laappmasdivertida #card')
+    let personaje5 = document.querySelector('.laappmasdivertida .numero5')
+    let personaje4 = document.querySelector('.laappmasdivertida .numero4')
+
     window.addEventListener('scroll', () => {
         let value = window.scrollY;
         moverLogoYNav(value);
-        sombrapersonaje1.style.translate = value * -0.1 + "px " + value * 0 + 'px';
-        sombrapersonaje2.style.translate = value * 0 + "px " + value * 0 + 'px';
-        sombrapersonaje3.style.translate = value * 0.1 + "px " + value * 0 + 'px';
-        personaje2.style.translate = value * 0 + "px " + value * 0.10 + 'px';
-        planta1.style.translate = value * 0.105 + "px " + value * 0.105 + 'px';
-        arbol3.style.translate = value * 0.11 + "px " + value * 0.11 + 'px';
-        personaje3.style.translate = value * 0.1 + "px " + value * -0.15 + 'px';
-        planta2.style.translate = value * 0.12 + "px " + value * 0.12 + 'px';
-        arbol2.style.translate = value * 0.13 + "px " + value * 0.13 + 'px';
-        piedra3.style.translate = value * 0.14 + "px " + value * 0.14 + 'px';
-        personaje1.style.translate = value * -0.1 + "px " + value * -0.15 + 'px';
-        piedra1.style.translate = value * 0.155 + "px " + value * 0.155 + 'px';
-        piedra4.style.translate = value * 0.15 + "px " + value * 0.15 + 'px';
-        arbusto4.style.translate = value * -0.15 + "px " + value * 0.15 + 'px';
-        arbol1.style.translate = value * -0.16 + "px " + value * 0.16 + 'px';
-        piedra2.style.translate = value * -0.17 + "px " + value * 0.17 + 'px';
-        planta3.style.translate = value * -0.2 + "px " + value * 0.2 + 'px';
+        moverCapasHero(value);
+        moverCapasLaAppMasDivertida(value);
     })
     function moverLogoYNav(value){  
         logohero.style.translate = "0 " + value * 0.807 + 'px';
@@ -56,5 +49,34 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             nav.classList.add('sticky');
         }
+    }
+    function moverCapasHero(value){
+        sombrapersonaje1.style.translate = value * -0.1 + "px " + value * 0 + 'px';
+        sombrapersonaje2.style.translate = value * 0 + "px " + value * 0 + 'px';
+        sombrapersonaje3.style.translate = value * 0.1 + "px " + value * 0 + 'px';
+        personaje2.style.translate = value * 0 + "px " + value * 0.10 + 'px';
+        planta1.style.translate = value * 0.105 + "px " + value * 0 + 'px';
+        arbol3.style.translate = value * 0.11 + "px " + value * 0 + 'px';
+        personaje3.style.translate = value * 0.1 + "px " + value * -0.15 + 'px';
+        planta2.style.translate = value * 0.12 + "px " + value * 0 + 'px';
+        arbol2.style.translate = value * 0.13 + "px " + value * 0 + 'px';
+        piedra3.style.translate = value * 0.14 + "px " + value * 0 + 'px';
+        personaje1.style.translate = value * -0.1 + "px " + value * -0.15 + 'px';
+        piedra1.style.translate = value * 0.155 + "px " + value * 0 + 'px';
+        piedra4.style.translate = value * 0.15 + "px " + value * 0 + 'px';
+        arbusto4.style.translate = value * -0.15 + "px " + value * 0 + 'px';
+        arbol1.style.translate = value * -0.16 + "px " + value * 0 + 'px';
+        piedra2.style.translate = value * -0.17 + "px " + value * 0 + 'px';
+        planta3.style.translate = value * -0.2 + "px " + value * 0 + 'px';
+    }
+    function moverCapasLaAppMasDivertida(value){
+        titulo.style.translate = value * 0.08 + "px " + value * 0.07 + 'px';
+        descripcion.style.translate = value * 0.1 + "px " + value * 0.08 + 'px';
+        bordeCard.style.translate = value * 0.1 + "px " + value * 0.1 + 'px';
+        card.style.translate = value * 0.1 + "px " + value * 0.1 + 'px';
+        personaje4.style.translate = value * 0.1 + "px " + value * 0 + 'px';
+        personaje5.style.translate = value * -0.1 + "px " + value * 0 + 'px';
+        
+
     }
 });

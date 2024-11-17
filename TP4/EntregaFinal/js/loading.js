@@ -2,12 +2,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     let personajes = document.querySelectorAll(".personajeCarga");
     let progreso = document.getElementById("progreso");
-    console.log(personajes)
     let progress = 0;
             const progressText = document.getElementById("porcentajedeprogreso");
             const body = document.body;
             body.style.overflow = 'hidden';
             let personajeActual = 0;
+            progreso.style.animation = "carga 5s linear forwards";
             const interval = setInterval(() => {
                 progress++;
                 //progreso.style.width = progress + "%";
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 50);
     
     function cargaCompletada(){
-        document.getElementById("pantalladecarga").style.display = "none";
-        body.style.overflow = 'auto';
+        window.location.href = "index.html";
     }
 });

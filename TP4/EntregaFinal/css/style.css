@@ -51,7 +51,6 @@
     height: 30px;
     background-color: #F39E46;
     border-radius: 25px;
-    animation: carga 5s linear forwards;
 }
 
 @keyframes carga {
@@ -102,8 +101,9 @@
 }
 
 #porcentajedeprogreso {
-    font-size: 60px;
     color: black;
+    font-size: 60px;
+    font-weight: 900;
 }
 
 nav {
@@ -129,12 +129,10 @@ body {
 }
 
 main {
-    overflow: visible;
     translate: 0 -103px;
-    margin: auto;
-    width: 1080px;
     height: 14780px;
-    z-index: 5;
+    padding: 0 100px;
+    overflow-x: clip;
 }
 
 nav div {
@@ -309,7 +307,6 @@ header {
     height: 959.305px;
     background: url('../img/fondohome.png') lightgray 50% / cover no-repeat;
     position: relative;
-    z-index: 1;
 }
 
 header img {
@@ -535,7 +532,6 @@ header img {
 }
 
 .laappmasdivertida {
-    overflow: visible;
     height: 1852px;
     position: relative;
 }
@@ -548,7 +544,8 @@ header img {
     width: 508px;
     color: #1B428F;
     font-weight: 600;
-line-height: 94.5%; /* 44.415px */
+    line-height: 94.5%;
+    /* 44.415px */
     font-size: 47px;
 }
 
@@ -557,25 +554,71 @@ line-height: 94.5%; /* 44.415px */
     padding: 0px;
     position: absolute;
     top: 214px;
-    width: 704px;
+    width: 700px;
     height: 154px;
     color: #1B428F;
     font-size: 20px;
     font-weight: 400;
 }
 
-.card1{
+.card1 {
     top: 336;
 }
 
 .numero5 {
-    z-index: 10;
+    z-index: 1;
     position: absolute;
     top: -87px;
-    left: 787px;
-    overflow: visible;
+    left: 900px;
 }
 
 .fondolaappmas {
     translate: -100px;
+}
+
+#card {
+    position: absolute;
+    width: 575.38px;
+    height: 322.351px;
+    border-radius: 77px;
+    top: 336px;
+    left: 137px;
+    transition: background 1s;
+}
+
+.bordeCard {
+    position: absolute;
+    width: 517.38px;
+    height: 264.351px;
+    border-radius: 77px;
+    border: 29px solid #1B5F99;
+    top: 336px;
+    left: 137px;
+    z-index: 1;
+}
+
+.numero4 {
+    position: absolute;
+    left: -300px;
+    top: 536px;
+    z-index: 2;
+}
+
+.laappmasdivertida article {
+    justify-content: space-between;
+    position: absolute;
+    display: flex;
+    top: 1215.02px;
+    width: 1080px;
+}
+
+.laappmasdivertida article figure {
+    margin: 0px;
+    width: 333px;
+    color: #000;
+    font-family: Lato;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
