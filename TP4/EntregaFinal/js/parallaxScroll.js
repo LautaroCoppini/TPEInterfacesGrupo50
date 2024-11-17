@@ -27,12 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let card = document.querySelector('.laappmasdivertida #card')
     let personaje5 = document.querySelector('.laappmasdivertida .numero5')
     let personaje4 = document.querySelector('.laappmasdivertida .numero4')
+    let cardsSecundarias = document.querySelectorAll('.laappmasdivertida figure');
 
     window.addEventListener('scroll', () => {
         let value = window.scrollY;
         moverLogoYNav(value);
         moverCapasHero(value);
         moverCapasLaAppMasDivertida(value);
+        mostrarCardsSecundarias(value);
     })
     function moverLogoYNav(value){  
         logohero.style.translate = "0 " + value * 0.807 + 'px';
@@ -78,5 +80,27 @@ document.addEventListener("DOMContentLoaded", () => {
         personaje5.style.translate = value * -0.1 + "px " + value * 0 + 'px';
         
 
+    }
+
+    function mostrarCardsSecundarias(value) {
+        console.log(value);
+        if (value > 1600) {
+            cardsSecundarias.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('mostrar');
+                }, index * 300); // Incrementa el retraso por 300ms para cada card
+            });
+        } else {
+            cardsSecundarias.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.remove('mostrar');
+                }, index * 300); // Misma lógica para eliminar las clases
+            });
+        }
+    }
+    
+
+    function mostrarCard(){
+        
     }
 });

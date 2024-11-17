@@ -621,4 +621,10 @@ header img {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    translate:0 600px;
+    transition: translate 1s ease;
+}
+
+.laappmasdivertida article figure.mostrar{
+    translate:0px;
 }
