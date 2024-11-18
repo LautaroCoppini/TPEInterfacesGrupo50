@@ -29,12 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let personaje4 = document.querySelector('.laappmasdivertida .numero4')
     let cardsSecundarias = document.querySelectorAll('.laappmasdivertida figure');
 
+    let video = document.querySelector('.miraelvideo iframe');
+    let miraelvideopersonaje = document.querySelector('.miraelvideo img');
+
     window.addEventListener('scroll', () => {
         let value = window.scrollY;
         moverLogoYNav(value);
         moverCapasHero(value);
         moverCapasLaAppMasDivertida(value);
         mostrarCardsSecundarias(value);
+        moverCapasMiraElVideo(value);
     })
     function moverLogoYNav(value){  
         logohero.style.translate = "0 " + value * 0.807 + 'px';
@@ -78,12 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
         card.style.translate = value * 0.1 + "px " + value * 0.1 + 'px';
         personaje4.style.translate = value * 0.1 + "px " + value * 0 + 'px';
         personaje5.style.translate = value * -0.1 + "px " + value * 0 + 'px';
-        
-
     }
 
     function mostrarCardsSecundarias(value) {
-        console.log(value);
         if (value > 1600) {
             cardsSecundarias.forEach((element, index) => {
                 setTimeout(() => {
@@ -100,7 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
 
-    function mostrarCard(){
-        
+    function moverCapasMiraElVideo(value){
+        let yVideo = video.getBoundingClientRect().top-window.innerHeight;
+        if(yVideo<0 && yVideo >-500){
+            video.style.translate = yVideo * 1 + "px " + yVideo * 0.05 + 'px';
+            miraelvideopersonaje.style.translate = yVideo * 0 + "px " + yVideo * 1.7 + 'px';
+        }
     }
 });

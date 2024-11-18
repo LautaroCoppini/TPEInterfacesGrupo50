@@ -1,5 +1,7 @@
 "use strict"
 
+// Carrusel la app mas divertida
+
 let cards = [
     "img/card1.png",
     "img/card2.png",

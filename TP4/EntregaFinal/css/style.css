@@ -621,10 +621,190 @@ header img {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    translate:0 600px;
+    translate: 0 600px;
     transition: translate 1s ease;
 }
 
-.laappmasdivertida article figure.mostrar{
-    translate:0px;
+.laappmasdivertida article figure.mostrar {
+    translate: 0px;
+}
+
+.descubreeljuego {
+    height: 1157px;
+    overflow-y: clip;
+    position: relative;
+}
+
+.descubreeljuego svg,
+.descubreeljuego .parallaxMouse {
+    translate: -100px 0;
+}
+
+.descubreeljuego h1,
+.descubreeljuego button,
+.descubreeljuego .parallaxMouse {
+    position: absolute;
+}
+
+.descubreeljuego h1 {
+    margin: 0;
+    top: 175px;
+    left: 65px;
+    width: 950px;
+    height: 153px;
+    color: #FFF;
+    text-align: center;
+    font-family: Lato;
+    font-size: 61.14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%;
+}
+
+.descubreeljuego h1 span {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 61.14px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+.descubreeljuego button {
+    top: 390px;
+    left: 270px;
+    width: 540px;
+    height: 66px;
+    border-radius: 111px;
+    border: 8px solid #FFF;
+    background: #83C252;
+    box-shadow: 4px 5px 0px 0px #02187E;
+    color: #FFF;
+    font-size: 31.14px;
+    font-weight: 400;
+    line-height: 110%;
+}
+
+.descubreeljuego .parallaxMouse {
+    scale: 1.05;
+    width: 1280px;
+    height: 767px;
+    background-image: url("../img/asdasds-10.png");
+    top: 390px;
+}
+
+.masamigos {
+    height: 5421px;
+    overflow-y: clip;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.masamigos article:last-child {
+    margin-bottom: 147.17px;
+}
+
+.masamigos figure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 200px;
+    width: 291px;
+    height: 436px;
+    position: sticky;
+}
+
+.masamigos figure img {
+    height: 100%;
+    animation: cambioPersonaje .2s ease forwards;
+}
+
+@keyframes cambioPersonajeEntrante {
+    0% {
+        scale: .9;
+        filter: blur(1px);
+    }
+
+    100% {
+        scale: 1;
+    }
+}
+
+@keyframes cambioPersonajeSaliente {
+    0% {
+        scale: 1;
+    }
+
+    100% {
+        scale: .9;
+        filter: blur(1px);
+    }
+}
+
+
+.masamigos article {
+    margin-left: 179px;
+    margin-bottom: 267px;
+}
+
+.masamigos h1 {
+    width: 802px;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 94.5%;
+}
+
+.masamigos div {
+    margin-top: 159px;
+}
+
+.masamigos h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    width: 467px;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 94.5%;
+}
+
+.masamigos p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 94.5%;
+    width: 467px;
+}
+
+.miraelvideo {
+    position: relative;
+}
+
+.miraelvideo svg {
+    translate: -100px 0;
+}
+
+.miraelvideo h1 {
+    margin: 0;
+    top: 308.83px;
+    position: absolute;
+    color: #FFF;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 94.5%;
+}
+
+.miraelvideo iframe {
+    top: 525.83px;
+    position: absolute;
+    width: 804px;
+    height: 452px;
+    left: 500px;
+    border-radius: 45px;
+    border: 29px solid #FFF;
+}
+
+.miraelvideo img{
+    position: absolute;
+    left: 700px;
+    top: 1051.83px;
 }
