@@ -803,8 +803,41 @@ header img {
     border: 29px solid #FFF;
 }
 
-.miraelvideo img{
+.miraelvideo img {
     position: absolute;
     left: 700px;
     top: 1051.83px;
+}
+
+.modelo3d {
+    height: 1034px;
+    position: relative;
+}
+
+.modelo3d #model {
+    position: absolute;
+    right: -100px;
+    width: 667px;
+    height: 973px;
+}
+
+.modelo3d h1 {
+    margin: 0;
+    position: absolute;
+    top: 220px;
+    color: #9D2121;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 94.5%;
+    width: 746px;
+}
+
+.modelo3d p {
+    position: absolute;
+    margin: 0;
+    top: 548px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 94.5%;
+    width: 467px;
 }
