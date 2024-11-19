@@ -1112,3 +1112,21 @@ nav button:hover p{
         opacity: 1;
     }
 }
+
+form .spritesheet{
+    position: absolute;
+    bottom: 0;
+    width: 480px; /* Ancho de un solo frame */
+    height: 480px; /* Altura de un solo frame */
+    background-image: url('../img/spritesheet.png');
+    animation:  play-sprite 1s steps(15) infinite;
+}
+
+@keyframes play-sprite {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 7200px 0px ; /* Ajusta este valor según la cantidad de columnas */
+    }
+}
