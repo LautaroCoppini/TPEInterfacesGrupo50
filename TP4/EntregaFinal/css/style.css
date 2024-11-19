@@ -125,12 +125,12 @@ body {
     margin: 0;
     padding: 0;
     max-width: 1280px;
-    height: 14780px;
+    max-height: 14780px;
+    overflow-x: clip;
 }
 
 main {
     translate: 0 -103px;
-    height: 14780px;
     padding: 0 100px;
     overflow-x: clip;
 }
@@ -535,6 +535,7 @@ header img {
 .laappmasdivertida {
     height: 1852px;
     position: relative;
+    margin-bottom: 24px;
 }
 
 .laappmasdivertida h1 {
@@ -1059,9 +1060,9 @@ nav button:hover {
         box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0), 4px 5px 0px 0px #02187E;
     }
 
-    50%{
+    50% {
         background: #83C252;
-        box-shadow:inset 0 0 0 0 rgba(0, 0, 0, 0), 0px 0px 0px 0px #02187E;
+        box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0), 0px 0px 0px 0px #02187E;
     }
 
     100% {
@@ -1071,7 +1072,7 @@ nav button:hover {
 
 }
 
-nav button img{
+nav button img {
     display: block;
     top: -12px;
     right: 31px;
@@ -1081,52 +1082,94 @@ nav button img{
     translate: -150px 0;
 }
 
-nav button:hover img{
+nav button:hover img {
     animation: animacionImagenBotonComprar 2s ease-in-out .25s;
 }
 
 @keyframes animacionImagenBotonComprar {
-    33%{
+    33% {
         translate: 0 0;
     }
-    66%{
+
+    66% {
         translate: 0 0;
     }
-    100%{
+
+    100% {
         translate: 150px 0;
     }
 }
 
-nav button:hover p{
+nav button:hover p {
     animation: animacionTextoBotonComprar 2s ease forwards .25s;
 }
 
 @keyframes animacionTextoBotonComprar {
-    33%{
+    33% {
         opacity: 0;
     }
-    66%{
+
+    66% {
         opacity: 0;
     }
-    100%{
+
+    100% {
         opacity: 1;
     }
 }
 
-form .spritesheet{
+form .spritesheet {
     position: absolute;
-    bottom: 0;
-    width: 480px; /* Ancho de un solo frame */
-    height: 480px; /* Altura de un solo frame */
+    bottom: 15px;
+    left: -130px;
+    width: 200px;
+    /* Ancho de un solo frame */
+    height: 200px;
+    /* Altura de un solo frame */
     background-image: url('../img/spritesheet.png');
-    animation:  play-sprite 1s steps(15) infinite;
+    animation: play-sprite .7s steps(15) infinite;
+    background-size: 1500%;
 }
 
 @keyframes play-sprite {
     0% {
-      background-position: 0 0;
+        background-position: 0 0;
     }
+
     100% {
-      background-position: 7200px 0px ; /* Ajusta este valor según la cantidad de columnas */
+        background-position: 3000px 0px;
+        /* Ajusta este valor según la cantidad de columnas */
     }
+}
+
+footer {
+    translate: -100px;
+    padding-left: 100px;
+    width: 1280px;
+    height: 595px;
+    background: #5E5E5D;
+
+}
+
+footer p{
+    margin: 35px 0;
+    width: 820px;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 94.5%;
+    letter-spacing: 2.2px;
+}
+
+footer figure {
+    margin: 0;
+    width: 1280px;
+    height: 80px;
+    background: #242424;
+    translate: -100px 0;
+}
+
+footer figure img {
+    margin-top: 5px;
+    margin-left: 100px;
 }
