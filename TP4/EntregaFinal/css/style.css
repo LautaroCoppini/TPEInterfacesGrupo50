@@ -841,3 +841,58 @@ header img {
     line-height: 94.5%;
     width: 467px;
 }
+
+.personajes{
+    position: relative;
+    overflow: clip;
+    translate: -100px 0;
+    width: 1296px;
+    height: 729px;
+    background-image: url('../img/4550.png');
+}
+
+.personajes figure{
+    position: absolute;
+    overflow: clip;
+}
+
+.personajes figure img{
+    transition: all .3s ease;
+}
+
+.personajes figure img:hover{
+    scale: 1.1;
+    filter: contrast(120%);
+}
+
+.personajes figure:nth-child(1){
+    translate: -40px -16px;
+}
+
+.personajes figure:nth-child(2){
+    translate: 242px -16px;
+}
+.personajes figure:nth-child(3){
+    translate: 506px -16px;
+}
+.personajes figure:nth-child(4){
+    translate: 772px -16px;
+}
+.personajes figure:nth-child(5){
+    translate: 1027px -18px;
+}
+.personajes figure:nth-child(6){
+    translate: -40px 389px;
+}
+.personajes figure:nth-child(7){
+    translate: 239px 389px;
+}
+.personajes figure:nth-child(8){
+    translate: 505px 389px;
+}
+.personajes figure:nth-child(9){
+    translate: 772px 389px;
+}
+.personajes figure:nth-child(10){
+    translate: 1026px 389px;
+}
