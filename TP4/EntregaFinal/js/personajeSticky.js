@@ -21,17 +21,11 @@ let personajeActual;
 let articulos = document.querySelectorAll('.masamigos article');
 
 function calcularScrollMitad(element) {
-    // Obtener la posición del elemento con respecto al documento
     const rect = element.getBoundingClientRect();
     const elementTop = rect.top + window.scrollY;
-
-    // Altura de la ventana y del elemento
     const windowHeight = window.innerHeight;
     const elementHeight = rect.height-267;
-
-    // Calcular la posición en la que el elemento estará centrado
     const scrollPos = elementTop - (windowHeight / 2) + (elementHeight / 2);
-
     return scrollPos;
 }
 
@@ -56,6 +50,4 @@ window.addEventListener('scroll', () => {
     
         }, 200);
     }
-
-
 })

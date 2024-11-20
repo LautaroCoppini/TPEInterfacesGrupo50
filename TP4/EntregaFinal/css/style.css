@@ -13,7 +13,6 @@
     width: 1280px;
     height: 100%;
     background-color: #00D1D5;
-    z-index: 9999;
 }
 
 .personajeCarga {
@@ -23,8 +22,6 @@
     display: none;
     animation: animacionPersonajeCarga 0.5s linear infinite;
 }
-
-.personajeCarga.oculto {}
 
 @keyframes animacionPersonajeCarga {
     0% {
@@ -673,6 +670,7 @@ header img {
 }
 
 .descubreeljuego button {
+    z-index: 2;
     top: 390px;
     left: 270px;
     width: 540px;
@@ -685,6 +683,11 @@ header img {
     font-size: 31.14px;
     font-weight: 400;
     line-height: 110%;
+    transition: background 1s ease;
+}
+
+.descubreeljuego button:hover{
+    background: #5c883b;
 }
 
 .descubreeljuego .parallaxMouse {
@@ -778,6 +781,7 @@ header img {
 }
 
 .miraelvideo {
+    overflow-y: clip;
     position: relative;
 }
 
@@ -808,7 +812,7 @@ header img {
 .miraelvideo img {
     position: absolute;
     left: 700px;
-    top: 1051.83px;
+    top: 1400px;
 }
 
 .modelo3d {
@@ -1124,7 +1128,7 @@ form .spritesheet {
     left: -130px;
     width: 200px;
     height: 200px;
-    background-image: url('../img/spritesheet1.png');
+    background-image: url('../img/spritesheet.png');
     animation: spritePosX 0.2s steps(5) infinite, spritePosY 0.6s steps(3) infinite;
     background-size: 500% 300%;
 }

@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrarCardsSecundarias(value);
         moverCapasMiraElVideo(value);
     })
+    
     function moverLogoYNav(value){  
         logohero.style.translate = "0 " + value * 0.807 + 'px';
         logohero.style.scale = 1 - value/1200;
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nav.classList.add('sticky');
         }
     }
+
     function moverCapasHero(value){
         sombrapersonaje1.style.translate = value * -0.1 + "px " + value * 0 + 'px';
         sombrapersonaje2.style.translate = value * 0 + "px " + value * 0 + 'px';
@@ -75,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         piedra2.style.translate = value * -0.17 + "px " + value * 0 + 'px';
         planta3.style.translate = value * -0.2 + "px " + value * 0 + 'px';
     }
+
     function moverCapasLaAppMasDivertida(value){
         titulo.style.translate = value * 0.08 + "px " + value * 0.07 + 'px';
         descripcion.style.translate = value * 0.1 + "px " + value * 0.08 + 'px';
@@ -89,23 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
             cardsSecundarias.forEach((element, index) => {
                 setTimeout(() => {
                     element.classList.add('mostrar');
-                }, index * 300); // Incrementa el retraso por 300ms para cada card
+                }, index * 300);
             });
         } else {
             cardsSecundarias.forEach((element, index) => {
                 setTimeout(() => {
                     element.classList.remove('mostrar');
-                }, index * 300); // Misma lógica para eliminar las clases
+                }, index * 300);
             });
         }
     }
-    
 
     function moverCapasMiraElVideo(value){
         let yVideo = video.getBoundingClientRect().top-window.innerHeight;
         if(yVideo<0 && yVideo >-500){
             video.style.translate = yVideo * 1 + "px " + yVideo * 0.05 + 'px';
-            miraelvideopersonaje.style.translate = yVideo * 0 + "px " + yVideo * 1.7 + 'px';
+            miraelvideopersonaje.style.translate = yVideo * 0 + "px " + yVideo * 2.5 + 'px';
         }
     }
 });

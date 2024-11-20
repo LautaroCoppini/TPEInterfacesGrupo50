@@ -2,16 +2,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     let personajes = document.querySelectorAll(".personajeCarga");
     let progreso = document.getElementById("progreso");
-    let progress = 0;
-            const progressText = document.getElementById("porcentajedeprogreso");
-            const body = document.body;
+    let porcentajeProgreso = 0;
+            let textoPorcentajeProgreso = document.getElementById("porcentajedeprogreso");
+            let body = document.body;
             body.style.overflow = 'hidden';
             let personajeActual = 0;
             progreso.style.animation = "carga 5s linear forwards";
-            const interval = setInterval(() => {
-                progress++;
-                //progreso.style.width = progress + "%";
-                personajeActual = Math.floor(progress/10);
+            let intervalo = setInterval(() => {
+                porcentajeProgreso++;
+                personajeActual = Math.floor(porcentajeProgreso/10);
                 if(personajeActual > 0){
                     personajes[personajeActual-1].style.display = "none";
                 }
@@ -20,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }else{
                     personajes[10].style.display = "block";
                 }
-                progressText.textContent = progress + "%";
-                if (progress >=100) {
-                    clearInterval(interval);
+                textoPorcentajeProgreso.textContent = porcentajeProgreso + "%";
+                if (porcentajeProgreso >=100) {
+                    clearInterval(intervalo);
                     setTimeout(cargaCompletada,200);
                 }
             }, 50);
