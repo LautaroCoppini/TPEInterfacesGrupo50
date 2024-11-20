@@ -1123,22 +1123,27 @@ form .spritesheet {
     bottom: 15px;
     left: -130px;
     width: 200px;
-    /* Ancho de un solo frame */
     height: 200px;
-    /* Altura de un solo frame */
-    background-image: url('../img/spritesheet.png');
-    animation: play-sprite .7s steps(15) infinite;
-    background-size: 1500%;
+    background-image: url('../img/spritesheet1.png');
+    animation: spritePosX 0.2s steps(5) infinite, spritePosY 0.6s steps(3) infinite;
+    background-size: 500% 300%;
 }
 
-@keyframes play-sprite {
-    0% {
-        background-position: 0 0;
+@keyframes spritePosX {
+    0%{
+        background-position-x: 0px;
     }
+    100%{
+        background-position-x: -1000px;
+    }
+}
 
-    100% {
-        background-position: 3000px 0px;
-        /* Ajusta este valor según la cantidad de columnas */
+@keyframes spritePosY {
+    0%{
+        background-position-y: 0px;
+    }
+    100%{
+        background-position-y: -600px;
     }
 }
 
@@ -1151,7 +1156,7 @@ footer {
 
 }
 
-footer p{
+footer p {
     margin: 35px 0;
     width: 820px;
     color: #FFF;
