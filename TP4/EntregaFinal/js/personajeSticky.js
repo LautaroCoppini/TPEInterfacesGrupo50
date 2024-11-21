@@ -16,16 +16,16 @@ let personajes = [
 
 let personajeAnterior = -1;
 
-let personajeActual;
+let personajeActual=0;
 
 let articulos = document.querySelectorAll('.masamigos article');
 
 function calcularScrollMitad(element) {
-    const rect = element.getBoundingClientRect();
-    const elementTop = rect.top + window.scrollY;
-    const windowHeight = window.innerHeight;
-    const elementHeight = rect.height-267;
-    const scrollPos = elementTop - (windowHeight / 2) + (elementHeight / 2);
+    let rect = element.getBoundingClientRect();
+    let elementTop = rect.top + window.scrollY;
+    let windowHeight = window.innerHeight;
+    let elementHeight = rect.height-267;
+    let scrollPos = elementTop - (windowHeight / 2) + (elementHeight / 2);
     return scrollPos;
 }
 
